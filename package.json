@@ -1,0 +1,30 @@
+{
+  "name": "vue-tinybox",
+  "version": "0.1.0",
+  "description": "A slick, yet tiny lightbox gallery component for Vue.js",
+  "license": "MIT",
+  "author": {
+    "name": "Nikita Karamov",
+    "email": "nick@karamoff.ru",
+    "url": "https://karamoff.ru"
+  },
+  "main": "dist/tinybox.umd.js",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickKaramoff/vue-tinybox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NickKaramoff/vue-tinybox/issues"
+  },
+  "homepage": "https://github.com/NickKaramoff/vue-tinybox#readme",
+  "keywords": [
+    "vue",
+    "vuejs",
+    "vue.js",
+    "lightbox",
+    "gallery"
+  ]
+}

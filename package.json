@@ -9,9 +9,25 @@
     "url": "https://karamoff.ru"
   },
   "main": "dist/tinybox.umd.js",
-  "scripts": {},
-  "dependencies": {},
-  "devDependencies": {},
+  "size-limit": [
+    {
+      "path": "dist/*.js",
+      "limit": "5 KB"
+    }
+  ],
+  "scripts": {
+    "size": "size-limit",
+    "test": "npm run size"
+  },
+  "dependencies": {
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^2.0.2",
+    "rollup": "^1.19.4",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-vue": "^5.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NickKaramoff/vue-tinybox.git"

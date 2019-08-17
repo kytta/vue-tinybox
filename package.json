@@ -24,6 +24,8 @@
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^2.0.2",
+    "eslint": "^6.1.0",
+    "eslint-plugin-vue": "^5.2.3",
     "rollup": "^1.19.4",
     "rollup-plugin-buble": "^0.19.8",
     "rollup-plugin-vue": "^5.0.1"

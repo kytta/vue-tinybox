@@ -45,7 +45,6 @@ module.exports = {
         "quotes": [2, "double", { allowTemplateLiterals: true }],
         "semi": [2, "always"],
         "semi-spacing": 2,
-        "sort-keys": [2, "asc", { natural: true }],
         "space-before-blocks": 2,
         "space-in-parens": 2,
         "spaced-comment": 2,

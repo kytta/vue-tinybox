@@ -1,5 +1,5 @@
 <script>
     export default {
-        name: 'Tinybox'
+        name: "Tinybox"
     };
 </script>

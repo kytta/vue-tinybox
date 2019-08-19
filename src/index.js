@@ -1,3 +1,3 @@
-import Tinybox from './tinybox.vue';
+import Tinybox from "./Tinybox.vue";
 
 export default Tinybox;

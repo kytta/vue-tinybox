@@ -9,6 +9,13 @@
     "url": "https://karamoff.ru"
   },
   "main": "dist/tinybox.umd.js",
+  "module": "dist/tinybox.esm.js",
+  "browser": "dist/tinybox.min.js",
+  "browserslist": [
+    "> 0.2%",
+    "last 3 versions",
+    "not dead"
+  ],
   "size-limit": [
     {
       "path": "dist/*.js",
@@ -16,6 +23,7 @@
     }
   ],
   "scripts": {
+    "build": "rollup --config rollup.config.js",
     "size": "size-limit",
     "test": "npm run size"
   },
@@ -23,12 +31,17 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "@size-limit/preset-small-lib": "^2.0.2",
     "eslint": "^6.1.0",
     "eslint-plugin-vue": "^5.2.3",
     "rollup": "^1.19.4",
-    "rollup-plugin-buble": "^0.19.8",
-    "rollup-plugin-vue": "^5.0.1"
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-terser": "^5.1.1",
+    "rollup-plugin-vue": "^5.0.1",
+    "vue-template-compiler": "^2.6.10"
   },
   "repository": {
     "type": "git",

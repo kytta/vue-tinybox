@@ -3,11 +3,32 @@
   "version": "0.1.0",
   "description": "A slick, yet tiny lightbox gallery component for Vue.js",
   "license": "MIT",
+  "keywords": [
+    "vue",
+    "vuejs",
+    "vue.js",
+    "lightbox",
+    "gallery"
+  ],
+  "homepage": "https://github.com/NickKaramoff/vue-tinybox#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickKaramoff/vue-tinybox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NickKaramoff/vue-tinybox/issues"
+  },
   "author": {
     "name": "Nikita Karamov",
     "email": "nick@karamoff.ru",
     "url": "https://karamoff.ru"
   },
+  "files": [
+    "dist/tinybox.esm.js",
+    "dist/tinybox.umd.js",
+    "dist/tinybox.min.js",
+    "src"
+  ],
   "main": "dist/tinybox.umd.js",
   "module": "dist/tinybox.esm.js",
   "browser": "dist/tinybox.min.js",
@@ -15,12 +36,6 @@
     "> 0.5%",
     "last 2 versions",
     "not dead"
-  ],
-  "size-limit": [
-    {
-      "path": "dist/tinybox.umd.js",
-      "limit": "5 KB"
-    }
   ],
   "scripts": {
     "build": "rollup --config rollup.config.prod.js",
@@ -41,19 +56,10 @@
     "rollup-plugin-vue": "^5.0.1",
     "vue-template-compiler": "^2.6.10"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NickKaramoff/vue-tinybox.git"
-  },
-  "bugs": {
-    "url": "https://github.com/NickKaramoff/vue-tinybox/issues"
-  },
-  "homepage": "https://github.com/NickKaramoff/vue-tinybox#readme",
-  "keywords": [
-    "vue",
-    "vuejs",
-    "vue.js",
-    "lightbox",
-    "gallery"
+  "size-limit": [
+    {
+      "path": "dist/tinybox.umd.js",
+      "limit": "5 KB"
+    }
   ]
 }

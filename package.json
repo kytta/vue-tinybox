@@ -24,6 +24,7 @@
   ],
   "scripts": {
     "build": "rollup --config rollup.config.prod.js",
+    "dev": "rollup -w --config rollup.config.dev.js",
     "size": "size-limit",
     "test": "npm run size"
   },

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tinybox example</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="../dist/tinybox.dev.js"></script>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        .open-tinybox {
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="app">
+        <h1>vue-tinybox</h1>
+        <a href="https://github.com/NickKaramoff/vue-tinybox">Source code</a>
+
+        <Tinybox :images="images" :index="index" @close="index = null"></Tinybox>
+
+        <div>
+            <h2>Pick an image</h2>
+
+            <img class="open-tinybox" v-for="(img, idx) in images" :src="img.thumbnail" :alt="img.alt" @click="index = idx">
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            components: { Tinybox },
+            el: '#app',
+            data: function () {
+                return {
+                    images: [
+                        {
+                            src: "https://picsum.photos/id/13/800/600",
+                            alt: "An empty beach",
+                            thumbnail: "https://picsum.photos/id/13/200"
+                        },
+                        {
+                            src: "https://picsum.photos/id/42/800/600",
+                            alt: "A café desk",
+                            thumbnail: "https://picsum.photos/id/42/200"
+                        },
+                        {
+                            src: "https://picsum.photos/id/256/800/600",
+                            alt: "Mountains",
+                            thumbnail: "https://picsum.photos/id/256/200"
+                        }
+                    ],
+                    index: null
+                }
+            }
+        });
+    </script>
+</body>
+</html>

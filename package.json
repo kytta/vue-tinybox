@@ -23,7 +23,7 @@
     }
   ],
   "scripts": {
-    "build": "rollup --config rollup.config.js",
+    "build": "rollup --config rollup.config.prod.js",
     "size": "size-limit",
     "test": "npm run size"
   },

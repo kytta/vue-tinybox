@@ -27,9 +27,6 @@
     "size": "size-limit",
     "test": "npm run size"
   },
-  "dependencies": {
-    "vue": "^2.6.10"
-  },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",

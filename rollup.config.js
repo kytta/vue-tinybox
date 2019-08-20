@@ -10,10 +10,19 @@ const name = "Tinybox";
 const plugins = [
     commonjs(),
     vue({
+        css: true,
         compileTemplate: true,
-        css: true
+        template: {
+            compilerOptions: {
+                preserveWhitespace: false,
+                whitespace: "condense",
+            },
+            isProduction: true
+        }
     }),
-    babel()
+    babel({
+        exclude: "node_modules/**"
+    })
 ];
 
 function getFilename(infix) {

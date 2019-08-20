@@ -163,13 +163,10 @@
 <style scoped>
     .tinybox {
         background: rgba(0, 0, 0, .9);
-        bottom: 0;
-        cursor: auto;
         height: 100%;
         left: 0;
         opacity: 0;
         outline: none;
-        overflow: auto;
         pointer-events: none;
         position: fixed;
         right: 0;
@@ -221,11 +218,10 @@
         background-repeat: no-repeat;
         background-position: center;
         cursor: pointer;
-        display: block;
         opacity: .5;
         position: absolute;
         top: 0;
-        transition: all .3s;
+        transition: opacity .3s;
         width: 4em;
     }
 
@@ -264,13 +260,11 @@
     }
 
     .tinybox__thumbnails__item {
-        background: #222;
-        box-sizing: content-box;
         cursor: pointer;
         display: inline-block;
         height: 10vh;
         overflow: hidden;
-        padding: 2vh 1vh;
+        margin: 2vh 1vh;
         position: relative;
         width: 10vh;
     }
@@ -280,12 +274,13 @@
     }
 
     .tinybox__thumbnails__item__image {
-        border: none;
         display: inline-block;
+        height: 100%;
+        left: 50%;
+        position: absolute;
+        top: 0;
+        transform: translateX(-50%);
         vertical-align: middle;
         width: auto;
-        max-width: none;
-        top: 0;
-        height: 100%;
     }
 </style>

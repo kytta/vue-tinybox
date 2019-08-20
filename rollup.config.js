@@ -3,7 +3,7 @@ import commonjs from "rollup-plugin-commonjs";
 import { terser } from "rollup-plugin-terser";
 import vue from "rollup-plugin-vue";
 
-const exports = "named";
+const exports = "default";
 const input = "./src/index.js";
 const name = "Tinybox";
 
@@ -14,7 +14,6 @@ const plugins = [
         compileTemplate: true,
         template: {
             compilerOptions: {
-                preserveWhitespace: false,
                 whitespace: "condense",
             },
             isProduction: true

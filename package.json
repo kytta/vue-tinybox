@@ -3,15 +3,14 @@
   "version": "0.1.0",
   "description": "A slick, yet tiny lightbox gallery component for Vue.js",
   "license": "MIT",
-  "author": {
-    "name": "Nikita Karamov",
-    "email": "nick@karamoff.ru",
-    "url": "https://karamoff.ru"
-  },
-  "main": "dist/tinybox.umd.js",
-  "scripts": {},
-  "dependencies": {},
-  "devDependencies": {},
+  "keywords": [
+    "vue",
+    "vuejs",
+    "vue.js",
+    "lightbox",
+    "gallery"
+  ],
+  "homepage": "https://github.com/NickKaramoff/vue-tinybox#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NickKaramoff/vue-tinybox.git"
@@ -19,12 +18,48 @@
   "bugs": {
     "url": "https://github.com/NickKaramoff/vue-tinybox/issues"
   },
-  "homepage": "https://github.com/NickKaramoff/vue-tinybox#readme",
-  "keywords": [
-    "vue",
-    "vuejs",
-    "vue.js",
-    "lightbox",
-    "gallery"
+  "author": {
+    "name": "Nikita Karamov",
+    "email": "nick@karamoff.ru",
+    "url": "https://karamoff.ru"
+  },
+  "files": [
+    "dist/tinybox.esm.js",
+    "dist/tinybox.umd.js",
+    "dist/tinybox.min.js",
+    "src"
+  ],
+  "main": "dist/tinybox.umd.js",
+  "module": "dist/tinybox.esm.js",
+  "browser": "dist/tinybox.min.js",
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "scripts": {
+    "build": "rollup --config rollup.config.prod.js",
+    "dev": "rollup -w --config rollup.config.dev.js",
+    "size": "size-limit",
+    "test": "npm run size"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@size-limit/preset-small-lib": "^2.0.2",
+    "eslint": "^6.1.0",
+    "eslint-plugin-vue": "^5.2.3",
+    "rollup": "^1.19.4",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-terser": "^5.1.1",
+    "rollup-plugin-vue": "^5.0.1",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "size-limit": [
+    {
+      "path": "dist/tinybox.umd.js",
+      "limit": "5 KB"
+    }
   ]
 }

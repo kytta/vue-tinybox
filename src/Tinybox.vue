@@ -115,14 +115,14 @@
         },
         watch: {
             index(value) {
-                this.resetIndex(value);
+                this.setIndex(value);
             }
         },
         mounted() {
-            this.resetIndex(this.index);
+            this.setIndex(this.index);
         },
         methods: {
-            resetIndex(value) {
+            setIndex(value) {
                 this.cIndex = value;
             },
             /**

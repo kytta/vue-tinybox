@@ -62,6 +62,7 @@ Then you can use the `Tinybox` component:
 ```
 
 The `Tinybox` component accepts these props:
+
 | Prop name | Type          | Default | Description                                                                    |
 |-----------|---------------|---------|--------------------------------------------------------------------------------|
 | `images`  | Array         | `[]`    | The array of either image URLs or `Image` objects                              |
@@ -69,6 +70,7 @@ The `Tinybox` component accepts these props:
 | `loop`    | Boolean       | `false` | Indicates whether the images should loop                                       |
 
 The `Image` object is an object with following fields:
+
 | Field name  | Type   | Description                                                                                                    |
 |-------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `src`       | String | The URL of the image                                                                                           |

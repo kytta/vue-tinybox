@@ -12,8 +12,8 @@
   "module": "dist/tinybox.esm.js",
   "browser": "dist/tinybox.min.js",
   "browserslist": [
-    "> 0.2%",
-    "last 3 versions",
+    "> 0.5%",
+    "last 2 versions",
     "not dead"
   ],
   "size-limit": [

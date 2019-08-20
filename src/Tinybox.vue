@@ -186,15 +186,20 @@
 
     .tinybox__content {
         height: 84vh;
-        margin-top: 2vh;
-        overflow: hidden;
-        position: relative;
+        position: absolute;
+        width: 100vw;
+    }
+
+    .tinybox__content::before {
+        content: "";
+        display: inline-block;
+        height: 84vh;
+        vertical-align: middle;
     }
 
     .tinybox__content__current {
-        height: 84vh;
-        position: absolute;
-        width: 100vw;
+        display: inline-block;
+        vertical-align: middle;
     }
 
     .tinybox__content__current__image {

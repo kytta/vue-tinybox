@@ -6,7 +6,12 @@
         @wheel.prevent
         @touchmove.prevent
     >
-        <div class="tinybox__content">
+        <div
+            class="tinybox__content"
+            @touchstart="swipeStart"
+            @touchmove="swipe"
+            @touchend="swipeEnd"
+        >
             <div class="tinybox__content__current">
                 <img
                     class="tinybox__content__current__image"
@@ -85,7 +90,10 @@
         },
         data() {
             return {
-                cIndex: null
+                cIndex: null,
+
+                swipeFinished: false,
+                swipeX: null,
             };
         },
         computed: {
@@ -157,6 +165,28 @@
             },
             goto(index) {
                 this.cIndex = index;
+            },
+            swipeStart(e) {
+                if (e.changedTouches.length === 1) {
+                    this.swipeX = e.changedTouches[0].screenX;
+                }
+            },
+            swipe(e) {
+                if (!this.swipeFinished && e.changedTouches.length === 1) {
+                    const newSwipeX = e.changedTouches[0].screenX;
+
+                    if (newSwipeX - this.swipeX >= 50) {
+                        this.prev();
+                        this.swipeFinished = true;
+                    } else if (this.swipeX - newSwipeX >= 50) {
+                        this.next();
+                        this.swipeFinished = true;
+                    }
+                }
+            },
+            swipeEnd() {
+                this.swipeX = null;
+                this.swipeFinished = false;
             }
         }
     };

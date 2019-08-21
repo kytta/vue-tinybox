@@ -10,7 +10,7 @@ export const defaultOutput = {
 
 export const input = "./src/index.js";
 
-export function getPlugins(prod = true) {
+export function getPlugins(prod = true, min = false) {
     return [
         commonjs(),
         vue({
@@ -26,7 +26,7 @@ export function getPlugins(prod = true) {
         babel({
             exclude: "node_modules/**"
         }),
-        prod && terser()
+        min && terser()
     ];
 }
 
@@ -60,6 +60,6 @@ export default [
             file: getFilename("min"),
             format: "iife",
         },
-        plugins: getPlugins()
+        plugins: getPlugins(true, true)
     },
 ];

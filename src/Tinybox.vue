@@ -7,10 +7,19 @@
         @touchmove.prevent
     >
         <div
+            ref="content"
             class="tinybox__content"
+            tabindex="0"
+
+            @blur="focusContent"
+
             @touchstart="swipeStart"
             @touchmove="swipe"
             @touchend="swipeEnd"
+
+            @keyup.left="prev"
+            @keyup.right="next"
+            @keyup.esc="close"
         >
             <div class="tinybox__content__current">
                 <img
@@ -126,6 +135,9 @@
         watch: {
             index(value) {
                 this.goto(value);
+            },
+            open() {
+                this.focusContent();
             }
         },
         mounted() {
@@ -186,6 +198,14 @@
             swipeEnd() {
                 this.swipeX = null;
                 this.swipeFinished = false;
+            },
+
+            focusContent() {
+                if (this.open) {
+                    this.$refs.content.focus();
+                } else {
+                    this.$refs.content.blur();
+                }
             }
         }
     };
@@ -216,6 +236,10 @@
         height: 84vh;
         position: absolute;
         width: 100vw;
+    }
+
+    .tinybox__content:focus {
+        outline: none;
     }
 
     .tinybox__content::before {

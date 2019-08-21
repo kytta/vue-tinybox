@@ -3,6 +3,8 @@
         class="tinybox"
         :class="{'tinybox--open': open}"
         @click="close"
+        @wheel.prevent
+        @touchmove.prevent
     >
         <div class="tinybox__content">
             <div class="tinybox__content__current">

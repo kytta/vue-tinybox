@@ -125,22 +125,20 @@
         },
         watch: {
             index(value) {
-                this.setIndex(value);
+                this.goto(value);
             }
         },
         mounted() {
-            this.setIndex(this.index);
+            this.goto(this.index);
         },
         methods: {
-            setIndex(value) {
-                this.cIndex = value;
-            },
             /**
              * @event close - the close button has been pressed. The current index is sent as payload
              */
             close() {
                 this.$emit("close", this.cIndex);
             },
+
             prev() {
                 if (this.hasPrev) {
                     let newIndex = this.cIndex - 1;
@@ -166,6 +164,7 @@
             goto(index) {
                 this.cIndex = index;
             },
+
             swipeStart(e) {
                 if (e.changedTouches.length === 1) {
                     this.swipeX = e.changedTouches[0].screenX;

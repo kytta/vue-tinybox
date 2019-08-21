@@ -41,7 +41,7 @@
     "build": "rollup --config rollup.config.prod.js",
     "dev": "rollup -w --config rollup.config.dev.js",
     "size": "size-limit",
-    "test": "npm run size"
+    "test": "npm run build && npm run size"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

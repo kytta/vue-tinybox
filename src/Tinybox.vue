@@ -367,6 +367,7 @@
     }
 
     .tinybox__thumbnails__item {
+        background-color: #222;
         cursor: pointer;
         display: inline-block;
         height: 10vh;
@@ -376,7 +377,7 @@
         width: 10vh;
     }
 
-    .tinybox__thumbnails__item--active {
+    .tinybox__thumbnails__item--active .tinybox__thumbnails__item__image{
         opacity: .3;
     }
 

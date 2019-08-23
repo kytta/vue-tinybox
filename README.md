@@ -4,7 +4,7 @@ A slick, yet tiny lightbox gallery component for Vue.js
 
 ## Demo
 
-The live demo can be found at https://NickKaramoff.github.io/vue-tinybox
+The live demo can be found at https://os.karamoff.ru/vue-tinybox
 
 ## Install
 

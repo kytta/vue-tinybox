@@ -78,4 +78,4 @@ atlassian-ide-plugin.xml
 
 # End of https://www.gitignore.io/api/node,visualstudiocode,webstorm+all
 
-/dist/*.dev.js
+/dist

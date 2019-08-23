@@ -1,6 +1,6 @@
 {
   "name": "vue-tinybox",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A slick, yet tiny lightbox gallery component for Vue.js",
   "license": "MIT",
   "keywords": [
@@ -60,7 +60,7 @@
   "size-limit": [
     {
       "path": "dist/tinybox.umd.js",
-      "limit": "5 KB"
+      "limit": "4 KB"
     }
   ]
 }

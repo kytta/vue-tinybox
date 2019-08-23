@@ -1,6 +1,6 @@
 {
   "name": "vue-tinybox",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A slick, yet tiny lightbox gallery component for Vue.js",
   "license": "MIT",
   "keywords": [
@@ -40,8 +40,9 @@
   "scripts": {
     "build": "rollup --config rollup.config.prod.js",
     "dev": "rollup -w --config rollup.config.dev.js",
+    "lint": "eslint ./src",
     "size": "size-limit",
-    "test": "npm run size"
+    "test": "npm run lint && npm run build && npm run size"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -59,7 +60,7 @@
   "size-limit": [
     {
       "path": "dist/tinybox.umd.js",
-      "limit": "5 KB"
+      "limit": "4 KB"
     }
   ]
 }

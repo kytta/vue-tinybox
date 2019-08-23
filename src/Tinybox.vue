@@ -3,14 +3,35 @@
         class="tinybox"
         :class="{'tinybox--open': open}"
         @click="close"
+        @wheel.prevent
+        @touchmove.prevent
     >
-        <div class="tinybox__content">
-            <div class="tinybox__content__current">
+        <div
+            ref="content"
+            class="tinybox__content"
+            tabindex="0"
+
+            @blur="focusContent"
+
+            @touchstart="swipeStart"
+            @touchmove="swipe"
+            @touchend="swipeEnd"
+
+            @keyup.left="prev"
+            @keyup.right="next"
+            @keyup.esc="close"
+        >
+            <div
+                class="tinybox__content__current"
+                :style="`background-image:url('${switchFrom.src}')`"
+            >
                 <img
                     class="tinybox__content__current__image"
+                    :class="transitionClass"
                     :src="current.src"
                     :alt="current.alt || ''"
                     @click.stop="next"
+                    @animationend="transitionClass = ''"
                 >
             </div>
             <div
@@ -83,7 +104,13 @@
         },
         data() {
             return {
-                cIndex: null
+                cIndex: null,
+
+                swipeFinished: false,
+                swipeX: null,
+
+                switchFrom: null,
+                transitionClass: ""
             };
         },
         computed: {
@@ -101,7 +128,7 @@
                 return result;
             },
             current() {
-                return this._images[this.cIndex] || {};
+                return this._images[this.cIndex] || { src: "" };
             },
             open() {
                 return this.index !== null;
@@ -114,47 +141,85 @@
             },
         },
         watch: {
-            index(value) {
-                this.resetIndex(value);
-            }
+            index(idx) {
+                this.goto(idx);
+            },
+            open() {
+                this.focusContent();
+            },
         },
-        mounted() {
-            this.resetIndex(this.index);
+        created() {
+            this.goto(this.index);
         },
         methods: {
-            resetIndex(value) {
-                this.cIndex = value;
-            },
             /**
              * @event close - the close button has been pressed. The current index is sent as payload
              */
             close() {
                 this.$emit("close", this.cIndex);
             },
+
             prev() {
                 if (this.hasPrev) {
-                    let newIndex = this.cIndex - 1;
-
-                    if (newIndex < 0) {
-                        newIndex = this._images.length - 1;
-                    }
-
-                    this.cIndex = newIndex;
+                    this.goto(this.cIndex - 1);
                 }
             },
             next() {
                 if (this.hasNext) {
-                    let newIndex = this.cIndex + 1;
-
-                    if (newIndex === this._images.length) {
-                        newIndex = 0;
-                    }
-
-                    this.cIndex = newIndex;
+                    this.goto(this.cIndex + 1);
                 }
             },
             goto(index) {
+                this.switchFrom = this.current;
+                let transition = "";
+
+                if (index !== null) {
+                    let newIndex = index;
+
+                    if (newIndex >= this._images.length) {
+                        newIndex = 0;
+                    } else if (newIndex < 0) {
+                        newIndex = this._images.length - 1;
+                    }
+
+                    if (this.cIndex !== null) {
+                        transition = this.cIndex < newIndex ? "tinybox__content__current__image--from-right" : "tinybox__content__current__image--from-left";
+                    }
+                }
+
+                this.transitionClass = transition;
                 this.cIndex = index;
+            },
+
+            swipeStart(e) {
+                if (e.changedTouches.length === 1) {
+                    this.swipeX = e.changedTouches[0].screenX;
+                }
+            },
+            swipe(e) {
+                if (!this.swipeFinished && e.changedTouches.length === 1) {
+                    const newSwipeX = e.changedTouches[0].screenX;
+
+                    if (newSwipeX - this.swipeX >= 50) {
+                        this.prev();
+                        this.swipeFinished = true;
+                    } else if (this.swipeX - newSwipeX >= 50) {
+                        this.next();
+                        this.swipeFinished = true;
+                    }
+                }
+            },
+            swipeEnd() {
+                this.swipeX = null;
+                this.swipeFinished = false;
+            },
+
+            focusContent() {
+                if (this.open) {
+                    this.$refs.content.focus();
+                } else {
+                    this.$refs.content.blur();
+                }
             }
         }
     };
@@ -163,13 +228,10 @@
 <style scoped>
     .tinybox {
         background: rgba(0, 0, 0, .9);
-        bottom: 0;
-        cursor: auto;
         height: 100%;
         left: 0;
         opacity: 0;
         outline: none;
-        overflow: auto;
         pointer-events: none;
         position: fixed;
         right: 0;
@@ -186,15 +248,25 @@
 
     .tinybox__content {
         height: 84vh;
-        margin-top: 2vh;
-        overflow: hidden;
-        position: relative;
+        position: absolute;
+        width: 100vw;
+    }
+
+    .tinybox__content:focus {
+        outline: none;
+    }
+
+    .tinybox__content::before {
+        content: "";
+        display: inline-block;
+        height: 84vh;
+        vertical-align: middle;
     }
 
     .tinybox__content__current {
-        height: 84vh;
-        position: absolute;
-        width: 100vw;
+        background-size: cover;
+        display: inline-block;
+        vertical-align: middle;
     }
 
     .tinybox__content__current__image {
@@ -209,6 +281,43 @@
         position: relative;
         vertical-align: middle;
         width: auto;
+
+        animation-duration: 300ms;
+        animation-direction: normal;
+        animation-iteration-count: 1;
+        animation-timing-function: ease;
+    }
+
+    .tinybox__content__current__image--from-left {
+        animation-name: left-right;
+    }
+
+    .tinybox__content__current__image--from-right {
+        animation-name: right-left;
+    }
+
+    @keyframes left-right {
+        from {
+            opacity: 0;
+            transform: translateX(-80px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes right-left {
+        from {
+            opacity: 0;
+            transform: translateX(80px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 
     .tinybox__content__control {
@@ -216,11 +325,10 @@
         background-repeat: no-repeat;
         background-position: center;
         cursor: pointer;
-        display: block;
         opacity: .5;
         position: absolute;
         top: 0;
-        transition: all .3s;
+        transition: opacity .3s;
         width: 4em;
     }
 
@@ -259,28 +367,28 @@
     }
 
     .tinybox__thumbnails__item {
-        background: #222;
-        box-sizing: content-box;
+        background-color: #222;
         cursor: pointer;
         display: inline-block;
         height: 10vh;
         overflow: hidden;
-        padding: 2vh 1vh;
+        margin: 2vh 1vh;
         position: relative;
         width: 10vh;
     }
 
-    .tinybox__thumbnails__item--active {
+    .tinybox__thumbnails__item--active .tinybox__thumbnails__item__image{
         opacity: .3;
     }
 
     .tinybox__thumbnails__item__image {
-        border: none;
         display: inline-block;
+        height: 100%;
+        left: 50%;
+        position: absolute;
+        top: 0;
+        transform: translateX(-50%);
         vertical-align: middle;
         width: auto;
-        max-width: none;
-        top: 0;
-        height: 100%;
     }
 </style>

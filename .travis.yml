@@ -19,8 +19,6 @@ jobs:
 
     - stage: test
       name: "Test"
-      before_script:
-        - npm run build
       script:
         - npm run test
 

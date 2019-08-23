@@ -21,12 +21,17 @@
             @keyup.right="next"
             @keyup.esc="close"
         >
-            <div class="tinybox__content__current">
+            <div
+                class="tinybox__content__current"
+                :style="`background-image:url('${switchFrom.src}')`"
+            >
                 <img
                     class="tinybox__content__current__image"
+                    :class="transitionClass"
                     :src="current.src"
                     :alt="current.alt || ''"
                     @click.stop="next"
+                    @animationend="transitionClass = ''"
                 >
             </div>
             <div
@@ -103,6 +108,9 @@
 
                 swipeFinished: false,
                 swipeX: null,
+
+                switchFrom: null,
+                transitionClass: ""
             };
         },
         computed: {
@@ -120,7 +128,7 @@
                 return result;
             },
             current() {
-                return this._images[this.cIndex] || {};
+                return this._images[this.cIndex] || { src: "" };
             },
             open() {
                 return this.index !== null;
@@ -133,14 +141,14 @@
             },
         },
         watch: {
-            index(value) {
-                this.goto(value);
+            index(idx) {
+                this.goto(idx);
             },
             open() {
                 this.focusContent();
-            }
+            },
         },
-        mounted() {
+        created() {
             this.goto(this.index);
         },
         methods: {
@@ -153,27 +161,33 @@
 
             prev() {
                 if (this.hasPrev) {
-                    let newIndex = this.cIndex - 1;
-
-                    if (newIndex < 0) {
-                        newIndex = this._images.length - 1;
-                    }
-
-                    this.cIndex = newIndex;
+                    this.goto(this.cIndex - 1);
                 }
             },
             next() {
                 if (this.hasNext) {
-                    let newIndex = this.cIndex + 1;
-
-                    if (newIndex === this._images.length) {
-                        newIndex = 0;
-                    }
-
-                    this.cIndex = newIndex;
+                    this.goto(this.cIndex + 1);
                 }
             },
             goto(index) {
+                this.switchFrom = this.current;
+                let transition = "";
+
+                if (index !== null) {
+                    let newIndex = index;
+
+                    if (newIndex >= this._images.length) {
+                        newIndex = 0;
+                    } else if (newIndex < 0) {
+                        newIndex = this._images.length - 1;
+                    }
+
+                    if (this.cIndex !== null) {
+                        transition = this.cIndex < newIndex ? "tinybox__content__current__image--from-right" : "tinybox__content__current__image--from-left";
+                    }
+                }
+
+                this.transitionClass = transition;
                 this.cIndex = index;
             },
 
@@ -250,6 +264,7 @@
     }
 
     .tinybox__content__current {
+        background-size: cover;
         display: inline-block;
         vertical-align: middle;
     }
@@ -266,6 +281,43 @@
         position: relative;
         vertical-align: middle;
         width: auto;
+
+        animation-duration: 300ms;
+        animation-direction: normal;
+        animation-iteration-count: 1;
+        animation-timing-function: ease;
+    }
+
+    .tinybox__content__current__image--from-left {
+        animation-name: left-right;
+    }
+
+    .tinybox__content__current__image--from-right {
+        animation-name: right-left;
+    }
+
+    @keyframes left-right {
+        from {
+            opacity: 0;
+            transform: translateX(-80px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes right-left {
+        from {
+            opacity: 0;
+            transform: translateX(80px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 
     .tinybox__content__control {

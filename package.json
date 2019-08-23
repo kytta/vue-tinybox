@@ -60,7 +60,7 @@
   "size-limit": [
     {
       "path": "dist/tinybox.umd.js",
-      "limit": "5 KB"
+      "limit": "4 KB"
     }
   ]
 }

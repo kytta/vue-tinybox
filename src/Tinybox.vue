@@ -1,15 +1,13 @@
 <template>
     <div
-        class="tinybox"
         :class="{'tinybox--open': open}"
         @click="close"
         @wheel.prevent
         @touchmove.prevent
+        class="tinybox"
     >
         <div
             ref="content"
-            class="tinybox__content"
-            tabindex="0"
 
             @blur="focusContent"
 
@@ -20,33 +18,36 @@
             @keyup.left="prev"
             @keyup.right="next"
             @keyup.esc="close"
+
+            class="tinybox__content"
+            tabindex="0"
         >
             <div
-                class="tinybox__content__current"
                 :style="`background-image:url('${switchFrom.src}')`"
+                class="tinybox__content__current"
             >
                 <img
-                    class="tinybox__content__current__image"
                     :class="transitionClass"
                     :src="current.src"
                     :alt="current.alt || ''"
                     @click.stop="next"
                     @animationend="transitionClass = ''"
+                    class="tinybox__content__current__image"
                 >
             </div>
             <div
                 v-if="hasPrev"
-                class="tinybox__content__control tinybox__content__control--prev"
                 @click.stop="prev"
+                class="tinybox__content__control tinybox__content__control--prev"
             />
             <div
                 v-if="hasNext"
-                class="tinybox__content__control tinybox__content__control--next"
                 @click.stop="next"
+                class="tinybox__content__control tinybox__content__control--next"
             />
             <div
-                class="tinybox__content__control tinybox__content__control--close"
                 @click.stop="close"
+                class="tinybox__content__control tinybox__content__control--close"
             />
         </div>
         <div class="tinybox__thumbnails">
@@ -54,13 +55,13 @@
                 v-for="(img, i) in _images"
                 :key="i"
                 :class="{'tinybox__thumbnails__item--active': cIndex === i}"
-                class="tinybox__thumbnails__item"
                 @click.stop="goto(i)"
+                class="tinybox__thumbnails__item"
             >
                 <img
-                    class="tinybox__thumbnails__item__image"
                     :src="img.thumbnail || img.src"
                     :alt="img.alt || ''"
+                    class="tinybox__thumbnails__item__image"
                 >
             </div>
         </div>

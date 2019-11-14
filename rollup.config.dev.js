@@ -1,4 +1,5 @@
-import { getFilename, input, defaultOutput, getPlugins } from "./rollup.config.prod.js";
+import { defaultOutput, getFilename, input } from "./config/build/defaults";
+import { buble, cjs, vue } from "./config/build/plugins";
 
 export default {
     input,
@@ -7,5 +8,9 @@ export default {
         file: getFilename("dev"),
         format: "iife",
     },
-    plugins: getPlugins(false)
+    plugins: [
+        cjs(),
+        vue(false),
+        buble()
+    ]
 };

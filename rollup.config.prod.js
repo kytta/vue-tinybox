@@ -1,65 +1,34 @@
-import babel from "rollup-plugin-babel";
-import commonjs from "rollup-plugin-commonjs";
-import { terser } from "rollup-plugin-terser";
-import vue from "rollup-plugin-vue";
+import { buble, cjs, terser, vue } from "./config/build/plugins";
+import { defaultOutput, getFilename, input } from "./config/build/defaults";
 
-export const defaultOutput = {
-    name: "Tinybox",
-    exports: "default"
-};
-
-export const input = "./src/index.js";
-
-export function getPlugins(prod = true, min = false) {
-    return [
-        commonjs(),
-        vue({
-            css: true,
-            compileTemplate: true,
-            template: {
-                compilerOptions: {
-                    whitespace: "condense",
-                },
-                isProduction: prod
-            }
-        }),
-        babel({
-            exclude: "node_modules/**"
-        }),
-        min && terser()
-    ];
-}
-
-export function getFilename(infix) {
-    return `./dist/tinybox.${infix}.js`;
-}
 
 export default [
     {
         input,
         output: {
-            ...defaultOutput,
             file: getFilename("esm"),
             format: "esm",
+            ...defaultOutput
         },
-        plugins: getPlugins()
+        plugins: [
+            cjs(),
+            vue(true),
+            buble(),
+            terser(6)
+        ]
     },
     {
         input,
         output: {
-            ...defaultOutput,
             file: getFilename("umd"),
             format: "umd",
+            ...defaultOutput
         },
-        plugins: getPlugins()
-    },
-    {
-        input,
-        output: {
-            ...defaultOutput,
-            file: getFilename("min"),
-            format: "iife",
-        },
-        plugins: getPlugins(true, true)
-    },
+        plugins: [
+            cjs(),
+            vue(true),
+            buble(),
+            terser(5)
+        ]
+    }
 ];

@@ -1,15 +1,16 @@
 <template>
     <div
-        class="tinybox"
-        :class="{'tinybox--open': open}"
+        :class="{'v-tb--open': open}"
+
         @click="close"
+
         @wheel.prevent
         @touchmove.prevent
+
+        class="v-tb"
     >
         <div
             ref="content"
-            class="tinybox__content"
-            tabindex="0"
 
             @blur="focusContent"
 
@@ -20,47 +21,60 @@
             @keyup.left="prev"
             @keyup.right="next"
             @keyup.esc="close"
+
+            class="v-tb__cont"
+            tabindex="0"
         >
             <div
-                class="tinybox__content__current"
-                :style="`background-image:url('${switchFrom.src}')`"
+                :style="`background:url('${switchFrom.src}')`"
+                class="v-tb__cont__cur"
             >
                 <img
-                    class="tinybox__content__current__image"
                     :class="transitionClass"
                     :src="current.src"
                     :alt="current.alt || ''"
+
                     @click.stop="next"
+
                     @animationend="transitionClass = ''"
+
+                    class="v-tb__cont__cur__img"
                 >
             </div>
             <div
                 v-if="hasPrev"
-                class="tinybox__content__control tinybox__content__control--prev"
+
                 @click.stop="prev"
+
+                class="v-tb__cont__ctrl v-tb__cont__ctrl--prev"
             />
             <div
                 v-if="hasNext"
-                class="tinybox__content__control tinybox__content__control--next"
+
                 @click.stop="next"
+
+                class="v-tb__cont__ctrl v-tb__cont__ctrl--next"
             />
             <div
-                class="tinybox__content__control tinybox__content__control--close"
                 @click.stop="close"
+
+                class="v-tb__cont__ctrl v-tb__cont__ctrl--close"
             />
         </div>
-        <div class="tinybox__thumbnails">
+        <div class="v-tb__thumbs">
             <div
                 v-for="(img, i) in _images"
                 :key="i"
-                :class="{'tinybox__thumbnails__item--active': cIndex === i}"
-                class="tinybox__thumbnails__item"
+                :class="{'v-tb__thumbs__item--active': cIndex === i}"
+
                 @click.stop="goto(i)"
+
+                class="v-tb__thumbs__item"
             >
                 <img
-                    class="tinybox__thumbnails__item__image"
                     :src="img.thumbnail || img.src"
                     :alt="img.alt || ''"
+                    class="v-tb__thumbs__item__img"
                 >
             </div>
         </div>
@@ -183,7 +197,7 @@
                     }
 
                     if (this.cIndex !== null) {
-                        transition = this.cIndex < newIndex ? "tinybox__content__current__image--from-right" : "tinybox__content__current__image--from-left";
+                        transition = this.cIndex < newIndex ? "v-tb__cont__cur__img--rtl" : "v-tb__cont__cur__img--ltr";
                     }
                 }
 
@@ -226,7 +240,7 @@
 </script>
 
 <style scoped>
-    .tinybox {
+    .v-tb {
         background: rgba(0, 0, 0, .9);
         height: 100%;
         left: 0;
@@ -241,35 +255,35 @@
         z-index: 2000;
     }
 
-    .tinybox--open {
+    .v-tb--open {
         opacity: 1;
         pointer-events: initial;
     }
 
-    .tinybox__content {
+    .v-tb__cont {
         height: 84vh;
         position: absolute;
         width: 100vw;
     }
 
-    .tinybox__content:focus {
+    .v-tb__cont:focus {
         outline: none;
     }
 
-    .tinybox__content::before {
+    .v-tb__cont::before {
         content: "";
         display: inline-block;
         height: 84vh;
         vertical-align: middle;
     }
 
-    .tinybox__content__current {
+    .v-tb__cont__cur {
         background-size: cover;
         display: inline-block;
         vertical-align: middle;
     }
 
-    .tinybox__content__current__image {
+    .v-tb__cont__cur__img {
         border: none;
         cursor: pointer;
         display: inline-block;
@@ -282,21 +296,18 @@
         vertical-align: middle;
         width: auto;
 
-        animation-duration: 300ms;
-        animation-direction: normal;
-        animation-iteration-count: 1;
-        animation-timing-function: ease;
+        animation: 300ms ease 1 normal;
     }
 
-    .tinybox__content__current__image--from-left {
-        animation-name: left-right;
+    .v-tb__cont__cur__img--ltr {
+        animation-name: ltr;
     }
 
-    .tinybox__content__current__image--from-right {
-        animation-name: right-left;
+    .v-tb__cont__cur__img--rtl {
+        animation-name: rtl;
     }
 
-    @keyframes left-right {
+    @keyframes ltr {
         from {
             opacity: 0;
             transform: translateX(-80px);
@@ -308,7 +319,7 @@
         }
     }
 
-    @keyframes right-left {
+    @keyframes rtl {
         from {
             opacity: 0;
             transform: translateX(80px);
@@ -320,10 +331,12 @@
         }
     }
 
-    .tinybox__content__control {
-        background-size: 24px;
-        background-repeat: no-repeat;
-        background-position: center;
+    .v-tb__cont__ctrl {
+        background: no-repeat center/24px;
+
+        /*background-size: 24px;*/
+        /*background-repeat: no-repeat;*/
+        /*background-position: center;*/
         cursor: pointer;
         opacity: .5;
         position: absolute;
@@ -332,29 +345,29 @@
         width: 4em;
     }
 
-    .tinybox__content__control:hover {
+    .v-tb__cont__ctrl:hover {
         opacity: 1;
     }
 
-    .tinybox__content__control--prev {
+    .v-tb__cont__ctrl--prev {
         background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMjE3LjkgMjU2IDEyNy4xLTEyN2M5LjQtOS40IDkuNC0yNC42IDAtMzMuOS05LjQtOS40LTI0LjYtOS4zLTM0IDBsLTE0NCAxNDMuOWMtOS4xIDkuMS05LjMgMjMuNy0uNyAzMy4xbDE0NC42IDE0NC45YzQuNyA0LjcgMTAuOSA3IDE3IDdzMTIuMy0yLjMgMTctN2M5LjQtOS40IDkuNC0yNC42IDAtMzMuOXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=");
         bottom: 0;
         left: 0;
     }
 
-    .tinybox__content__control--next {
+    .v-tb__cont__ctrl--next {
         background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMjk0LjEgMjU2LTEyNy4xLTEyN2MtOS40LTkuNC05LjQtMjQuNiAwLTMzLjlzMjQuNi05LjMgMzQgMGwxNDQgMTQzLjljOS4xIDkuMSA5LjMgMjMuNy43IDMzLjFsLTE0NC42IDE0NC45Yy00LjcgNC43LTEwLjkgNy0xNyA3cy0xMi4zLTIuMy0xNy03Yy05LjQtOS40LTkuNC0yNC42IDAtMzMuOXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=");
         bottom: 0;
         right: 0;
     }
 
-    .tinybox__content__control--close {
+    .v-tb__cont__ctrl--close {
         background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0yNzguNiAyNTYgNjguMi02OC4yYzYuMi02LjIgNi4yLTE2LjQgMC0yMi42cy0xNi40LTYuMi0yMi42IDBsLTY4LjIgNjguMi02OC4yLTY4LjJjLTYuMi02LjItMTYuNC02LjItMjIuNiAwLTMuMSAzLjEtNC43IDcuMi00LjcgMTEuM3MxLjYgOC4yIDQuNyAxMS4zbDY4LjIgNjguMi02OC4yIDY4LjJjLTMuMSAzLjEtNC43IDcuMi00LjcgMTEuM3MxLjYgOC4yIDQuNyAxMS4zYzYuMiA2LjIgMTYuNCA2LjIgMjIuNiAwbDY4LjItNjguMiA2OC4yIDY4LjJjNi4yIDYuMiAxNi40IDYuMiAyMi42IDBzNi4yLTE2LjQgMC0yMi42eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==");
         height: 2.6em;
         right: 0;
     }
 
-    .tinybox__thumbnails {
+    .v-tb__thumbs {
         bottom: 0;
         left: 0;
         line-height: 0;
@@ -366,8 +379,8 @@
         white-space: nowrap;
     }
 
-    .tinybox__thumbnails__item {
-        background-color: #222;
+    .v-tb__thumbs__item {
+        background: #222;
         cursor: pointer;
         display: inline-block;
         height: 10vh;
@@ -377,11 +390,11 @@
         width: 10vh;
     }
 
-    .tinybox__thumbnails__item--active .tinybox__thumbnails__item__image{
+    .v-tb__thumbs__item--active .v-tb__thumbs__item__img{
         opacity: .3;
     }
 
-    .tinybox__thumbnails__item__image {
+    .v-tb__thumbs__item__img {
         display: inline-block;
         height: 100%;
         left: 50%;

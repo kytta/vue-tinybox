@@ -32,7 +32,6 @@ jobs:
         api_key:
           secure: ZkkKjSsdvjVjamrcSeuCFCp+Upi2iKI0jszIYuLmIixhY/JfYWLWYM6T+8To9BWuEZ1974Ddo400nYS2BTwKu5jZVUBZPWJorurT/rFt6tnnRQ/jNdh8tmQYG3XT3BZBf/vN7JGFbKVpY6C91szfdkUOPBqbXrjkJOWOVC8+gY2z/iFur0ddhWGB4mCMZb/9qEx1d1KgdMFBAlyn1BJMLyjukyEE0NxgfLeENso0MHST9Scp4a2+yTL/qBdHODD62P2KMDHmAUD7vCY4SDuQbpkIcSZW9YPbaau4pGZX+KTlLAh+OZZfmke+Kn7ju/61CDkp3rGITNsRUxC0SXDrwwkYWh2kG9EueWE8dJBFL2oMMkzHkHwz0P7EUf3l5dVbAw9GtwWu68xor24ElDviUBlboAc/DxfbR7JAG1VmGn7m0jTBUSYNxv9xzSUKbBdT+0dPgDsQH28Yyl01VPe9jtyPEQ9dbvQdv/i/oi1qPEKrgtNB7vG34hkdyjsdS0OO5b+qw3k2nYluCCK+gu8p+dtUGQMI4BHTw3xP6R6W37/e9Nexr4o37dTSDYzoRnc2BUDGjgBlqn0rsa6bMPG4BxyKdZ7c+ZeaolqPblMbKbtxXLiXwRnVK5MQYj5NJ2ZyNb492lcfqtYKetm+tlUiNqzjfBVyzUP4i2d/nndDz5o=
         file:
-          - ./dist/tinybox.min.js
           - ./dist/tinybox.umd.js
           - ./dist/tinybox.esm.js
         skip_cleanup: true

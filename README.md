@@ -2,6 +2,10 @@
 
 A slick, yet tiny lightbox gallery component for Vue.js
 
+- **Slick.** Nothing excessive. Image, controls and thumbnails.
+- **Small.** Dependency-free and less than 3.5 KB minified and gzipped.
+- **Adaptive.** Works great on both desktop and mobile.
+
 ## Demo
 
 The live demo can be found at https://os.karamoff.ru/vue-tinybox
@@ -24,7 +28,7 @@ Just include the link to the Tinybox in your `<head>`:
 
 ```html
 <script src="path/to/vue.js"></script>
-<script src="path/to/tinybox.min.js"></script>
+<script src="path/to/tinybox.umd.js"></script>
 ```
 
 ## Usage
@@ -63,16 +67,16 @@ Then you can use the `Tinybox` component:
 
 The `Tinybox` component accepts these props:
 
-| Prop name | Type          | Default | Description                                                                    |
-|-----------|---------------|---------|--------------------------------------------------------------------------------|
-| `images`  | Array         | `[]`    | The array of either image URLs or `Image` objects                              |
-| `index`   | Number|`null` | `null`  | The index of the image that has to be shown. If `null`, the lightbox is closed |
-| `loop`    | Boolean       | `false` | Indicates whether the images should loop                                       |
+| Prop name | Type              | Default | Description                                                                    |
+|-----------|-------------------|---------|--------------------------------------------------------------------------------|
+| `images`  | `Array`           | `[]`    | The array of either image URLs or `Image` objects                              |
+| `index`   | `Number` / `null` | `null`  | The index of the image that has to be shown. If `null`, the lightbox is closed |
+| `loop`    | `Boolean`         | `false` | Indicates whether the images should loop                                       |
 
 The `Image` object is an object with following fields:
 
-| Field name  | Type   | Description                                                                                                    |
-|-------------|--------|----------------------------------------------------------------------------------------------------------------|
-| `src`       | String | The URL of the image                                                                                           |
-| `alt`       | String | The text to be set inside `alt` attribute, i.e. text for screen readers or to be shown if the image can't load |
-| `thumbnail` | String | The URL of the smaller version of the image to be shown in the thumbnail strip                                 |
+| Field name  | Type     | Description                                                                               |
+|-------------|----------|-------------------------------------------------------------------------------------------|
+| `src`       | `String` | The URL of the image                                                                      |
+| `alt`       | `String` | (optional) The text to be set inside `alt` attribute, e.g. a caption                      |
+| `thumbnail` | `String` | (optional) The URL of the smaller version of the image to be shown in the thumbnail strip |

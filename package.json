@@ -38,15 +38,15 @@
     "test": "npm run lint && npm run build && npm run size"
   },
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^2.1.1",
-    "eslint": "^6.2.1",
-    "eslint-plugin-vue": "^5.2.3",
-    "rollup": "^1.20.1",
+    "@size-limit/preset-small-lib": "^2.2.0",
+    "eslint": "^6.6.0",
+    "eslint-plugin-vue": "^6.0.1",
+    "rollup": "^1.27.0",
     "rollup-plugin-buble": "^0.19.8",
-    "rollup-plugin-commonjs": "^10.0.2",
-    "rollup-plugin-terser": "^5.1.1",
-    "rollup-plugin-vue": "^5.0.1",
-    "vue-eslint-parser": "^6.0.4",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-vue": "^5.1.1",
+    "vue-eslint-parser": "^6.0.5",
     "vue-template-compiler": "^2.6.10"
   },
   "size-limit": [

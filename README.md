@@ -1,4 +1,6 @@
 # vue-tinybox
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FNickKaramoff%2Fvue-tinybox.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FNickKaramoff%2Fvue-tinybox?ref=badge_shield)
+
 
 A slick, yet tiny lightbox gallery component for Vue.js
 
@@ -80,3 +82,7 @@ The `Image` object is an object with following fields:
 | `src`       | `String` | The URL of the image                                                                      |
 | `alt`       | `String` | (optional) The text to be set inside `alt` attribute, e.g. a caption                      |
 | `thumbnail` | `String` | (optional) The URL of the smaller version of the image to be shown in the thumbnail strip |
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FNickKaramoff%2Fvue-tinybox.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FNickKaramoff%2Fvue-tinybox?ref=badge_large)

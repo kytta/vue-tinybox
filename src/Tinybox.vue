@@ -341,19 +341,19 @@ export default {
     }
 
     .tinybox__content__control--prev {
-        background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMjE3LjkgMjU2IDEyNy4xLTEyN2M5LjQtOS40IDkuNC0yNC42IDAtMzMuOS05LjQtOS40LTI0LjYtOS4zLTM0IDBsLTE0NCAxNDMuOWMtOS4xIDkuMS05LjMgMjMuNy0uNyAzMy4xbDE0NC42IDE0NC45YzQuNyA0LjcgMTAuOSA3IDE3IDdzMTIuMy0yLjMgMTctN2M5LjQtOS40IDkuNC0yNC42IDAtMzMuOXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='2 -2 28 36' width='40' height='60' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3'%3E%3Cpath d='M20 30 L8 16 20 2' /%3E%3C/svg%3E");
         bottom: 0;
         left: 0;
     }
 
     .tinybox__content__control--next {
-        background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMjk0LjEgMjU2LTEyNy4xLTEyN2MtOS40LTkuNC05LjQtMjQuNiAwLTMzLjlzMjQuNi05LjMgMzQgMGwxNDQgMTQzLjljOS4xIDkuMSA5LjMgMjMuNy43IDMzLjFsLTE0NC42IDE0NC45Yy00LjcgNC43LTEwLjkgNy0xNyA3cy0xMi4zLTIuMy0xNy03Yy05LjQtOS40LTkuNC0yNC42IDAtMzMuOXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='2 -2 28 36' width='40' height='60' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3'%3E%3Cpath d='M12 30 L24 16 12 2' /%3E%3C/svg%3E");
         bottom: 0;
         right: 0;
     }
 
     .tinybox__content__control--close {
-        background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0yNzguNiAyNTYgNjguMi02OC4yYzYuMi02LjIgNi4yLTE2LjQgMC0yMi42cy0xNi40LTYuMi0yMi42IDBsLTY4LjIgNjguMi02OC4yLTY4LjJjLTYuMi02LjItMTYuNC02LjItMjIuNiAwLTMuMSAzLjEtNC43IDcuMi00LjcgMTEuM3MxLjYgOC4yIDQuNyAxMS4zbDY4LjIgNjguMi02OC4yIDY4LjJjLTMuMSAzLjEtNC43IDcuMi00LjcgMTEuM3MxLjYgOC4yIDQuNyAxMS4zYzYuMiA2LjIgMTYuNCA2LjIgMjIuNiAwbDY4LjItNjguMiA2OC4yIDY4LjJjNi4yIDYuMiAxNi40IDYuMiAyMi42IDBzNi4yLTE2LjQgMC0yMi42eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-5 -5 46 46' width='40' height='40' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='4'%3E%3Cpath d='M2 30 L30 2 M30 30 L2 2' /%3E%3C/svg%3E");
         height: 2.6em;
         right: 0;
     }

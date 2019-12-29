@@ -33,9 +33,9 @@
   "scripts": {
     "build": "rollup --config ./build/rollup.config.prod.js",
     "dev": "rollup -w --config ./build/rollup.config.dev.js",
-    "lint": "eslint .",
-    "size": "size-limit",
-    "test": "run-s lint build size"
+    "test:lint": "eslint .",
+    "test:size": "size-limit",
+    "checks": "run-s lint build size"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",

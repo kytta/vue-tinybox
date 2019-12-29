@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="{'v-tb--open': open}"
-    class="v-tb"
+    :class="{'tinybox--open': open}"
+    class="tinybox"
 
     @click="close"
     @wheel.prevent
@@ -10,7 +10,7 @@
     <div
       ref="content"
 
-      class="v-tb__cont"
+      class="tinybox__content"
 
       tabindex="0"
 
@@ -26,14 +26,14 @@
     >
       <div
         :style="`background:url('${switchFrom.src}')`"
-        class="v-tb__cont__cur"
+        class="tinybox__content__current"
       >
         <img
           :class="transitionClass"
           :src="current.src"
           :alt="current.alt || ''"
 
-          class="v-tb__cont__cur__img"
+          class="tinybox__content__current__image"
 
           @click.stop="next"
 
@@ -43,37 +43,37 @@
       <div
         v-if="hasPrev"
 
-        class="v-tb__cont__ctrl v-tb__cont__ctrl--prev"
+        class="tinybox__content__control tinybox__content__control--prev"
 
         @click.stop="prev"
       />
       <div
         v-if="hasNext"
 
-        class="v-tb__cont__ctrl v-tb__cont__ctrl--next"
+        class="tinybox__content__control tinybox__content__control--next"
 
         @click.stop="next"
       />
       <div
-        class="v-tb__cont__ctrl v-tb__cont__ctrl--close"
+        class="tinybox__content__control tinybox__content__control--close"
 
         @click.stop="close"
       />
     </div>
-    <div class="v-tb__thumbs">
+    <div class="tinybox__thumbs">
       <div
         v-for="(img, i) in normalizedImages"
         :key="i"
-        :class="{'v-tb__thumbs__item--active': cIndex === i}"
+        :class="{'tinybox__thumbs__item--active': cIndex === i}"
 
-        class="v-tb__thumbs__item"
+        class="tinybox__thumbs__item"
 
         @click.stop="goto(i)"
       >
         <img
           :src="img.thumbnail || img.src"
           :alt="img.alt || ''"
-          class="v-tb__thumbs__item__img"
+          class="tinybox__thumbs__item__image"
         >
       </div>
     </div>
@@ -186,7 +186,7 @@ export default {
         }
 
         if (this.cIndex !== null) {
-          transition = this.cIndex < newIndex ? 'v-tb__cont__cur__img--rtl' : 'v-tb__cont__cur__img--ltr';
+          transition = this.cIndex < newIndex ? 'tinybox__content__current__image--rtl' : 'tinybox__content__current__image--ltr';
         }
       }
 
@@ -231,7 +231,7 @@ export default {
 <!-- eslint-disable max-len -->
 
 <style scoped>
-    .v-tb {
+    .tinybox {
         background: rgba(0, 0, 0, .9);
         height: 100%;
         left: 0;
@@ -246,35 +246,35 @@ export default {
         z-index: 2000;
     }
 
-    .v-tb--open {
+    .tinybox--open {
         opacity: 1;
         pointer-events: initial;
     }
 
-    .v-tb__cont {
+    .tinybox__content {
         height: 84vh;
         position: absolute;
         width: 100vw;
     }
 
-    .v-tb__cont:focus {
+    .tinybox__content:focus {
         outline: none;
     }
 
-    .v-tb__cont::before {
+    .tinybox__content::before {
         content: "";
         display: inline-block;
         height: 84vh;
         vertical-align: middle;
     }
 
-    .v-tb__cont__cur {
+    .tinybox__content__current {
         background-size: cover;
         display: inline-block;
         vertical-align: middle;
     }
 
-    .v-tb__cont__cur__img {
+    .tinybox__content__current__image {
         border: none;
         cursor: pointer;
         display: inline-block;
@@ -290,11 +290,11 @@ export default {
         animation: 300ms ease 1 normal;
     }
 
-    .v-tb__cont__cur__img--ltr {
+    .tinybox__content__current__image--ltr {
         animation-name: ltr;
     }
 
-    .v-tb__cont__cur__img--rtl {
+    .tinybox__content__current__image--rtl {
         animation-name: rtl;
     }
 
@@ -322,7 +322,7 @@ export default {
         }
     }
 
-    .v-tb__cont__ctrl {
+    .tinybox__content__control {
         background: no-repeat center/24px;
 
         /*background-size: 24px;*/
@@ -336,29 +336,29 @@ export default {
         width: 4em;
     }
 
-    .v-tb__cont__ctrl:hover {
+    .tinybox__content__control:hover {
         opacity: 1;
     }
 
-    .v-tb__cont__ctrl--prev {
+    .tinybox__content__control--prev {
         background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMjE3LjkgMjU2IDEyNy4xLTEyN2M5LjQtOS40IDkuNC0yNC42IDAtMzMuOS05LjQtOS40LTI0LjYtOS4zLTM0IDBsLTE0NCAxNDMuOWMtOS4xIDkuMS05LjMgMjMuNy0uNyAzMy4xbDE0NC42IDE0NC45YzQuNyA0LjcgMTAuOSA3IDE3IDdzMTIuMy0yLjMgMTctN2M5LjQtOS40IDkuNC0yNC42IDAtMzMuOXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=");
         bottom: 0;
         left: 0;
     }
 
-    .v-tb__cont__ctrl--next {
+    .tinybox__content__control--next {
         background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMjk0LjEgMjU2LTEyNy4xLTEyN2MtOS40LTkuNC05LjQtMjQuNiAwLTMzLjlzMjQuNi05LjMgMzQgMGwxNDQgMTQzLjljOS4xIDkuMSA5LjMgMjMuNy43IDMzLjFsLTE0NC42IDE0NC45Yy00LjcgNC43LTEwLjkgNy0xNyA3cy0xMi4zLTIuMy0xNy03Yy05LjQtOS40LTkuNC0yNC42IDAtMzMuOXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=");
         bottom: 0;
         right: 0;
     }
 
-    .v-tb__cont__ctrl--close {
+    .tinybox__content__control--close {
         background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0yNzguNiAyNTYgNjguMi02OC4yYzYuMi02LjIgNi4yLTE2LjQgMC0yMi42cy0xNi40LTYuMi0yMi42IDBsLTY4LjIgNjguMi02OC4yLTY4LjJjLTYuMi02LjItMTYuNC02LjItMjIuNiAwLTMuMSAzLjEtNC43IDcuMi00LjcgMTEuM3MxLjYgOC4yIDQuNyAxMS4zbDY4LjIgNjguMi02OC4yIDY4LjJjLTMuMSAzLjEtNC43IDcuMi00LjcgMTEuM3MxLjYgOC4yIDQuNyAxMS4zYzYuMiA2LjIgMTYuNCA2LjIgMjIuNiAwbDY4LjItNjguMiA2OC4yIDY4LjJjNi4yIDYuMiAxNi40IDYuMiAyMi42IDBzNi4yLTE2LjQgMC0yMi42eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==");
         height: 2.6em;
         right: 0;
     }
 
-    .v-tb__thumbs {
+    .tinybox__thumbs {
         bottom: 0;
         left: 0;
         line-height: 0;
@@ -370,7 +370,7 @@ export default {
         white-space: nowrap;
     }
 
-    .v-tb__thumbs__item {
+    .tinybox__thumbs__item {
         background: #222;
         cursor: pointer;
         display: inline-block;
@@ -381,11 +381,11 @@ export default {
         width: 10vh;
     }
 
-    .v-tb__thumbs__item--active .v-tb__thumbs__item__img{
+    .tinybox__thumbs__item--active .tinybox__thumbs__item__image{
         opacity: .3;
     }
 
-    .v-tb__thumbs__item__img {
+    .tinybox__thumbs__item__image {
         display: inline-block;
         height: 100%;
         left: 50%;

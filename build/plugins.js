@@ -1,10 +1,10 @@
-import rollupPluginBuble from "rollup-plugin-buble";
-import rollupPluginCommonJs from "rollup-plugin-commonjs";
-import { terser as rollupPluginTerser } from "rollup-plugin-terser";
-import rollupPluginVue from "rollup-plugin-vue";
+import rollupPluginBabel from 'rollup-plugin-babel';
+import rollupPluginCommonJs from 'rollup-plugin-commonjs';
+import {terser as rollupPluginTerser} from 'rollup-plugin-terser';
+import rollupPluginVue from 'rollup-plugin-vue';
 
-export function buble() {
-    return rollupPluginBuble();
+export function babel() {
+	return rollupPluginBabel();
 }
 
 export function cjs() {

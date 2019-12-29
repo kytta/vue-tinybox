@@ -10,7 +10,7 @@
     "lightbox",
     "gallery"
   ],
-  "homepage": "https://github.com/NickKaramoff/vue-tinybox#readme",
+  "homepage": "https://os.karamoff.dev/vue-tinybox",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NickKaramoff/vue-tinybox.git"
@@ -20,8 +20,8 @@
   },
   "author": {
     "name": "Nikita Karamov",
-    "email": "nick@karamoff.ru",
-    "url": "https://karamoff.ru"
+    "email": "nick@karamoff.dev",
+    "url": "https://karamoff.dev"
   },
   "main": "dist/tinybox.umd.js",
   "module": "dist/tinybox.esm.js",

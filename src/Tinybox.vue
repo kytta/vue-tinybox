@@ -84,6 +84,10 @@
 export default {
   name: 'Tinybox',
 
+  model: {
+    prop: 'index',
+    event: 'change',
+  },
   props: {
     /**
      * List of images to display in the lightbox
@@ -155,11 +159,8 @@ export default {
     this.goto(this.index);
   },
   methods: {
-    /**
-     * @event close - the close button has been pressed. The current index is sent as payload
-     */
     close() {
-      this.$emit('close', this.cIndex);
+      this.goto(null);
     },
 
     prev() {
@@ -192,6 +193,11 @@ export default {
 
       this.transitionClass = transition;
       this.cIndex = index;
+
+      /**
+       * @event change - the index has been changed. The current index is sent as payload
+       */
+      this.$emit('change', index);
     },
 
     swipeStart(e) {

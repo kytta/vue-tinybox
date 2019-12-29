@@ -78,7 +78,7 @@
             </h2>
             <p>Click on any image below to open <code>Tinybox</code></p>
 
-            <Tinybox :images="images" :index="index" @close="index = null"></Tinybox>
+            <Tinybox v-model="index" :images="images"></Tinybox>
             <img class="open-tinybox" width="100" v-for="(img, idx) in images" :src="img.thumbnail" :alt="img.alt"
                  @click="index = idx">
         </article>

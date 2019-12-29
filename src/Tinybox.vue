@@ -128,17 +128,7 @@ export default {
   },
   computed: {
     normalizedImages() {
-      const result = [];
-
-      for (let i = 0; i < this.images.length; i += 1) {
-        result.push(
-          typeof this.images[i] === 'string'
-            ? { src: this.images[i] }
-            : this.images[i],
-        );
-      }
-
-      return result;
+      return this.images.map((img) => ((typeof img === 'string' || img instanceof String) ? { src: img } : img));
     },
     current() {
       return this.normalizedImages[this.cIndex] || { src: '' };

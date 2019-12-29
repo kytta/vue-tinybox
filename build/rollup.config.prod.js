@@ -1,4 +1,4 @@
-import {babel, cjs, terser, vue} from './plugins';
+import {babel, resolve, terser, vue} from './plugins';
 import {defaultOutput, getFilename, input} from './defaults';
 
 export default [
@@ -10,7 +10,7 @@ export default [
 			...defaultOutput
 		},
 		plugins: [
-			cjs(),
+			resolve(),
 			vue(true),
 			babel(),
 			terser(6)
@@ -24,7 +24,7 @@ export default [
 			...defaultOutput
 		},
 		plugins: [
-			cjs(),
+			resolve(),
 			vue(true),
 			babel(),
 			terser(5)

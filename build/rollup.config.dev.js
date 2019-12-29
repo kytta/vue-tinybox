@@ -1,5 +1,5 @@
 import {defaultOutput, getFilename, input} from './defaults';
-import {cjs, vue} from './plugins';
+import {resolve, vue} from './plugins';
 
 export default {
 	input,
@@ -9,7 +9,7 @@ export default {
 		format: 'umd'
 	},
 	plugins: [
-		cjs(),
+		resolve(),
 		vue(false)
 	]
 };

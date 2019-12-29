@@ -1,243 +1,244 @@
 <template>
+  <div
+    :class="{'v-tb--open': open}"
+    class="v-tb"
+
+    @click="close"
+    @wheel.prevent
+    @touchmove.prevent
+  >
     <div
-        :class="{'v-tb--open': open}"
+      ref="content"
 
-        @click="close"
+      class="v-tb__cont"
 
-        @wheel.prevent
-        @touchmove.prevent
+      tabindex="0"
 
-        class="v-tb"
+      @blur="focusContent"
+
+      @touchstart="swipeStart"
+      @touchmove="swipe"
+      @touchend="swipeEnd"
+
+      @keyup.left="prev"
+      @keyup.right="next"
+      @keyup.esc="close"
     >
-        <div
-            ref="content"
+      <div
+        :style="`background:url('${switchFrom.src}')`"
+        class="v-tb__cont__cur"
+      >
+        <img
+          :class="transitionClass"
+          :src="current.src"
+          :alt="current.alt || ''"
 
-            @blur="focusContent"
+          class="v-tb__cont__cur__img"
 
-            @touchstart="swipeStart"
-            @touchmove="swipe"
-            @touchend="swipeEnd"
+          @click.stop="next"
 
-            @keyup.left="prev"
-            @keyup.right="next"
-            @keyup.esc="close"
-
-            class="v-tb__cont"
-            tabindex="0"
+          @animationend="transitionClass = ''"
         >
-            <div
-                :style="`background:url('${switchFrom.src}')`"
-                class="v-tb__cont__cur"
-            >
-                <img
-                    :class="transitionClass"
-                    :src="current.src"
-                    :alt="current.alt || ''"
+      </div>
+      <div
+        v-if="hasPrev"
 
-                    @click.stop="next"
+        class="v-tb__cont__ctrl v-tb__cont__ctrl--prev"
 
-                    @animationend="transitionClass = ''"
+        @click.stop="prev"
+      />
+      <div
+        v-if="hasNext"
 
-                    class="v-tb__cont__cur__img"
-                >
-            </div>
-            <div
-                v-if="hasPrev"
+        class="v-tb__cont__ctrl v-tb__cont__ctrl--next"
 
-                @click.stop="prev"
+        @click.stop="next"
+      />
+      <div
+        class="v-tb__cont__ctrl v-tb__cont__ctrl--close"
 
-                class="v-tb__cont__ctrl v-tb__cont__ctrl--prev"
-            />
-            <div
-                v-if="hasNext"
-
-                @click.stop="next"
-
-                class="v-tb__cont__ctrl v-tb__cont__ctrl--next"
-            />
-            <div
-                @click.stop="close"
-
-                class="v-tb__cont__ctrl v-tb__cont__ctrl--close"
-            />
-        </div>
-        <div class="v-tb__thumbs">
-            <div
-                v-for="(img, i) in _images"
-                :key="i"
-                :class="{'v-tb__thumbs__item--active': cIndex === i}"
-
-                @click.stop="goto(i)"
-
-                class="v-tb__thumbs__item"
-            >
-                <img
-                    :src="img.thumbnail || img.src"
-                    :alt="img.alt || ''"
-                    class="v-tb__thumbs__item__img"
-                >
-            </div>
-        </div>
+        @click.stop="close"
+      />
     </div>
+    <div class="v-tb__thumbs">
+      <div
+        v-for="(img, i) in normalizedImages"
+        :key="i"
+        :class="{'v-tb__thumbs__item--active': cIndex === i}"
+
+        class="v-tb__thumbs__item"
+
+        @click.stop="goto(i)"
+      >
+        <img
+          :src="img.thumbnail || img.src"
+          :alt="img.alt || ''"
+          class="v-tb__thumbs__item__img"
+        >
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "Tinybox",
+export default {
+  name: 'Tinybox',
 
-        props: {
-            /**
-             * List of images to display in the lightbox
-             *
-             * Any array item can be either a string containing the image URL or an object.
-             * The object fields are the following:
-             * - `src` - the image URL
-             * - `thumbnail` - the thumbnail (a smaller version of the image) URL
-             * - `alt` - the alt text to be displayed if the image failed to load (or by screenreaders)
-             */
-            images: {
-                type: Array,
-                default: () => []
-            },
+  props: {
+    /**
+     * List of images to display in the lightbox
+     *
+     * Any array item can be either a string containing the image URL or an object.
+     * The object fields are the following:
+     * - `src` - the image URL
+     * - `thumbnail` - the thumbnail (a smaller version of the image) URL
+     * - `alt` - the alt text to be displayed if the image failed to load (or by screenreaders)
+     */
+    images: {
+      type: Array,
+      default: () => [],
+    },
 
-            /**
-             * The index of the image to be opened in the lightbox
-             */
-            index: {
-                type: Number,
-                default: null
-            },
+    /**
+     * The index of the image to be opened in the lightbox
+     */
+    index: {
+      type: Number,
+      default: null,
+    },
 
-            /**
-             * Indicates whether the images carousel should loop around itself
-             */
-            loop: {
-                type: Boolean,
-                default: false
-            }
-        },
-        data() {
-            return {
-                cIndex: null,
+    /**
+     * Indicates whether the images carousel should loop around itself
+     */
+    loop: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      cIndex: null,
 
-                swipeFinished: false,
-                swipeX: null,
+      swipeFinished: false,
+      swipeX: null,
 
-                switchFrom: null,
-                transitionClass: ""
-            };
-        },
-        computed: {
-            _images() {
-                let result = [];
-
-                for (let i = 0; i < this.images.length; i++) {
-                    result.push(
-                        typeof this.images[i] === "string"
-                            ? { src: this.images[i] }
-                            : this.images[i]
-                    );
-                }
-
-                return result;
-            },
-            current() {
-                return this._images[this.cIndex] || { src: "" };
-            },
-            open() {
-                return this.index !== null;
-            },
-            hasPrev() {
-                return this.cIndex > 0 || this.loop;
-            },
-            hasNext() {
-                return this.cIndex < this._images.length - 1 || this.loop;
-            },
-        },
-        watch: {
-            index(idx) {
-                this.goto(idx);
-            },
-            open() {
-                this.focusContent();
-            },
-        },
-        created() {
-            this.goto(this.index);
-        },
-        methods: {
-            /**
-             * @event close - the close button has been pressed. The current index is sent as payload
-             */
-            close() {
-                this.$emit("close", this.cIndex);
-            },
-
-            prev() {
-                if (this.hasPrev) {
-                    this.goto(this.cIndex - 1);
-                }
-            },
-            next() {
-                if (this.hasNext) {
-                    this.goto(this.cIndex + 1);
-                }
-            },
-            goto(index) {
-                this.switchFrom = this.current;
-                let transition = "";
-
-                if (index !== null) {
-                    let newIndex = index;
-
-                    if (newIndex >= this._images.length) {
-                        newIndex = 0;
-                    } else if (newIndex < 0) {
-                        newIndex = this._images.length - 1;
-                    }
-
-                    if (this.cIndex !== null) {
-                        transition = this.cIndex < newIndex ? "v-tb__cont__cur__img--rtl" : "v-tb__cont__cur__img--ltr";
-                    }
-                }
-
-                this.transitionClass = transition;
-                this.cIndex = index;
-            },
-
-            swipeStart(e) {
-                if (e.changedTouches.length === 1) {
-                    this.swipeX = e.changedTouches[0].screenX;
-                }
-            },
-            swipe(e) {
-                if (!this.swipeFinished && e.changedTouches.length === 1) {
-                    const newSwipeX = e.changedTouches[0].screenX;
-
-                    if (newSwipeX - this.swipeX >= 50) {
-                        this.prev();
-                        this.swipeFinished = true;
-                    } else if (this.swipeX - newSwipeX >= 50) {
-                        this.next();
-                        this.swipeFinished = true;
-                    }
-                }
-            },
-            swipeEnd() {
-                this.swipeX = null;
-                this.swipeFinished = false;
-            },
-
-            focusContent() {
-                if (this.open) {
-                    this.$refs.content.focus();
-                } else {
-                    this.$refs.content.blur();
-                }
-            }
-        }
+      switchFrom: null,
+      transitionClass: '',
     };
+  },
+  computed: {
+    normalizedImages() {
+      const result = [];
+
+      for (let i = 0; i < this.images.length; i += 1) {
+        result.push(
+          typeof this.images[i] === 'string'
+            ? { src: this.images[i] }
+            : this.images[i],
+        );
+      }
+
+      return result;
+    },
+    current() {
+      return this.normalizedImages[this.cIndex] || { src: '' };
+    },
+    open() {
+      return this.index != null;
+    },
+    hasPrev() {
+      return this.cIndex > 0 || this.loop;
+    },
+    hasNext() {
+      return this.cIndex < this.normalizedImages.length - 1 || this.loop;
+    },
+  },
+  watch: {
+    index(idx) {
+      this.goto(idx);
+    },
+    open() {
+      this.focusContent();
+    },
+  },
+  created() {
+    this.goto(this.index);
+  },
+  methods: {
+    /**
+     * @event close - the close button has been pressed. The current index is sent as payload
+     */
+    close() {
+      this.$emit('close', this.cIndex);
+    },
+
+    prev() {
+      if (this.hasPrev) {
+        this.goto(this.cIndex - 1);
+      }
+    },
+    next() {
+      if (this.hasNext) {
+        this.goto(this.cIndex + 1);
+      }
+    },
+    goto(index) {
+      this.switchFrom = this.current;
+      let transition = '';
+
+      if (index !== null) {
+        let newIndex = index;
+
+        if (newIndex >= this.normalizedImages.length) {
+          newIndex = 0;
+        } else if (newIndex < 0) {
+          newIndex = this.normalizedImages.length - 1;
+        }
+
+        if (this.cIndex !== null) {
+          transition = this.cIndex < newIndex ? 'v-tb__cont__cur__img--rtl' : 'v-tb__cont__cur__img--ltr';
+        }
+      }
+
+      this.transitionClass = transition;
+      this.cIndex = index;
+    },
+
+    swipeStart(e) {
+      if (e.changedTouches.length === 1) {
+        this.swipeX = e.changedTouches[0].screenX;
+      }
+    },
+    swipe(e) {
+      if (!this.swipeFinished && e.changedTouches.length === 1) {
+        const newSwipeX = e.changedTouches[0].screenX;
+
+        if (newSwipeX - this.swipeX >= 50) {
+          this.prev();
+          this.swipeFinished = true;
+        } else if (this.swipeX - newSwipeX >= 50) {
+          this.next();
+          this.swipeFinished = true;
+        }
+      }
+    },
+    swipeEnd() {
+      this.swipeX = null;
+      this.swipeFinished = false;
+    },
+
+    focusContent() {
+      if (this.open) {
+        this.$refs.content.focus();
+      } else {
+        this.$refs.content.blur();
+      }
+    },
+  },
+};
 </script>
+
+<!-- eslint-disable max-len -->
 
 <style scoped>
     .v-tb {

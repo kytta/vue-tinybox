@@ -28,7 +28,7 @@
   "files": [
     "dist/tinybox.umd.js",
     "dist/tinybox.esm.js",
-    "src/Tinybox.vue"
+    "src/tinybox.vue"
   ],
   "scripts": {
     "build": "rollup --config ./build/rollup.config.prod.js",

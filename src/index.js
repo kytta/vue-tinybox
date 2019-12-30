@@ -1,4 +1,4 @@
-import component from './Tinybox.vue';
+import component from './tinybox.vue';
 
 function install(Vue) {
   if (install.installed) return;

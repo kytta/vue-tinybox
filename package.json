@@ -25,6 +25,7 @@
   },
   "main": "dist/tinybox.umd.js",
   "module": "dist/tinybox.esm.js",
+  "unpkg": "dist/tinybox.umd.js",
   "files": [
     "dist/tinybox.umd.js",
     "dist/tinybox.esm.js",

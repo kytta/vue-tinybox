@@ -81,6 +81,11 @@
 </template>
 
 <script>
+/**
+   * The Tinybox component
+   *
+   * @event change - the index has been changed. The current index is sent as payload
+   */
 export default {
   name: 'Tinybox',
 
@@ -160,19 +165,20 @@ export default {
   },
   methods: {
     close() {
-      this.goto(null);
+      this.$emit('change', null);
     },
 
     prev() {
       if (this.hasPrev) {
-        this.goto(this.cIndex - 1);
+        this.$emit('change', this.cIndex - 1);
       }
     },
     next() {
       if (this.hasNext) {
-        this.goto(this.cIndex + 1);
+        this.$emit('change', this.cIndex + 1);
       }
     },
+
     goto(index) {
       this.switchFrom = this.current;
       let transition = '';
@@ -186,18 +192,13 @@ export default {
           newIndex = this.normalizedImages.length - 1;
         }
 
-        if (this.cIndex !== null) {
+        if (this.cIndex != null && this.cIndex !== newIndex) {
           transition = this.cIndex < newIndex ? 'tinybox__content__current__image--rtl' : 'tinybox__content__current__image--ltr';
         }
       }
 
       this.transitionClass = transition;
       this.cIndex = index;
-
-      /**
-       * @event change - the index has been changed. The current index is sent as payload
-       */
-      this.$emit('change', index);
     },
 
     swipeStart(e) {

@@ -235,4 +235,169 @@ export default {
 };
 </script>
 
-<style scoped src="./tinybox.css" />
+<style scoped>
+  .tinybox {
+    background: rgba(0, 0, 0, .9);
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    outline: none;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    transition: opacity 300ms ease;
+    z-index: 2000;
+  }
+
+  .tinybox--open {
+    opacity: 1;
+    pointer-events: initial;
+  }
+
+  .tinybox__content {
+    height: 84vh;
+    position: absolute;
+    width: 100vw;
+  }
+
+  .tinybox__content:focus {
+    outline: none;
+  }
+
+  .tinybox__content::before {
+    content: "";
+    display: inline-block;
+    height: 84vh;
+    vertical-align: middle;
+  }
+
+  .tinybox__content__current {
+    background-size: cover;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .tinybox__content__current__image {
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    float: none;
+    height: auto;
+    margin: 0;
+    max-width: 82.3vw;
+    max-height: 84vh;
+    position: relative;
+    vertical-align: middle;
+    width: auto;
+
+    animation: 300ms ease 1 normal;
+  }
+
+  .tinybox__content__current__image--ltr {
+    animation-name: ltr;
+  }
+
+  .tinybox__content__current__image--rtl {
+    animation-name: rtl;
+  }
+
+  @keyframes ltr {
+    from {
+      opacity: 0;
+      transform: translateX(-80px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes rtl {
+    from {
+      opacity: 0;
+      transform: translateX(80px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .tinybox__content__control {
+    background: no-repeat center/24px;
+
+    /*background-size: 24px;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: center;*/
+    cursor: pointer;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+    transition: opacity .3s;
+    width: 4em;
+  }
+
+  .tinybox__content__control:hover {
+    opacity: 1;
+  }
+
+  .tinybox__content__control--prev {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='2 -2 28 36' width='40' height='60' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3'%3E%3Cpath d='M20 30 L8 16 20 2' /%3E%3C/svg%3E");
+    bottom: 0;
+    left: 0;
+  }
+
+  .tinybox__content__control--next {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='2 -2 28 36' width='40' height='60' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3'%3E%3Cpath d='M12 30 L24 16 12 2' /%3E%3C/svg%3E");
+    bottom: 0;
+    right: 0;
+  }
+
+  .tinybox__content__control--close {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-5 -5 46 46' width='40' height='40' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='4'%3E%3Cpath d='M2 30 L30 2 M30 30 L2 2' /%3E%3C/svg%3E");
+    height: 2.6em;
+    right: 0;
+  }
+
+  .tinybox__thumbs {
+    bottom: 0;
+    left: 0;
+    line-height: 0;
+    padding: 0 1vh;
+    position: absolute;
+    right: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  .tinybox__thumbs__item {
+    background: #222;
+    cursor: pointer;
+    display: inline-block;
+    height: 10vh;
+    overflow: hidden;
+    margin: 2vh 1vh;
+    position: relative;
+    width: 10vh;
+  }
+
+  .tinybox__thumbs__item--active .tinybox__thumbs__item__image{
+    opacity: .3;
+  }
+
+  .tinybox__thumbs__item__image {
+    display: inline-block;
+    height: 100%;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    vertical-align: middle;
+    width: auto;
+  }
+</style>

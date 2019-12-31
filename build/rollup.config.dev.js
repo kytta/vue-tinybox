@@ -1,11 +1,11 @@
-import { defaultOutput, getFilename, input } from './defaults';
+import { defaultOutput, input } from './defaults';
 import { resolve, vue } from './plugins';
 
 export default {
   input,
   output: {
     ...defaultOutput,
-    file: getFilename('dev'),
+    file: './dev/tinybox.js',
     format: 'umd',
   },
   plugins: [

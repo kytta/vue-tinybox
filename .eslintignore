@@ -1,4 +1,5 @@
 .cache
+/dev/tinybox.js
 dist
 .idea
 node_modules

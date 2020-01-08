@@ -34,7 +34,8 @@
   "scripts": {
     "build": "rollup --config ./build/rollup.config.prod.js",
     "dev:build": "rollup -w --config ./build/rollup.config.dev.js",
-    "dev:serve": "sirv ./dev -s -q -D",
+    "dev:serve-basic": "sirv ./dev/basic -s -q -D",
+    "dev:serve-nuxt": "nuxt ./dev/nuxt",
     "dev": "run-p dev:*",
     "test:lint": "eslint .",
     "test:size": "size-limit",
@@ -51,6 +52,7 @@
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-vue": "^6.1.1",
     "npm-run-all": "^4.1.5",
+    "nuxt": "^2.11.0",
     "rollup": "^1.27.14",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-node-resolve": "^5.2.0",

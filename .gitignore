@@ -1,5 +1,6 @@
 .cache
-/dev/tinybox.js
+/dev/**/tinybox.js
+/dev/nuxt/.nuxt/
 dist
 .idea
 node_modules

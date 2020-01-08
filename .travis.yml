@@ -5,4 +5,4 @@ node_js:
 cache: npm
 
 install: npm install
-script: npm run checks
+script: npm run test

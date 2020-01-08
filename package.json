@@ -38,7 +38,8 @@
     "dev": "run-p dev:*",
     "test:lint": "eslint .",
     "test:size": "size-limit",
-    "checks": "run-s test:lint build test:size"
+    "pretest": "npm run build",
+    "test": "run-p test:*"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",

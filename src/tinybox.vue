@@ -1,9 +1,5 @@
 <template>
-  <transition
-    name="fade"
-    @after-enter="focusContent"
-    @after-leave="focusContent"
-  >
+  <transition name="fade">
     <div
       v-if="open"
 
@@ -20,15 +16,9 @@
 
         tabindex="0"
 
-        @blur="focusContent"
-
         @touchstart="swipeStart"
         @touchmove="swipe"
         @touchend="swipeEnd"
-
-        @keyup.left="prev"
-        @keyup.right="next"
-        @keyup.esc="close"
       >
         <div
           :style="`background:url('${switchFrom.src}')`"
@@ -95,7 +85,6 @@
    */
 export default {
   name: 'Tinybox',
-
   model: {
     prop: 'index',
     event: 'change',
@@ -160,8 +149,15 @@ export default {
     },
   },
   watch: {
-    index(idx) {
-      this.goto(idx);
+    index(val) {
+      this.goto(val);
+    },
+    open(val) {
+      if (val) {
+        window.addEventListener('keyup', this.keyup);
+      } else {
+        window.removeEventListener('keyup', this.keyup);
+      }
     },
   },
   created() {
@@ -205,6 +201,16 @@ export default {
       this.cIndex = index;
     },
 
+    keyup(e) {
+      if (e.code === 'ArrowRight') {
+        this.next();
+      } else if (e.code === 'ArrowLeft') {
+        this.prev();
+      } else if (e.code === 'Escape') {
+        this.close();
+      }
+    },
+
     swipeStart(e) {
       if (e.changedTouches.length === 1) {
         this.swipeX = e.changedTouches[0].screenX;
@@ -226,14 +232,6 @@ export default {
     swipeEnd() {
       this.swipeX = null;
       this.swipeFinished = false;
-    },
-
-    focusContent() {
-      if (this.open) {
-        this.$refs.content.focus();
-      } else {
-        this.$refs.content.blur();
-      }
     },
   },
 };

@@ -5,6 +5,8 @@ import rollupPluginNodeResolve from 'rollup-plugin-node-resolve';
 import { terser as rollupPluginTerser } from 'rollup-plugin-terser';
 import rollupPluginVue from 'rollup-plugin-vue';
 
+import autoprefixer from 'autoprefixer';
+
 export function babel() {
   return rollupPluginBabel();
 }
@@ -24,8 +26,16 @@ export function terser(ecma) {
 export function vue(isProduction) {
   return rollupPluginVue({
     css: true,
+    style: {
+      postcssPlugins: [
+        autoprefixer,
+      ],
+    },
     template: {
       isProduction,
+      compilerOptions: {
+        whitespace: 'condense',
+      },
     },
   });
 }

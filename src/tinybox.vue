@@ -1,83 +1,90 @@
 <template>
-  <div
-    :class="{'tinybox--open': open}"
-    class="tinybox"
-
-    @click="close"
-    @wheel.prevent
-    @touchmove.prevent
+  <transition
+    name="fade"
+    @after-enter="focusContent"
+    @after-leave="focusContent"
   >
     <div
-      ref="content"
+      v-if="open"
 
-      class="tinybox__content"
+      class="tinybox"
 
-      tabindex="0"
-
-      @blur="focusContent"
-
-      @touchstart="swipeStart"
-      @touchmove="swipe"
-      @touchend="swipeEnd"
-
-      @keyup.left="prev"
-      @keyup.right="next"
-      @keyup.esc="close"
+      @click="close"
+      @wheel.prevent
+      @touchmove.prevent
     >
       <div
-        :style="`background:url('${switchFrom.src}')`"
-        class="tinybox__content__current"
-      >
-        <img
-          :class="transitionClass"
-          :src="current.src"
-          :alt="current.alt || ''"
+        ref="content"
 
-          class="tinybox__content__current__image"
+        class="tinybox__content"
+
+        tabindex="0"
+
+        @blur="focusContent"
+
+        @touchstart="swipeStart"
+        @touchmove="swipe"
+        @touchend="swipeEnd"
+
+        @keyup.left="prev"
+        @keyup.right="next"
+        @keyup.esc="close"
+      >
+        <div
+          :style="`background:url('${switchFrom.src}')`"
+          class="tinybox__content__current"
+        >
+          <img
+            :class="transitionClass"
+            :src="current.src"
+            :alt="current.alt || ''"
+
+            class="tinybox__content__current__image"
+
+            @click.stop="next"
+
+            @animationend="transitionClass = ''"
+          >
+        </div>
+        <div
+          v-if="hasPrev"
+
+          class="tinybox__content__control tinybox__content__control--prev"
+
+          @click.stop="prev"
+        />
+        <div
+          v-if="hasNext"
+
+          class="tinybox__content__control tinybox__content__control--next"
 
           @click.stop="next"
+        />
+        <div
+          class="tinybox__content__control tinybox__content__control--close"
 
-          @animationend="transitionClass = ''"
-        >
+          @click.stop="close"
+        />
       </div>
-      <div
-        v-if="hasPrev"
+      <div class="tinybox__thumbs">
+        <div
+          v-for="(img, i) in normalizedImages"
+          :key="i"
+          :class="{'tinybox__thumbs__item--active': cIndex === i}"
 
-        class="tinybox__content__control tinybox__content__control--prev"
+          class="tinybox__thumbs__item"
 
-        @click.stop="prev"
-      />
-      <div
-        v-if="hasNext"
-
-        class="tinybox__content__control tinybox__content__control--next"
-
-        @click.stop="next"
-      />
-      <div
-        class="tinybox__content__control tinybox__content__control--close"
-
-        @click.stop="close"
-      />
-    </div>
-    <div class="tinybox__thumbs">
-      <div
-        v-for="(img, i) in normalizedImages"
-        :key="i"
-        :class="{'tinybox__thumbs__item--active': cIndex === i}"
-
-        class="tinybox__thumbs__item"
-
-        @click.stop="goto(i)"
-      >
-        <img
-          :src="img.thumbnail || img.src"
-          :alt="img.alt || ''"
-          class="tinybox__thumbs__item__image"
+          @click.stop="goto(i)"
         >
+          <img
+            :src="img.thumbnail || img.src"
+            :alt="img.alt || ''"
+            class="tinybox__thumbs__item__image"
+          >
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -155,9 +162,6 @@ export default {
   watch: {
     index(idx) {
       this.goto(idx);
-    },
-    open() {
-      this.focusContent();
     },
   },
   created() {
@@ -240,20 +244,12 @@ export default {
     background: rgba(0, 0, 0, .9);
     height: 100%;
     left: 0;
-    opacity: 0;
     outline: none;
-    pointer-events: none;
     position: fixed;
     right: 0;
     text-align: center;
     top: 0;
-    transition: opacity 300ms ease;
     z-index: 2000;
-  }
-
-  .tinybox--open {
-    opacity: 1;
-    pointer-events: initial;
   }
 
   .tinybox__content {
@@ -399,5 +395,17 @@ export default {
     transform: translateX(-50%);
     vertical-align: middle;
     width: auto;
+  }
+
+
+  /*******************/
+  /*   TRANSITIONS   */
+  /*******************/
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 300ms ease;
+  }
+  .fade-enter, .fade-leave-active {
+    opacity: 0;
   }
 </style>

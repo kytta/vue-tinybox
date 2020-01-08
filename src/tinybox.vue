@@ -22,9 +22,9 @@
       >
         <transition :name="`slide-${slide}`">
           <img
-            :key="current.src || current.toString() || ''"
-            :src="current.src || current.toString() || ''"
-            :alt="current.alt || ''"
+            :key="images[index].src || images[index].toString() || ''"
+            :src="images[index].src || images[index].toString() || ''"
+            :alt="images[index].alt || ''"
 
             class="tinybox__content__image"
 
@@ -32,14 +32,14 @@
           >
         </transition>
         <div
-          v-if="hasPrev"
+          v-if="prevImage !== index"
 
           class="tinybox__content__control tinybox__content__control--prev"
 
           @click.stop="prev"
         />
         <div
-          v-if="hasNext"
+          v-if="nextImage !== index"
 
           class="tinybox__content__control tinybox__content__control--next"
 
@@ -55,7 +55,7 @@
         <div
           v-for="(img, i) in images"
           :key="i"
-          :class="{'tinybox__thumbs__item--active': cIndex === i}"
+          :class="{'tinybox__thumbs__item--active': index === i}"
 
           class="tinybox__thumbs__item"
 
@@ -117,32 +117,35 @@ export default {
   },
   data() {
     return {
-      cIndex: null,
-
+      slide: 'rtl',
       swipeFinished: false,
       swipeX: null,
-
-      slide: 'rtl',
     };
   },
   computed: {
-    current() {
-      return this.images[this.cIndex] || '';
-    },
     open() {
       return this.index != null;
     },
-    hasPrev() {
-      return this.cIndex > 0 || this.loop;
+    prevImage() {
+      if (this.index > 0) {
+        return this.index - 1;
+      }
+      if (this.loop) {
+        return this.images.length - 1;
+      }
+      return this.index;
     },
-    hasNext() {
-      return this.cIndex < this.images.length - 1 || this.loop;
+    nextImage() {
+      if (this.index < this.images.length - 1) {
+        return this.index + 1;
+      }
+      if (this.loop) {
+        return 0;
+      }
+      return this.index;
     },
   },
   watch: {
-    index(val) {
-      this.goto(val);
-    },
     open(val) {
       if (val) {
         window.addEventListener('keyup', this.keyup);
@@ -151,41 +154,21 @@ export default {
       }
     },
   },
-  created() {
-    this.goto(this.index);
-  },
   methods: {
     close() {
-      this.$emit('change', null);
+      this.goto(null);
     },
-
     prev() {
-      if (this.hasPrev) {
-        this.$emit('change', this.cIndex - 1);
-      }
+      this.goto(this.prevImage);
     },
     next() {
-      if (this.hasNext) {
-        this.$emit('change', this.cIndex + 1);
-      }
+      this.goto(this.nextImage);
     },
-
     goto(index) {
-      if (index !== null) {
-        let newIndex = index;
-
-        if (newIndex >= this.images.length) {
-          newIndex = 0;
-        } else if (newIndex < 0) {
-          newIndex = this.images.length - 1;
-        }
-
-        if (this.cIndex != null && this.cIndex !== newIndex) {
-          this.slide = this.cIndex < newIndex ? 'rtl' : 'ltr';
-        }
+      if (index != null && this.index != null && this.index !== index) {
+        this.slide = this.index < index ? 'rtl' : 'ltr';
       }
-
-      this.cIndex = index;
+      this.$emit('change', index);
     },
 
     keyup(e) {

@@ -11,6 +11,7 @@
     >
       <div
         class="tinybox__content"
+        :class="{'tinybox__content--no-thumbs': noThumbs}"
 
         @touchstart="swipeStart"
         @touchmove="swipe"
@@ -47,6 +48,7 @@
         />
       </div>
       <div
+        v-if="!noThumbs"
         class="tinybox__thumbs"
         @touchmove.stop
         @wheel.stop
@@ -107,6 +109,11 @@ export default {
      * Indicates whether the images carousel should loop around itself
      */
     loop: {
+      type: Boolean,
+      default: false,
+    },
+
+    noThumbs: {
       type: Boolean,
       default: false,
     },
@@ -216,6 +223,10 @@ export default {
     height: 85%;
     position: relative;
     width: 100%;
+  }
+
+  .tinybox__content--no-thumbs {
+    height: 100%;
   }
 
   .tinybox__content::before {

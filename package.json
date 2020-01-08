@@ -74,5 +74,8 @@
   ],
   "engines": {
     "node": ">=10"
+  },
+  "np": {
+    "yarn": false
   }
 }

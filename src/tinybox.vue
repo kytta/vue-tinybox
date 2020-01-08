@@ -46,22 +46,23 @@
           @click.stop="close"
         />
       </div>
-      <div class="tinybox__thumbs">
-        <div
+      <div
+        class="tinybox__thumbs"
+        @touchmove.stop
+        @wheel.stop
+      >
+        <img
           v-for="(image, idx) in images"
           :key="idx"
           :class="{'tinybox__thumbs__item--active': index === idx}"
+
+          :src="image.thumbnail || image.src || image.toString() || ''"
+          :alt="image.alt || ''"
 
           class="tinybox__thumbs__item"
 
           @click.stop="goto(idx)"
         >
-          <img
-            :src="image.thumbnail || image.src || image.toString() || ''"
-            :alt="image.alt || ''"
-            class="tinybox__thumbs__item__image"
-          >
-        </div>
       </div>
     </div>
   </transition>
@@ -201,47 +202,36 @@ export default {
 
 <style scoped>
   .tinybox {
-    background: rgba(0, 0, 0, .9);
-    height: 100%;
+    background-color: rgba(0, 0, 0, .9);
+    bottom: 0;
     left: 0;
-    outline: none;
     position: fixed;
     right: 0;
     text-align: center;
     top: 0;
-    z-index: 2000;
+    z-index: 1000;
   }
 
   .tinybox__content {
-    height: 84vh;
-    position: absolute;
-    width: 100vw;
-  }
-
-  .tinybox__content:focus {
-    outline: none;
+    height: 85%;
+    position: relative;
+    width: 100%;
   }
 
   .tinybox__content::before {
-    content: "";
+    content: '';
     display: inline-block;
-    height: 84vh;
+    height: 100%;
     vertical-align: middle;
   }
 
   .tinybox__content__image {
-    border: none;
+    background-color: #222;
     cursor: pointer;
     display: inline-block;
-    float: none;
-    height: auto;
-    margin: 0;
-    max-width: 82.3vw;
-    max-height: 84vh;
-    position: relative;
+    max-height: 90%;
+    max-width: 80%;
     vertical-align: middle;
-    width: auto;
-    background-color: #222;
   }
 
   .tinybox__content__control {
@@ -250,11 +240,12 @@ export default {
     /*background-size: 24px;*/
     /*background-repeat: no-repeat;*/
     /*background-position: center;*/
+
     cursor: pointer;
     opacity: .5;
     position: absolute;
     top: 0;
-    transition: opacity .3s;
+    transition: opacity 300ms ease;
     width: 4em;
   }
 
@@ -282,42 +273,30 @@ export default {
 
   .tinybox__thumbs {
     bottom: 0;
+    height: 15%;
     left: 0;
     line-height: 0;
-    padding: 0 1vh;
+    padding: 0 10px;
     position: absolute;
     right: 0;
-    overflow-x: auto;
+    overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
   }
 
   .tinybox__thumbs__item {
-    background: #222;
     cursor: pointer;
     display: inline-block;
     height: 10vh;
+    margin: 2.5vh 5px;
+    object-fit: cover;
     overflow: hidden;
-    margin: 2vh 1vh;
-    position: relative;
     width: 10vh;
   }
 
-  .tinybox__thumbs__item--active .tinybox__thumbs__item__image{
+  .tinybox__thumbs__item--active {
     opacity: .3;
   }
-
-  .tinybox__thumbs__item__image {
-    display: inline-block;
-    height: 100%;
-    left: 50%;
-    position: absolute;
-    top: 0;
-    transform: translateX(-50%);
-    vertical-align: middle;
-    width: auto;
-  }
-
 
   /*******************/
   /*   TRANSITIONS   */
@@ -330,14 +309,12 @@ export default {
     opacity: 0;
   }
 
-  .slide-ltr-enter-active,
   .slide-rtl-enter-active {
     animation: 300ms ease 1 normal;
-  }
-  .slide-rtl-enter-active {
     animation-name: rtl;
   }
   .slide-ltr-enter-active {
+    animation: 300ms ease 1 normal;
     animation-name: ltr;
   }
 

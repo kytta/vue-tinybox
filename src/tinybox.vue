@@ -188,12 +188,12 @@ export default {
     },
     swipe(e) {
       if (!this.swipeFinished && e.changedTouches.length === 1) {
-        const newSwipeX = e.changedTouches[0].screenX;
+        const swipeDistance = e.changedTouches[0].screenX - this.swipeX;
 
-        if (newSwipeX - this.swipeX >= 50) {
+        if (swipeDistance >= 50) {
           this.prev();
           this.swipeFinished = true;
-        } else if (this.swipeX - newSwipeX >= 50) {
+        } else if (swipeDistance <= -50) {
           this.next();
           this.swipeFinished = true;
         }

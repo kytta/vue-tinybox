@@ -10,11 +10,7 @@
       @touchmove.prevent
     >
       <div
-        ref="content"
-
         class="tinybox__content"
-
-        tabindex="0"
 
         @touchstart="swipeStart"
         @touchmove="swipe"

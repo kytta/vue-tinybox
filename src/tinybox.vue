@@ -18,8 +18,8 @@
       >
         <transition :name="`slide-${slide}`">
           <img
-            :key="images[index].src || images[index].toString() || ''"
-            :src="images[index].src || images[index].toString() || ''"
+            :key="images[index].src || images[index] || ''"
+            :src="images[index].src || images[index] || ''"
             :alt="images[index].alt || ''"
 
             class="tinybox__content__image"
@@ -58,7 +58,7 @@
           :key="idx"
           :class="{'tinybox__thumbs__item--active': index === idx}"
 
-          :src="image.thumbnail || image.src || image.toString() || ''"
+          :src="image.thumbnail || image.src || image || ''"
           :alt="image.alt || ''"
 
           class="tinybox__thumbs__item"
@@ -121,7 +121,7 @@ export default {
   data() {
     return {
       slide: 'rtl',
-      swipeFinished: false,
+      swipeDone: false,
       swipeX: null,
     };
   },
@@ -185,21 +185,21 @@ export default {
     },
 
     swipeStart(e) {
-      this.swipeFinished = false;
+      this.swipeDone = false;
       if (e.changedTouches.length === 1) {
         this.swipeX = e.changedTouches[0].screenX;
       }
     },
     swipe(e) {
-      if (!this.swipeFinished && e.changedTouches.length === 1) {
+      if (!this.swipeDone && e.changedTouches.length === 1) {
         const swipeDistance = e.changedTouches[0].screenX - this.swipeX;
 
         if (swipeDistance >= 50) {
           this.prev();
-          this.swipeFinished = true;
+          this.swipeDone = true;
         } else if (swipeDistance <= -50) {
           this.next();
-          this.swipeFinished = true;
+          this.swipeDone = true;
         }
       }
     },

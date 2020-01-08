@@ -20,22 +20,17 @@
         @touchmove="swipe"
         @touchend="swipeEnd"
       >
-        <div
-          :style="`background:url('${switchFrom.src}')`"
-          class="tinybox__content__current"
-        >
+        <transition :name="`slide-${slide}`">
           <img
-            :class="transitionClass"
+            :key="current.src"
             :src="current.src"
             :alt="current.alt || ''"
 
             class="tinybox__content__current__image"
 
             @click.stop="next"
-
-            @animationend="transitionClass = ''"
           >
-        </div>
+        </transition>
         <div
           v-if="hasPrev"
 
@@ -128,7 +123,7 @@ export default {
       swipeX: null,
 
       switchFrom: null,
-      transitionClass: '',
+      slide: 'rtl',
     };
   },
   computed: {
@@ -181,7 +176,6 @@ export default {
 
     goto(index) {
       this.switchFrom = this.current;
-      let transition = '';
 
       if (index !== null) {
         let newIndex = index;
@@ -193,11 +187,10 @@ export default {
         }
 
         if (this.cIndex != null && this.cIndex !== newIndex) {
-          transition = this.cIndex < newIndex ? 'tinybox__content__current__image--rtl' : 'tinybox__content__current__image--ltr';
+          this.slide = this.cIndex < newIndex ? 'rtl' : 'ltr';
         }
       }
 
-      this.transitionClass = transition;
       this.cIndex = index;
     },
 
@@ -267,12 +260,6 @@ export default {
     vertical-align: middle;
   }
 
-  .tinybox__content__current {
-    background-size: cover;
-    display: inline-block;
-    vertical-align: middle;
-  }
-
   .tinybox__content__current__image {
     border: none;
     cursor: pointer;
@@ -285,40 +272,7 @@ export default {
     position: relative;
     vertical-align: middle;
     width: auto;
-
-    animation: 300ms ease 1 normal;
-  }
-
-  .tinybox__content__current__image--ltr {
-    animation-name: ltr;
-  }
-
-  .tinybox__content__current__image--rtl {
-    animation-name: rtl;
-  }
-
-  @keyframes ltr {
-    from {
-      opacity: 0;
-      transform: translateX(-80px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes rtl {
-    from {
-      opacity: 0;
-      transform: translateX(80px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    background-color: #222;
   }
 
   .tinybox__content__control {
@@ -405,5 +359,37 @@ export default {
   }
   .fade-enter, .fade-leave-active {
     opacity: 0;
+  }
+
+  .slide-ltr-enter-active,
+  .slide-rtl-enter-active {
+    animation: 300ms ease 1 normal;
+  }
+  .slide-rtl-enter-active {
+    animation-name: rtl;
+  }
+  .slide-ltr-enter-active {
+    animation-name: ltr;
+  }
+
+  @keyframes ltr {
+    from {
+      opacity: 0;
+      transform: translateX(-80px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes rtl {
+    from {
+      opacity: 0;
+      transform: translateX(80px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 </style>

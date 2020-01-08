@@ -122,7 +122,6 @@ export default {
       swipeFinished: false,
       swipeX: null,
 
-      switchFrom: null,
       slide: 'rtl',
     };
   },
@@ -175,8 +174,6 @@ export default {
     },
 
     goto(index) {
-      this.switchFrom = this.current;
-
       if (index !== null) {
         let newIndex = index;
 

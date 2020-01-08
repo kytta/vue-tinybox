@@ -22,8 +22,8 @@
       >
         <transition :name="`slide-${slide}`">
           <img
-            :key="current.src"
-            :src="current.src"
+            :key="current.src || current.toString() || ''"
+            :src="current.src || current.toString() || ''"
             :alt="current.alt || ''"
 
             class="tinybox__content__current__image"
@@ -53,7 +53,7 @@
       </div>
       <div class="tinybox__thumbs">
         <div
-          v-for="(img, i) in normalizedImages"
+          v-for="(img, i) in images"
           :key="i"
           :class="{'tinybox__thumbs__item--active': cIndex === i}"
 
@@ -62,7 +62,7 @@
           @click.stop="goto(i)"
         >
           <img
-            :src="img.thumbnail || img.src"
+            :src="img.thumbnail || img.src || img.toString() || ''"
             :alt="img.alt || ''"
             class="tinybox__thumbs__item__image"
           >
@@ -126,11 +126,8 @@ export default {
     };
   },
   computed: {
-    normalizedImages() {
-      return this.images.map((img) => ((typeof img === 'string' || img instanceof String) ? { src: img } : img));
-    },
     current() {
-      return this.normalizedImages[this.cIndex] || { src: '' };
+      return this.images[this.cIndex] || '';
     },
     open() {
       return this.index != null;
@@ -139,7 +136,7 @@ export default {
       return this.cIndex > 0 || this.loop;
     },
     hasNext() {
-      return this.cIndex < this.normalizedImages.length - 1 || this.loop;
+      return this.cIndex < this.images.length - 1 || this.loop;
     },
   },
   watch: {
@@ -177,10 +174,10 @@ export default {
       if (index !== null) {
         let newIndex = index;
 
-        if (newIndex >= this.normalizedImages.length) {
+        if (newIndex >= this.images.length) {
           newIndex = 0;
         } else if (newIndex < 0) {
-          newIndex = this.normalizedImages.length - 1;
+          newIndex = this.images.length - 1;
         }
 
         if (this.cIndex != null && this.cIndex !== newIndex) {

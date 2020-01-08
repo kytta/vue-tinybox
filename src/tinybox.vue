@@ -26,7 +26,7 @@
             :src="current.src || current.toString() || ''"
             :alt="current.alt || ''"
 
-            class="tinybox__content__current__image"
+            class="tinybox__content__image"
 
             @click.stop="next"
           >
@@ -254,7 +254,7 @@ export default {
     vertical-align: middle;
   }
 
-  .tinybox__content__current__image {
+  .tinybox__content__image {
     border: none;
     cursor: pointer;
     display: inline-block;

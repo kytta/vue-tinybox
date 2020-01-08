@@ -18,7 +18,6 @@
 
         @touchstart="swipeStart"
         @touchmove="swipe"
-        @touchend="swipeEnd"
       >
         <transition :name="`slide-${slide}`">
           <img
@@ -182,6 +181,7 @@ export default {
     },
 
     swipeStart(e) {
+      this.swipeFinished = false;
       if (e.changedTouches.length === 1) {
         this.swipeX = e.changedTouches[0].screenX;
       }
@@ -198,10 +198,6 @@ export default {
           this.swipeFinished = true;
         }
       }
-    },
-    swipeEnd() {
-      this.swipeX = null;
-      this.swipeFinished = false;
     },
   },
 };

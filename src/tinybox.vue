@@ -89,7 +89,7 @@ export default {
      * Any array item can be either a string containing the image URL or an object.
      * The object fields are the following:
      * - `src` - the image URL
-     * - `thumbnail` - the thumbnail (a smaller version of the image) URL
+     * - `thumbnail` - the thumbnail (a smaller, square version of the image) URL
      * - `alt` - the alt text to be displayed if the image failed to load (or by screenreaders)
      */
     images: {
@@ -113,6 +113,9 @@ export default {
       default: false,
     },
 
+    /**
+     * When enabled, the thumbnails are hidden
+     */
     noThumbs: {
       type: Boolean,
       default: false,

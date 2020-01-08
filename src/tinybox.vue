@@ -53,17 +53,17 @@
       </div>
       <div class="tinybox__thumbs">
         <div
-          v-for="(img, i) in images"
-          :key="i"
-          :class="{'tinybox__thumbs__item--active': index === i}"
+          v-for="(image, idx) in images"
+          :key="idx"
+          :class="{'tinybox__thumbs__item--active': index === idx}"
 
           class="tinybox__thumbs__item"
 
-          @click.stop="goto(i)"
+          @click.stop="goto(idx)"
         >
           <img
-            :src="img.thumbnail || img.src || img.toString() || ''"
-            :alt="img.alt || ''"
+            :src="image.thumbnail || image.src || image.toString() || ''"
+            :alt="image.alt || ''"
             class="tinybox__thumbs__item__image"
           >
         </div>
@@ -146,8 +146,8 @@ export default {
     },
   },
   watch: {
-    open(val) {
-      if (val) {
+    open(value) {
+      if (value) {
         window.addEventListener('keyup', this.keyup);
       } else {
         window.removeEventListener('keyup', this.keyup);
@@ -164,11 +164,11 @@ export default {
     next() {
       this.goto(this.nextImage);
     },
-    goto(index) {
-      if (index != null && this.index != null && this.index !== index) {
-        this.slide = this.index < index ? 'rtl' : 'ltr';
+    goto(idx) {
+      if (idx != null && this.index != null && this.index !== idx) {
+        this.slide = this.index < idx ? 'rtl' : 'ltr';
       }
-      this.$emit('change', index);
+      this.$emit('change', idx);
     },
 
     keyup(e) {

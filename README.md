@@ -7,7 +7,7 @@
          height="96">
 </h1>
 
-A slick, yet tiny lightbox gallery component for Vue.js
+A slick, yet tiny lightbox gallery for Vue.js
 
 - **Slick.** No excessive design. Pictures, thumbnails, controls.
 - **Tiny.** Dependency-free. Less than 3 KB minified and gzipped.
@@ -46,7 +46,7 @@ Observe the live demo at https://os.karamoff.dev/vue-tinybox
 
 ### Node environment
 
-1. Install the Tinybox package"
+1. Install the Tinybox package:
 
    ```sh
    npm install vue-tinybox

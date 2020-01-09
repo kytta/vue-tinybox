@@ -6,19 +6,7 @@ export default [
     input,
     output: {
       ...defaultOutput,
-      file: './dev/nuxt/components/tinybox.js',
-      format: 'esm',
-    },
-    plugins: [
-      resolve(),
-      vue(false),
-    ],
-  },
-  {
-    input,
-    output: {
-      ...defaultOutput,
-      file: './dev/basic/tinybox.js',
+      file: './dev/tinybox.js',
       format: 'umd',
     },
     plugins: [

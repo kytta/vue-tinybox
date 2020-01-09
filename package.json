@@ -34,8 +34,7 @@
   "scripts": {
     "build": "rollup --config ./build/rollup.config.prod.js",
     "dev:build": "rollup -w --config ./build/rollup.config.dev.js",
-    "dev:serve-basic": "sirv ./dev/basic -s -q -D",
-    "dev:serve-nuxt": "nuxt ./dev/nuxt",
+    "dev:serve": "sirv ./dev -s -q -D",
     "dev": "run-p dev:*",
     "test:lint": "eslint .",
     "test:size": "size-limit",

@@ -9,6 +9,7 @@
     body {
       height: 3000px; /* to test scrolling */
     }
+
     .open-tinybox {
       display: inline-block;
       cursor: pointer;
@@ -17,17 +18,25 @@
   </style>
 
   <script src="https://unpkg.com/vue@%5E2"></script>
-  <script src="./tinybox.js"></script>
+  <script src="tinybox.js"></script>
 </head>
 <body>
 <div id="app">
   <h2>vue-tinybox demo: vanilla Vue.js</h2>
+  <div>
+    <input v-model="loopCheckbox" id="loop" type="checkbox">
+    <label for="loop">Loop</label>
+    <br>
+    <input v-model="thumbsCheckbox" id="thumbs" type="checkbox">
+    <label for="thumbs">Thumbnails</label>
+  </div>
   <p>Click on any image below to open <code>Tinybox</code></p>
 
   <Tinybox
       v-model="index"
       :images="images"
-      no-thumbs
+      :loop="loopCheckbox"
+      :no-thumbs="!thumbsCheckbox"
   ></Tinybox>
   <img
       v-for="(img, idx) in thumbs"
@@ -68,6 +77,8 @@ new Vue({
         'https://picsum.photos/id/420/200',
       ],
       index: null,
+      loopCheckbox: false,
+      thumbsCheckbox: true,
     };
   },
 });

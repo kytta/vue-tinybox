@@ -123,7 +123,7 @@ export default {
   },
   data() {
     return {
-      slide: 'rtl',
+      slide: 'next',
       swipeDone: false,
       swipeX: null,
     };
@@ -165,15 +165,14 @@ export default {
       this.goto(null);
     },
     prev() {
+      this.slide = 'prev';
       this.goto(this.prevImage);
     },
     next() {
+      this.slide = 'next';
       this.goto(this.nextImage);
     },
     goto(idx) {
-      if (idx != null && this.index != null && this.index !== idx) {
-        this.slide = this.index < idx ? 'rtl' : 'ltr';
-      }
       this.$emit('change', idx);
     },
 
@@ -323,16 +322,16 @@ export default {
     opacity: 0;
   }
 
-  .slide-rtl-enter-active {
+  .slide-next-enter-active {
     animation: 300ms ease 1 normal;
-    animation-name: rtl;
+    animation-name: next;
   }
-  .slide-ltr-enter-active {
+  .slide-prev-enter-active {
     animation: 300ms ease 1 normal;
-    animation-name: ltr;
+    animation-name: prev;
   }
 
-  @keyframes ltr {
+  @keyframes prev {
     from {
       opacity: 0;
       transform: translateX(-80px);
@@ -342,7 +341,7 @@ export default {
       transform: translateX(0);
     }
   }
-  @keyframes rtl {
+  @keyframes next {
     from {
       opacity: 0;
       transform: translateX(80px);

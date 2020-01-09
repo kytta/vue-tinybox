@@ -165,14 +165,14 @@ export default {
       this.goto(null);
     },
     prev() {
-      this.slide = 'prev';
-      this.goto(this.prevImage);
+      this.goto(this.prevImage, 'prev');
     },
     next() {
-      this.slide = 'next';
-      this.goto(this.nextImage);
+      this.goto(this.nextImage, 'next');
     },
-    goto(idx) {
+    goto(idx, slide) {
+      this.slide = slide || (this.index < idx ? 'next' : 'prev');
+
       this.$emit('change', idx);
     },
 

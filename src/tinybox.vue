@@ -16,7 +16,7 @@
         @touchstart="swipeStart"
         @touchmove="swipe"
       >
-        <transition :name="`slide-${slide}`">
+        <transition :name="slide">
           <img
             :key="images[index].src || images[index] || ''"
             :src="images[index].src || images[index] || ''"
@@ -27,6 +27,7 @@
             @click.stop="next"
           >
         </transition>
+
         <div
           v-if="prevImage !== index"
 
@@ -225,17 +226,13 @@ export default {
     height: 85%;
     position: relative;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .tinybox__content--no-thumbs {
     height: 100%;
-  }
-
-  .tinybox__content::before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
   }
 
   .tinybox__content__image {
@@ -244,15 +241,11 @@ export default {
     display: inline-block;
     max-height: 90%;
     max-width: 80%;
-    vertical-align: middle;
+    position: absolute;
   }
 
   .tinybox__content__control {
     background: no-repeat center/24px;
-
-    /*background-size: 24px;*/
-    /*background-repeat: no-repeat;*/
-    /*background-position: center;*/
 
     cursor: pointer;
     opacity: .5;
@@ -315,40 +308,32 @@ export default {
   /*   TRANSITIONS   */
   /*******************/
 
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity 300ms ease;
-  }
-  .fade-enter, .fade-leave-active {
+  .fade-enter,
+  .next-enter,
+  .prev-enter,
+  .fade-leave-active,
+  .prev-leave-active,
+  .next-leave-active {
     opacity: 0;
   }
 
-  .slide-next-enter-active {
-    animation: 300ms ease 1 normal;
-    animation-name: next;
-  }
-  .slide-prev-enter-active {
-    animation: 300ms ease 1 normal;
-    animation-name: prev;
+  .fade-enter-active,
+  .fade-leave-active,
+  .prev-leave-active,
+  .next-leave-active {
+    transition: opacity 300ms ease;
   }
 
-  @keyframes prev {
-    from {
-      opacity: 0;
-      transform: translateX(-80px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+  .prev-enter {
+    transform: translateX(-40px);
   }
-  @keyframes next {
-    from {
-      opacity: 0;
-      transform: translateX(80px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+
+  .next-enter {
+    transform: translateX(40px);
+  }
+
+  .next-enter-active,
+  .prev-enter-active {
+    transition: opacity 300ms ease, transform 300ms ease;
   }
 </style>

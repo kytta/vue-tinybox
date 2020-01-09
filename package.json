@@ -39,7 +39,7 @@
     "test:lint": "eslint .",
     "test:size": "size-limit",
     "pretest": "npm run build",
-    "test": "run-p test:*"
+    "test": "run-p --aggregate-output test:*"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",

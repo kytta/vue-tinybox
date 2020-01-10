@@ -35,8 +35,8 @@ Observe the live demo at https://os.karamoff.dev/vue-tinybox
 1. Include the link to Tinybox in `<head>` alongside Vue.js:
 
    ```html
-   <script src="https://unpkg.com/vue"></script>
-   <script src="https://unpkg.com/vue-tinybox"></script>
+   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+   <script src="https://cdn.jsdelivr.net/npm/vue-tinybox"></script>
    ```
 
    You can of course use _jsDelivr_ instead of _unpkg_.

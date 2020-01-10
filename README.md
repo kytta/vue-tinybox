@@ -114,3 +114,15 @@ Instead of `v-model` you can use the `index` prop and `change` event:
     @change="(i) => {index = i}"
 />
 ```
+
+## Browser support
+
+| ![Chrome][chrome] | ![Firefox][firefox] | ![Safari][safari] | ![MS Edge][edge] | ![Internet Explorer][ie] |
+|:-----------------:|:-------------------:|:-----------------:|:----------------:|:------------------------:|
+|      **21+**      |       **28+**       |       **7+**      |      **16+**     |          **11**          |
+
+[chrome]:  https://github.com/alrra/browser-logos/raw/master/src/chrome/chrome_48x48.png
+[firefox]: https://github.com/alrra/browser-logos/raw/master/src/firefox/firefox_48x48.png
+[safari]:  https://github.com/alrra/browser-logos/raw/master/src/safari/safari_48x48.png
+[edge]:    https://github.com/alrra/browser-logos/raw/master/src/edge/edge_48x48.png
+[ie]:      https://github.com/alrra/browser-logos/raw/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png

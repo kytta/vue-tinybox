@@ -1,6 +1,6 @@
 {
   "name": "vue-tinybox",
-  "version": "1.0.0-2",
+  "version": "1.0.0",
   "description": "A slick, yet tiny lightbox gallery for Vue.js",
   "license": "MIT",
   "keywords": [

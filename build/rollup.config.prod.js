@@ -3,33 +3,25 @@ import {
 } from './plugins';
 import { defaultOutput, getFilename, input } from './defaults';
 
-export default [
-  {
-    input,
-    output: {
+export default {
+  input,
+  output: [
+    {
       file: getFilename('esm'),
       format: 'esm',
       ...defaultOutput,
+      plugins: [terser(6)],
     },
-    plugins: [
-      resolve(),
-      vue(true),
-      babel(),
-      terser(6),
-    ],
-  },
-  {
-    input,
-    output: {
+    {
       file: getFilename('umd'),
       format: 'umd',
       ...defaultOutput,
+      plugins: [terser(5)],
     },
-    plugins: [
-      resolve(),
-      vue(true),
-      babel(),
-      terser(5),
-    ],
-  },
-];
+  ],
+  plugins: [
+    resolve(),
+    vue(true),
+    babel(),
+  ],
+};

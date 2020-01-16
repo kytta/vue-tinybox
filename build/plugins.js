@@ -8,7 +8,11 @@ import rollupPluginVue from 'rollup-plugin-vue';
 import autoprefixer from 'autoprefixer';
 
 export function babel() {
-  return rollupPluginBabel();
+  return rollupPluginBabel({
+    presets: [
+      '@babel/env',
+    ],
+  });
 }
 
 export function resolve() {

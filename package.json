@@ -66,10 +66,6 @@
       "limit": "3 KB"
     }
   ],
-  "browserslist": [
-    ">=.5%, last 2 versions",
-    "not dead"
-  ],
   "engines": {
     "node": ">=10"
   },

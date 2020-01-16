@@ -1,82 +1,128 @@
-# vue-tinybox
+<h1>
+    vue-tinybox
+    <img src="https://raw.githubusercontent.com/googlefonts/noto-emoji/master/png/128/emoji_u1f30c.png"
+         align="right"
+         alt="Milky Way emoji"
+         width="96"
+         height="96">
+</h1>
 
-A slick, yet tiny lightbox gallery component for Vue.js
+A slick, yet tiny lightbox gallery for Vue.js
 
-- **Slick.** Nothing excessive. Image, controls and thumbnails.
-- **Small.** Dependency-free and less than 3.5 KB minified and gzipped.
-- **Adaptive.** Works great on both desktop and mobile.
+- **Slick.** No excessive design. Pictures, thumbnails, controls.
+- **Tiny.** Dependency-free. Less than 3 KB minified and gzipped.
+- **Adaptive.** Works on computers. Works on tablets. Works on phones.
 
 ## Demo
 
-The live demo can be found at https://os.karamoff.ru/vue-tinybox
+Observe the live demo at https://os.karamoff.dev/vue-tinybox
 
-## Install
-
-### Node.js
-
-Install the module as you normally would via npm or yarn:
-
-```sh
-npm install vue-tinybox
-# or
-yarn add vue-tinybox
-```
-
-### Browsers
-
-Just include the link to the Tinybox in your `<head>`:
+## Basic usage
 
 ```html
-<script src="path/to/vue.js"></script>
-<script src="path/to/tinybox.umd.js"></script>
-```
-
-## Usage
-
-If you're using the Tinybox not from the browser, you'll have to import it:
-
-```js
-import Tinybox from "vue-tinybox";
-```
-
-Then you include it your usual way:
-
-```js
-Vue.component('tinybox', Tinybox);
-
-// or
-
-Vue.use(Tinybox);
-
-// or, inside a Vue instance or SFC
-
-{
-    components: { Tinybox }
-}
-```
-
-Then you can use the `Tinybox` component:
-
-```vue
 <Tinybox
+    v-model="index"
     :images="images"
-    :index="idx"
-    @close="idx = null"
+    loop
+    no-thumbs
 />
 ```
 
-The `Tinybox` component accepts these props:
+## Install
 
-| Prop name | Type              | Default | Description                                                                    |
-|-----------|-------------------|---------|--------------------------------------------------------------------------------|
-| `images`  | `Array`           | `[]`    | The array of either image URLs or `Image` objects                              |
-| `index`   | `Number` / `null` | `null`  | The index of the image that has to be shown. If `null`, the lightbox is closed |
-| `loop`    | `Boolean`         | `false` | Indicates whether the images should loop                                       |
+### Browsers
 
-The `Image` object is an object with following fields:
+1. Include the link to Tinybox in `<head>` alongside Vue.js:
 
-| Field name  | Type     | Description                                                                               |
-|-------------|----------|-------------------------------------------------------------------------------------------|
-| `src`       | `String` | The URL of the image                                                                      |
-| `alt`       | `String` | (optional) The text to be set inside `alt` attribute, e.g. a caption                      |
-| `thumbnail` | `String` | (optional) The URL of the smaller version of the image to be shown in the thumbnail strip |
+   ```html
+   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+   <script src="https://cdn.jsdelivr.net/npm/vue-tinybox"></script>
+   ```
+
+   You can of course use _jsDelivr_ instead of _unpkg_.
+  
+2. Tinybox will auto-install upon detecting the global Vue instance. You can use
+   it right away.
+
+### Node environment
+
+1. Install the Tinybox package:
+
+   ```sh
+   npm install vue-tinybox
+   # or
+   yarn add vue-tinybox
+   ```
+
+2. Register it as you usually would:
+
+   ```js
+   import Tinybox from "vue-tinybox";
+   // or
+   const Tinybox = require('vue-tinybox');
+
+
+   Vue.component('Tinybox', Tinybox);
+   //or
+   Vue.use(Tinybox);
+   //or
+   new Vue({
+       components: { Tinybox },
+       // ... 
+   });
+   ```
+
+## API
+
+### Image object
+
+An `Image` object is an object with following fields:
+
+| Field name  | Type     | Description                                                           |
+|-------------|----------|-----------------------------------------------------------------------|
+| `src`       | `String` | The image URL                                                         |
+| `alt`       | `String` | (optional) the alt text                                               |
+| `thumbnail` | `String` | (optional) The thumbnail (a smaller, square version of the image) URL |
+
+### Props
+
+| Prop name   | Type      | Default | Description                                                   |
+|-------------|-----------|---------|---------------------------------------------------------------|
+| `images`    | `Array`   | `[]`    | List of either image URLs or [`Image`](#image-object) objects |
+| `loop`      | `Boolean` | `false` | Indicates whether the images should loop                      |
+| `no-thumbs` | `Boolean` | `false` | When enabled, the thumbnails are hidden                       |
+
+### `v-model`
+
+You can use `v-model` on a `Number` variable, which will hold the index of the
+image currently open. If no image is open (i.e. Tinybox is closed), the value
+becomes `null`.
+
+Instead of `v-model` you can use the `index` prop and `change` event:
+
+```html
+<Tinybox
+    v-model="index"
+    :images="images"
+/>
+
+<!-- is equivalent to -->
+
+<Tinybox
+    :images="images"
+    :index="index"
+    @change="(i) => {index = i}"
+/>
+```
+
+## Browser support
+
+| ![Chrome][chrome] | ![Firefox][firefox] | ![Safari][safari] | ![MS Edge][edge] | ![Internet Explorer][ie] |
+|:-----------------:|:-------------------:|:-----------------:|:----------------:|:------------------------:|
+|      **21+**      |       **28+**       |       **7+**      |      **16+**     |          **11**          |
+
+[chrome]:  https://github.com/alrra/browser-logos/raw/master/src/chrome/chrome_48x48.png
+[firefox]: https://github.com/alrra/browser-logos/raw/master/src/firefox/firefox_48x48.png
+[safari]:  https://github.com/alrra/browser-logos/raw/master/src/safari/safari_48x48.png
+[edge]:    https://github.com/alrra/browser-logos/raw/master/src/edge/edge_48x48.png
+[ie]:      https://github.com/alrra/browser-logos/raw/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png

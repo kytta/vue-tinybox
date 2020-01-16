@@ -1,54 +1,9 @@
 language: node_js
 node_js:
-  - stable
+  - lts/dubnium
+  - lts/erbium
+  - node
 cache: npm
 
-install: npm ci
-
-stages:
-  - build
-  - test
-  - deploy
-
-jobs:
-  include:
-    - stage: build
-      name: "Prod build"
-      script:
-        - npm run build
-
-    - stage: test
-      name: "Test"
-      script:
-        - npm run test
-
-    - stage: deploy
-      name: Deploy to GitHub Releases
-      script: npm run build
-      before_deploy:
-        - echo "Deploying to GitHub Releases"
-      deploy:
-        provider: releases
-        api_key:
-          secure: ZkkKjSsdvjVjamrcSeuCFCp+Upi2iKI0jszIYuLmIixhY/JfYWLWYM6T+8To9BWuEZ1974Ddo400nYS2BTwKu5jZVUBZPWJorurT/rFt6tnnRQ/jNdh8tmQYG3XT3BZBf/vN7JGFbKVpY6C91szfdkUOPBqbXrjkJOWOVC8+gY2z/iFur0ddhWGB4mCMZb/9qEx1d1KgdMFBAlyn1BJMLyjukyEE0NxgfLeENso0MHST9Scp4a2+yTL/qBdHODD62P2KMDHmAUD7vCY4SDuQbpkIcSZW9YPbaau4pGZX+KTlLAh+OZZfmke+Kn7ju/61CDkp3rGITNsRUxC0SXDrwwkYWh2kG9EueWE8dJBFL2oMMkzHkHwz0P7EUf3l5dVbAw9GtwWu68xor24ElDviUBlboAc/DxfbR7JAG1VmGn7m0jTBUSYNxv9xzSUKbBdT+0dPgDsQH28Yyl01VPe9jtyPEQ9dbvQdv/i/oi1qPEKrgtNB7vG34hkdyjsdS0OO5b+qw3k2nYluCCK+gu8p+dtUGQMI4BHTw3xP6R6W37/e9Nexr4o37dTSDYzoRnc2BUDGjgBlqn0rsa6bMPG4BxyKdZ7c+ZeaolqPblMbKbtxXLiXwRnVK5MQYj5NJ2ZyNb492lcfqtYKetm+tlUiNqzjfBVyzUP4i2d/nndDz5o=
-        file:
-          - ./dist/tinybox.umd.js
-          - ./dist/tinybox.esm.js
-        skip_cleanup: true
-        draft: true
-        on:
-          tags: true
-    - stage: deploy
-      name: Deploy to NPM
-      script: npm run build
-      before_deploy:
-        - echo "Deploying to NPM"
-      deploy:
-        provider: npm
-        email: nick@karamoff.ru
-        api_key:
-          secure: T+fFRTOTZL1UtQ5ZlsayLfYodHCYmidLr2MPlo5QH8QfK7oURNiYMradgy7Xi2uQ7bWXzzuZtON3XkB1TLzxZmOFUfFJHuTYYdLCBj/94T12S5qmLGL/uHg5yrdy9o388wmYtZBCCH1pTmN8bJ6vxeolRg3TjAKbAy4omo8S0KnjSyGTKNrPW8K89iIx1ZQwlf2oVLaavbAV+twNft2UnldlNrxco3FBXpndujTT/uBP0gFLI6miXixY0nUZN8GI8VPzcvNDyY4qVCangfL0DMOfsQyieumRsC+630snPRzSUmyG0G3NO34gBg/oEkAqRnxHdmTuZDjMo02gMMABE6z4RY+ETwBYSda/6DbDYpkkyBvhavP2cRwwqZFsjM/qJl3dOhLiBmPRPPmuIEl5GNhVgSBGBv6nxV8vXOkkiHO5dJOrW6zlahOwT0eOO176ASTMB8dctLFg/mlUulZvKaQ0OZw67++MuqXFS1/DJM499mXrLE5qw+2dwq+sekuxbHA93+BBX7mztKm2SlzzvroKeE+KrVsvTlnfhK0oxotIvG4C7SbhkTis5PPhK4GemytAgtL1PWuHzk9To7ir4KyX2A3ZKqEC8ERfFt7f8rbJEEYaMJoLk/3lQUFjn7pZUnazh68gov7rRlmchZJm6oFZwGCmWXvysY2SfJl8IvA=
-        skip_cleanup: true
-        draft: true
-        on:
-          tags: true
+install: npm install
+script: npm run test

@@ -1,166 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>vue-tinybox | A slick, yet tiny lightbox gallery component for Vue.js</title>
-    <meta name="description" content="A slick, yet tiny lightbox gallery component for Vue.js">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>vue-tinybox | A slick, yet tiny lightbox gallery for Vue.js</title>
+  <meta name="description" content="A slick, yet tiny lightbox gallery for Vue.js">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm.min.css">
-    <style>
+  <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm.min.css">
+  <style>
+    .open-tinybox {
+      display: inline-block;
+      cursor: pointer;
+      margin: 5px;
+      width: 100px;
+    }
+  </style>
 
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-tinybox@1.0/dist/tinybox.umd.js"></script>
 
-        .open-tinybox {
-            display: inline-block;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-    </style>
-
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-tinybox@0.2.0/dist/tinybox.min.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 </head>
+
 <body>
-    <header>
-        <p>
-            <img src="https://github.com/googlefonts/noto-emoji/raw/master/png/128/emoji_u1f30c.png" width="64" height="64" alt="Milky way emoji">
-        </p>
-        <h1>vue-tinybox</h1>
-        <p>A slick, yet tiny lightbox gallery component for Vue.js</p>
-        <nav>
-            <ul>
-                <li>
-                    <a href="https://www.npmjs.com/package/vue-tinybox" target="_blank">npm</a>
-                </li>
-                <li>
-                    <a href="https://github.com/NickKaramoff/vue-tinybox" target="_blank">github</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+<header>
+  <p>
+    <img src="https://raw.githubusercontent.com/googlefonts/noto-emoji/master/png/128/emoji_u1f30c.png" width="64" height="64" alt="Milky Way emoji">
+  </p>
+  <h1>vue-tinybox</h1>
+  <p>A slick, yet tiny lightbox gallery for Vue.js</p>
+  <nav>
+    <ul>
+      <li>
+        <a href="https://www.npmjs.com/package/vue-tinybox" target="_blank">npm</a>
+      </li>
+      <li>
+        <a href="https://github.com/NickKaramoff/vue-tinybox" target="_blank">github</a>
+      </li>
+    </ul>
+  </nav>
+</header>
 
-    <main>
-        <article>
-            <h2>
-                <a id="what-is-it" href="#what-is-it" aria-hidden="true"></a>
-                What is it?
-            </h2>
+<main>
+  <article>
+    <h2>
+      <a id="what-is-it" href="#what-is-it" aria-hidden="true"></a>
+      What is it?
+    </h2>
 
-            <p>
-                <code>Tinybox</code> is a simple lightbox gallery component for Vue.js.
-            </p>
+    <p>
+      Tinybox is a simple lightbox gallery for Vue.js.
+    </p>
 
-            <p>
-                While being not as customizable as some other components, <code>Tinybox</code> is dead simple and
-                lightweight (less than 3.5 KB minzipped).
-            </p>
-            <aside>
-                <p>
-                    the size of <code>Tinybox</code> is controlled with
-                    <a href="https://github.com/ai/size-limit" target="_blank">Size Limit</a>
-                </p>
-            </aside>
+    <p>
+      While being not as customizable as some other
+      lightboxes, Tinybox is very slick and lightweight (less than 3&nbsp;KB minzipped). Tinybox is
+      great on mobile devices too: it supports swipe gestures and changes its size responsively.
+    </p>
+    <aside>
+      <p>
+        the size of Tinybox is controlled with
+        <a href="https://github.com/ai/size-limit" target="_blank">Size Limit</a>
+      </p>
+    </aside>
 
-            <p>
-                <code>Tinybox</code> also doesn't depend on any third-party library, so that means pure JavaScript —
-                with no mess.
-            </p>
-
-            <p>
-                <code>Tinybox</code> is great for mobile devices too: it supports swipe gestures and is responsive.
-            </p>
-        </article>
-
-        <article id="app">
-            <h2>
-                <a href="#demo" id="demo" aria-hidden="true"></a>
-                Demo
-            </h2>
-            <p>Click on any image below to open <code>Tinybox</code></p>
-
-            <Tinybox :images="images" :index="index" @close="index = null"></Tinybox>
-            <img class="open-tinybox" width="100" v-for="(img, idx) in images" :src="img.thumbnail" :alt="img.alt"
-                 @click="index = idx">
-        </article>
-
-        <article>
-            <h2>
-                <a href="#install" id="install" aria-hidden="true"></a>
-                Install
-            </h2>
-
-            <p><code>Tinybox</code> can be installed as an npm module:</p>
-        <pre><code>npm install vue-tinybox
-# or
-yarn add vue-tinybox</code></pre>
-
-                <p>...or served from CDN like jsDelivr:</p>
-                <pre><code>&lt;script
-  src="https://cdn.jsdelivr.net/npm/vue-tinybox@0.3/dist/tinybox.umd.js"
-&gt;
-&lt;/script&gt;</code></pre>
-        </article>
-
-        <article>
-            <h2>
-                <a href="#usage" id="usage" aria-hidden="true"></a>
-                Usage
-            </h2>
-
-            <p>
-                Include the component like you normally would: via <code>Vue.component()</code>,
-                <code>Vue.use()</code> or inside the <code>components</code> property of your component.
-            </p>
-
-            <p>
-                Then just pass the props needed:
-            </p>
-
-            <pre><code>&lt;Tinybox
-  :images="images"
-  :index="idx"
-  loop
-  @close="idx = null"
+    <pre><code>&lt;Tinybox
+    v-model="index"
+    :images="images"
 /&gt;</code></pre>
 
-            <p>
-                For more info consult the <a href="https://github.com/NickKaramoff/vue-tinybox#readme">README</a>.
-            </p>
-        </article>
-    </main>
 
-    <footer>
-        <p>by <a href="https://karamoff.ru" target="_blank">Nikita Karamov</a></p>
-        <p>Website built with <a href="https://igoradamenko.github.io/awsm.css/index.html" target="_blank">awsm.css</a></p>
-    </footer>
+  </article>
 
-    <script>
-        new Vue({
-            components: {Tinybox},
-            el: '#app',
-            data: function () {
-                return {
-                    images: [
-                        {
-                            src: "https://picsum.photos/id/13/800/600",
-                            alt: "An empty beach",
-                            thumbnail: "https://picsum.photos/id/13/200"
-                        },
-                        {
-                            src: "https://picsum.photos/id/42/800/600",
-                            alt: "A café desk",
-                            thumbnail: "https://picsum.photos/id/42/200"
-                        },
-                        {
-                            src: "https://picsum.photos/id/256/800/600",
-                            alt: "Mountains",
-                            thumbnail: "https://picsum.photos/id/256/200"
-                        }
-                    ],
-                    index: null
-                }
-            }
-        });
-    </script>
+  <article id="demo-app">
+    <h2>
+      <a href="#demo" id="demo" aria-hidden="true"></a>
+      Demo
+    </h2>
+    <p>Click on any image below to open Tinybox</p>
+
+    <Tinybox v-model="index" :images="images"></Tinybox>
+
+    <img
+        v-for="(img, idx) in images"
+        :src="img.thumbnail"
+        :alt="img.alt"
+        class="open-tinybox"
+        @click="index = idx"
+    >
+  </article>
+
+  <article>
+    <h2>
+      <a href="#install" id="install" aria-hidden="true"></a>
+      Install
+    </h2>
+
+    <h3>Browsers</h3>
+    <p>
+      Include the link to Tinybox in <code>&lt;head&gt;</code> alongside Vue.js:
+    </p>
+    <pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/vue-tinybox"&gt;&lt;/script&gt;</code></pre>
+
+    <h3>Node.js</h3>
+    <p>
+      Install the Tinybox package and register it as you usually would:
+    </p>
+    <pre><code>$ npm install vue-tinybox</code></pre>
+    <pre><code>import Tinybox from "vue-tinybox";
+Vue.component('Tinybox', Tinybox);</code></pre>
+  </article>
+
+  <article>
+    <h2>API and more</h2>
+
+    <p>
+      For API docs and more info on installation consult the
+      <a href="https://github.com/NickKaramoff/vue-tinybox#readme">README</a>.
+    </p>
+  </article>
+</main>
+
+<footer>
+  <p>vue-tinybox by <a href="https://karamoff.ru" target="_blank">Nikita Karamov</a></p>
+  <p>Website built with <a href="https://igoradamenko.github.io/awsm.css/index.html" target="_blank">awsm.css</a></p>
+</footer>
+
+<script>
+new Vue({
+  components: { Tinybox },
+  el: '#demo-app',
+  data: function () {
+    return {
+      images: [
+        {
+          src: "https://picsum.photos/id/13/600/1000",
+          alt: "Empty beach",
+          thumbnail: "https://picsum.photos/id/13/200"
+        },
+        {
+          src: "https://picsum.photos/id/42/800/600",
+          alt: "Desk in a café",
+          thumbnail: "https://picsum.photos/id/42/200"
+        },
+        {
+          src: "https://picsum.photos/id/256/1500/600",
+          alt: "Mountains",
+          thumbnail: "https://picsum.photos/id/256/200"
+        },
+        {
+          src: "https://picsum.photos/id/666/800/600",
+          alt: "Forest",
+          thumbnail: "https://picsum.photos/id/666/200"
+        }
+      ],
+      index: null
+    }
+  }
+});
+</script>
 </body>
 </html>

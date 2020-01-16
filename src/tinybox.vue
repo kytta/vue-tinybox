@@ -124,15 +124,43 @@ export default {
   },
   data() {
     return {
+      /**
+       * Transition name to be used on photo switch
+       *
+       * @type string
+       */
       slide: 'next',
+
+      /**
+       * Indication that the swipe action has been executed
+       *
+       * @type boolean
+       */
       swipeDone: false,
+
+      /**
+       * The swipe distance or null if no swipe action is being executed
+       *
+       * @type null|number
+       */
       swipeX: null,
     };
   },
   computed: {
+    /**
+     * Indicates whether the Tinybox is open
+     *
+     * @returns {boolean} open state
+     */
     open() {
       return this.index != null;
     },
+
+    /**
+     * Index of the image _previous_ to the one being open
+     *
+     * @returns {number} index
+     */
     prevImage() {
       if (this.index > 0) {
         return this.index - 1;
@@ -142,6 +170,12 @@ export default {
       }
       return this.index;
     },
+
+    /**
+     * Index of the image _next_ to the one being open
+     *
+     * @returns {number} index
+     */
     nextImage() {
       if (this.index < this.images.length - 1) {
         return this.index + 1;
@@ -162,21 +196,43 @@ export default {
     },
   },
   methods: {
+    /**
+     * Closes the Tinybox
+     */
     close() {
       this.goto(null);
     },
+
+    /**
+     * Navigates to the previous image
+     */
     prev() {
       this.goto(this.prevImage, 'prev');
     },
+
+    /**
+     * Navigates to the next image
+     */
     next() {
       this.goto(this.nextImage, 'next');
     },
+
+    /**
+     * Navigates to the image with a specific index
+     * @param {null|number} idx image index
+     * @param {string} [slide] name of the transition to be used
+     */
     goto(idx, slide) {
       this.slide = slide || (this.index < idx ? 'next' : 'prev');
 
       this.$emit('change', idx);
     },
 
+    /**
+     * Handles the `keyup` event
+     *
+     * @param {KeyboardEvent} e event
+     */
     keyup(e) {
       if (e.code === 'ArrowRight' || e.key === 'ArrowRight' || e.key === 'Right' || e.keyCode === 39) {
         this.next();
@@ -187,12 +243,27 @@ export default {
       }
     },
 
+    /**
+     * Handles the `touchstart` event
+     *
+     * The `touchstart` event on the image indicates the beginning of the swipe action.
+     *
+     * @param {TouchEvent} e event
+     */
     swipeStart(e) {
       this.swipeDone = false;
       if (e.changedTouches.length === 1) {
         this.swipeX = e.changedTouches[0].screenX;
       }
     },
+
+    /**
+     * Handles the `touch` event
+     *
+     * The `touch` event registered after the `touchstart` event indicates the swipe being in action
+     *
+     * @param {TouchEvent} e event
+     */
     swipe(e) {
       if (!this.swipeDone && e.changedTouches.length === 1) {
         const swipeDistance = e.changedTouches[0].screenX - this.swipeX;

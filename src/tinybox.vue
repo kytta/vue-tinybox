@@ -178,11 +178,11 @@ export default {
     },
 
     keyup(e) {
-      if (e.code === 'ArrowRight') {
+      if (e.code === 'ArrowRight' || e.key === 'ArrowRight' || e.key === 'Right' || e.keyCode === 39) {
         this.next();
-      } else if (e.code === 'ArrowLeft') {
+      } else if (e.code === 'ArrowLeft' || e.key === 'ArrowLeft' || e.key === 'Left' || e.keyCode === 37) {
         this.prev();
-      } else if (e.code === 'Escape') {
+      } else if (e.code === 'Escape' || e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
         this.close();
       }
     },

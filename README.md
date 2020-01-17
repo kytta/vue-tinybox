@@ -1,11 +1,10 @@
-<h1>
-    vue-tinybox
-    <img src="https://raw.githubusercontent.com/googlefonts/noto-emoji/master/png/128/emoji_u1f30c.png"
+# vue-tinybox
+
+<img src="https://raw.githubusercontent.com/googlefonts/noto-emoji/master/png/128/emoji_u1f30c.png"
          align="right"
          alt="Milky Way emoji"
          width="96"
          height="96">
-</h1>
 
 A slick, yet tiny lightbox gallery for Vue.js
 

@@ -1,9 +1,9 @@
 language: node_js
 node_js:
-  - lts/dubnium
-  - lts/erbium
   - node
-cache: npm
+  - lts/erbium
+  - lts/dubnium
+cache: yarn
 
-install: npm install
-script: npm run test
+install: yarn
+script: yarn test

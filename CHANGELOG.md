@@ -1,5 +1,12 @@
 # CHANGELOG
 
+### 1.0.1
+
+### New & Improved
+
+- switched from NPM to Yarn for development
+- updated dependencies
+
 ## 1.0.0
 
 ### 🛑 BREAKING

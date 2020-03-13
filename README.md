@@ -1,10 +1,6 @@
 # vue-tinybox
 
-<img src="https://raw.githubusercontent.com/googlefonts/noto-emoji/master/png/128/emoji_u1f30c.png"
-         align="right"
-         alt="Milky Way emoji"
-         width="96"
-         height="96">
+<img src="https://raw.githubusercontent.com/googlefonts/noto-emoji/master/png/128/emoji_u1f30c.png" align="right" alt="Milky Way emoji" width="96" height="96">
 
 A slick, yet tiny lightbox gallery for Vue.js
 
@@ -14,7 +10,7 @@ A slick, yet tiny lightbox gallery for Vue.js
 
 ## Demo
 
-Observe the live demo at https://os.karamoff.dev/vue-tinybox
+Observe the live demo here: [os.karamoff.dev/vue-tinybox](https://os.karamoff.dev/vue-tinybox)
 
 ## Basic usage
 
@@ -37,8 +33,6 @@ Observe the live demo at https://os.karamoff.dev/vue-tinybox
    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
    <script src="https://cdn.jsdelivr.net/npm/vue-tinybox"></script>
    ```
-
-   You can of course use _jsDelivr_ instead of _unpkg_.
   
 2. Tinybox will auto-install upon detecting the global Vue instance. You can use
    it right away.

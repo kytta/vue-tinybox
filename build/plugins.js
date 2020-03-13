@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */ // `build` folder does not have project files
 
 import rollupPluginBabel from 'rollup-plugin-babel';
-import rollupPluginNodeResolve from 'rollup-plugin-node-resolve';
+import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import { terser as rollupPluginTerser } from 'rollup-plugin-terser';
 import rollupPluginVue from 'rollup-plugin-vue';
 

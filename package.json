@@ -38,7 +38,7 @@
     "dev": "run-p dev:*",
     "test:lint": "eslint .",
     "test:size": "size-limit",
-    "pretest": "npm run build",
+    "pretest": "yarn build",
     "test": "run-p --aggregate-output test:*"
   },
   "devDependencies": {
@@ -68,8 +68,5 @@
   ],
   "engines": {
     "node": ">=10"
-  },
-  "np": {
-    "yarn": false
   }
 }

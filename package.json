@@ -23,9 +23,13 @@
     "email": "nick@karamoff.dev",
     "url": "https://karamoff.dev"
   },
-  "main": "dist/tinybox.umd.js",
-  "module": "dist/tinybox.esm.js",
-  "unpkg": "dist/tinybox.umd.js",
+  "main": "./dist/tinybox.umd.js",
+  "module": "./dist/tinybox.esm.js",
+  "unpkg": "./dist/tinybox.umd.js",
+  "exports": {
+    "require": "./dist/tinybox.umd.js",
+    "import": "./dist/tinybox.esm.js"
+  },
   "files": [
     "dist/tinybox.umd.js",
     "dist/tinybox.esm.js",

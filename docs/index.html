@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>vue-tinybox | A slick, yet tiny lightbox gallery for Vue.js</title>
   <meta name="description" content="A slick, yet tiny lightbox gallery for Vue.js">
+  <meta name="keywords" content="vue,vuejs,vue.js,lightbox,gallery,component,javascript">
+  <meta name="author" content="Nikita Karamov">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>vue-tinybox | A slick, yet tiny lightbox gallery for Vue.js</title>
+
+  <link rel="preconnect" href="https://picsum.photos/">
 
   <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm.min.css">
   <style>
@@ -15,9 +20,6 @@
       width: 100px;
     }
   </style>
-
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue-tinybox@1.0/dist/tinybox.umd.js"></script>
 
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -33,10 +35,10 @@
   <nav>
     <ul>
       <li>
-        <a href="https://www.npmjs.com/package/vue-tinybox" target="_blank">npm</a>
+        <a href="https://www.npmjs.com/package/vue-tinybox" target="_blank" rel="noopener noreferrer">npm</a>
       </li>
       <li>
-        <a href="https://github.com/NickKaramoff/vue-tinybox" target="_blank">github</a>
+        <a href="https://github.com/NickKaramoff/vue-tinybox" target="_blank" rel="noopener noreferrer">github</a>
       </li>
     </ul>
   </nav>
@@ -61,7 +63,7 @@
     <aside>
       <p>
         the size of Tinybox is controlled with
-        <a href="https://github.com/ai/size-limit" target="_blank">Size Limit</a>
+        <a href="https://github.com/ai/size-limit" target="_blank" rel="noopener noreferrer">Size Limit</a>
       </p>
     </aside>
 
@@ -117,48 +119,54 @@ Vue.component('Tinybox', Tinybox);</code></pre>
 
     <p>
       For API docs and more info on installation consult the
-      <a href="https://github.com/NickKaramoff/vue-tinybox#readme">README</a>.
+      <a href="https://github.com/NickKaramoff/vue-tinybox#readme" rel="noopener noreferrer">README</a>.
     </p>
   </article>
 </main>
 
 <footer>
-  <p>vue-tinybox by <a href="https://karamoff.ru" target="_blank">Nikita Karamov</a></p>
-  <p>Website built with <a href="https://igoradamenko.github.io/awsm.css/index.html" target="_blank">awsm.css</a></p>
+  <p>vue-tinybox by <a href="https://karamoff.dev" target="_blank" rel="noopener noreferrer">Nikita Karamov</a></p>
+  <p>Website built with <a href="https://igoradamenko.github.io/awsm.css/index.html" target="_blank" rel="noopener noreferrer">awsm.css</a></p>
 </footer>
 
+
+<script defer src="https://cdn.jsdelivr.net/npm/vue@2.6"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/vue-tinybox@1.0/dist/tinybox.umd.js"></script>
+
 <script>
-new Vue({
-  components: { Tinybox },
-  el: '#demo-app',
-  data: function () {
-    return {
-      images: [
-        {
-          src: "https://picsum.photos/id/13/600/1000",
-          alt: "Empty beach",
-          thumbnail: "https://picsum.photos/id/13/200"
-        },
-        {
-          src: "https://picsum.photos/id/42/800/600",
-          alt: "Desk in a café",
-          thumbnail: "https://picsum.photos/id/42/200"
-        },
-        {
-          src: "https://picsum.photos/id/256/1500/600",
-          alt: "Mountains",
-          thumbnail: "https://picsum.photos/id/256/200"
-        },
-        {
-          src: "https://picsum.photos/id/666/800/600",
-          alt: "Forest",
-          thumbnail: "https://picsum.photos/id/666/200"
-        }
-      ],
-      index: null
+window.onload = function () {
+  new Vue({
+    components: { Tinybox },
+    el: '#demo-app',
+    data: function () {
+      return {
+        images: [
+          {
+            src: "https://picsum.photos/id/13/600/1000",
+            alt: "Empty beach",
+            thumbnail: "https://picsum.photos/id/13/200"
+          },
+          {
+            src: "https://picsum.photos/id/42/800/600",
+            alt: "Desk in a café",
+            thumbnail: "https://picsum.photos/id/42/200"
+          },
+          {
+            src: "https://picsum.photos/id/256/1500/600",
+            alt: "Mountains",
+            thumbnail: "https://picsum.photos/id/256/200"
+          },
+          {
+            src: "https://picsum.photos/id/666/800/600",
+            alt: "Forest",
+            thumbnail: "https://picsum.photos/id/666/200"
+          }
+        ],
+        index: null
+      }
     }
-  }
-});
+  });
+}
 </script>
 </body>
 </html>

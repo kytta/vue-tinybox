@@ -1,5 +1,5 @@
 .cache
-/dev/**/tinybox.js
+/dev/**/*.js*
 /dev/nuxt/.nuxt/
 dist
 .idea

@@ -30,6 +30,9 @@
     "require": "./dist/tinybox.umd.js",
     "import": "./dist/tinybox.esm.js"
   },
+  "browser": {
+    "./sfc": "src/tinybox.vue"
+  },
   "files": [
     "dist/tinybox.umd.js",
     "dist/tinybox.esm.js",

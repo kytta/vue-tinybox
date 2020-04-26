@@ -1,6 +1,6 @@
 {
   "name": "vue-tinybox",
-  "version": "1.1.0-2",
+  "version": "1.0.1",
   "description": "A slick, yet tiny lightbox gallery for Vue.js",
   "license": "MIT",
   "keywords": [
@@ -40,16 +40,13 @@
   ],
   "scripts": {
     "build": "cross-env NODE_ENV=production rollup -c",
-    "collect": "node prepublishCollect.js",
     "dev:build": "rollup -c -w",
     "dev:serve": "sirv ./dev -s -q -D",
     "dev": "run-p dev:*",
     "test:lint": "eslint .",
     "test:size": "size-limit",
     "pretest": "run-s build",
-    "test": "run-p --aggregate-output test:*",
-    "prerelease": "run-s test collect",
-    "release": "yarn publish ./package"
+    "test": "run-p --aggregate-output test:*"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -57,13 +54,11 @@
     "@rollup/plugin-node-resolve": "^7.1.3",
     "@size-limit/preset-small-lib": "^4.4.5",
     "autoprefixer": "^9.7.6",
-    "clean-publish": "^1.1.7",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^6.2.2",
-    "fs-extra": "^9.0.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^7.0.27",
     "rollup": "^2.7.2",
@@ -85,5 +80,8 @@
       "path": "dist/tinybox.esm.js",
       "limit": "3 KB"
     }
-  ]
+  ],
+  "engines": {
+    "node": ">=10"
+  }
 }

@@ -4,7 +4,7 @@
 
 ### New & Improved
 
-- you can now caption your images using the `caption` prop
+- you can now caption your images using the `caption` prop (#24)
 
 ## 1.0.1
 

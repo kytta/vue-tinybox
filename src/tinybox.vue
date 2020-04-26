@@ -20,13 +20,20 @@
           <img
             :key="images[index].src || images[index] || ''"
             :src="images[index].src || images[index] || ''"
-            :alt="images[index].alt || ''"
+            :alt="images[index].alt || images[index].caption || ''"
 
             class="tinybox__content__image"
 
             @click.stop="next"
           >
         </transition>
+
+        <span
+          v-if="images[index].caption"
+          class="tinybox__content__image__caption"
+        >
+          {{ images[index].caption }}
+        </span>
 
         <div
           v-if="prevImage !== index"
@@ -60,7 +67,7 @@
           :class="{'tinybox__thumbs__item--active': index === idx}"
 
           :src="image.thumbnail || image.src || image || ''"
-          :alt="image.alt || ''"
+          :alt="images[index].alt || images[index].caption || ''"
 
           class="tinybox__thumbs__item"
 
@@ -89,9 +96,10 @@ export default {
      *
      * Any array item can be either a string containing the image URL or an object.
      * The object fields are the following:
-     * - `src` - the image URL
-     * - `thumbnail` - the thumbnail (a smaller, square version of the image) URL
-     * - `alt` - the alt text to be displayed if the image failed to load (or by screenreaders)
+     * - `src` - image URL
+     * - `thumbnail` - thumbnail URL. If omitted, the image URL will be used
+     * - `caption` - caption text to be overlayed on the image
+     * - `alt` - alt text. If omitted, the caption will be used
      */
     images: {
       type: Array,
@@ -313,6 +321,19 @@ export default {
     max-height: 90%;
     max-width: 80%;
     position: absolute;
+  }
+
+  .tinybox__content__image__caption {
+    position: absolute;
+    bottom: 0;
+    padding: .5rem .75rem;
+    border-radius: 5px;
+    color: white;
+    background-color: rgba(0, 0, 0, .9);
+    opacity: .75;
+    font-family: sans-serif;
+    font-weight: lighter;
+    font-size: 1.2rem;
   }
 
   .tinybox__content__control {

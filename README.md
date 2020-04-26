@@ -71,11 +71,12 @@ Observe the live demo here: [os.karamoff.dev/vue-tinybox](https://os.karamoff.de
 
 An `Image` object is an object with following fields:
 
-| Field name  | Type     | Description                                                           |
-|-------------|----------|-----------------------------------------------------------------------|
-| `src`       | `String` | The image URL                                                         |
-| `alt`       | `String` | (optional) the alt text                                               |
-| `thumbnail` | `String` | (optional) The thumbnail (a smaller, square version of the image) URL |
+| Field name  | Type     | Description                                                      |
+|-------------|----------|------------------------------------------------------------------|
+| `src`       | `String` | Image URL                                                        |
+| `thumbnail` | `String` | (optional) Thumbnail URL. If omitted, the image URL will be used |
+| `caption`   | `String` | (optional) Caption text to be overlayed on the image             |
+| `alt`       | `String` | (optional) Alt text. If omitted, the caption will be used        |
 
 ### Props
 

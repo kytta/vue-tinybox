@@ -96,9 +96,10 @@ export default {
      *
      * Any array item can be either a string containing the image URL or an object.
      * The object fields are the following:
-     * - `src` - the image URL
-     * - `thumbnail` - the thumbnail (a smaller, square version of the image) URL
-     * - `alt` - the alt text to be displayed if the image failed to load (or by screenreaders)
+     * - `src` - image URL
+     * - `thumbnail` - thumbnail URL. If omitted, the image URL will be used
+     * - `caption` - caption text to be overlayed on the image
+     * - `alt` - alt text. If omitted, the caption will be used
      */
     images: {
       type: Array,

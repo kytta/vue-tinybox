@@ -20,13 +20,20 @@
           <img
             :key="images[index].src || images[index] || ''"
             :src="images[index].src || images[index] || ''"
-            :alt="images[index].alt || ''"
+            :alt="images[index].alt || images[index].caption || ''"
 
             class="tinybox__content__image"
 
             @click.stop="next"
           >
         </transition>
+
+        <span
+          v-if="images[index].caption"
+          class="tinybox__content__image__caption"
+        >
+          {{ images[index].caption }}
+        </span>
 
         <div
           v-if="prevImage !== index"
@@ -60,7 +67,7 @@
           :class="{'tinybox__thumbs__item--active': index === idx}"
 
           :src="image.thumbnail || image.src || image || ''"
-          :alt="image.alt || ''"
+          :alt="images[index].alt || images[index].caption || ''"
 
           class="tinybox__thumbs__item"
 
@@ -313,6 +320,19 @@ export default {
     max-height: 90%;
     max-width: 80%;
     position: absolute;
+  }
+
+  .tinybox__content__image__caption {
+    position: absolute;
+    bottom: 0;
+    padding: .5rem .75rem;
+    border-radius: 5px;
+    color: white;
+    background-color: rgba(0, 0, 0, .9);
+    opacity: .75;
+    font-family: sans-serif;
+    font-weight: lighter;
+    font-size: 1.2rem;
   }
 
   .tinybox__content__control {

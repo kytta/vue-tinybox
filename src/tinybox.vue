@@ -202,6 +202,30 @@ export default {
         window.removeEventListener('keyup', this.keyup);
       }
     },
+    
+    /*
+     * Center the thumbnails' scrollbar to the clicked image
+     */
+    index: function(index) {
+      if (!this.noThumbs) {
+        Vue.nextTick(function() {
+          if (typeof(index) != 'undefined' && index != null) {
+            var elements = document.getElementsByClassName('tinybox__thumbs__item');
+            var el = elements[index];
+            var thumbs = document.querySelector('.tinybox__thumbs');
+
+            // If the thumbnail's center X position is bigger than the half of the screen
+            // then scroll the thumbs scrollbar to center the image
+            if ((el.offsetLeft + (el.clientWidth / 2)) > window.innerWidth / 2) {
+              var distance = el.offsetLeft - (window.innerWidth / 2);
+              // if there's space to scroll to center the image, then center it
+              // otherwise use the maximum scroll width
+              thumbs.scrollLeft = (distance < thumbs.scrollWidth) ? distance + (el.clientWidth / 2) : thumbs.scrollWidth;
+            }
+          }
+        });
+      }
+    }
   },
   methods: {
     /**

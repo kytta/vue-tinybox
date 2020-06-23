@@ -222,17 +222,18 @@ export default {
               const distance = el.offsetLeft - (window.innerWidth / 2);
               // if there's space to scroll to center the image, then center it
               // otherwise use the maximum scroll width
-              if (distance < thumbs.scrollWidth)
+              if (distance < thumbs.scrollWidth) {
                 thumbs.scrollLeft = distance + (el.clientWidth / 2);
-              else
+              } else {
                 thumbs.scrollLeft = thumbs.scrollWidth;
+              }
             } else {
               thumbs.scrollLeft = 0;
             }
           }
         });
       }
-    }
+    },
   },
   methods: {
     /**

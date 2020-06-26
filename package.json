@@ -40,8 +40,8 @@
   ],
   "scripts": {
     "build": "cross-env NODE_ENV=production rollup -c",
-    "dev:build": "rollup -c -w",
-    "dev:serve": "sirv ./dev -s -q -D",
+    "dev:build": "rollup -c -w --no-watch.clearScreen",
+    "dev:serve": "sirv ./dev -s -D -p 8629",
     "dev": "run-p dev:*",
     "test:lint": "eslint .",
     "test:size": "size-limit",

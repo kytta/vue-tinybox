@@ -57,6 +57,7 @@
       </div>
       <div
         v-if="!noThumbs"
+        ref="thumbs"
         class="tinybox__thumbs"
         @touchmove.stop
         @wheel.stop
@@ -64,6 +65,7 @@
         <img
           v-for="(image, idx) in images"
           :key="idx"
+          ref="thumbItems"
           :class="{'tinybox__thumbs__item--active': index === idx}"
 
           :src="image.thumbnail || image.src || image || ''"
@@ -205,31 +207,24 @@ export default {
     /*
      * Center the thumbnails' scrollbar to the clicked image
      */
-    index(index) {
-      let elements;
-      let el;
-      let thumbs;
-
-      if (!this.noThumbs) {
+    index(newIndex) {
+      if (!this.noThumbs && newIndex != null) {
         this.$nextTick(() => {
-          if (typeof index !== 'undefined' && index !== null) {
-            elements = document.getElementsByClassName('tinybox__thumbs__item');
-            el = elements[index];
-            thumbs = document.querySelector('.tinybox__thumbs');
-            // If the thumbnail's center X position is bigger than the half of the screen
-            // then scroll the thumbs scrollbar to center the image
-            if ((el.offsetLeft + (el.clientWidth / 2)) > window.innerWidth / 2) {
-              const distance = el.offsetLeft - (window.innerWidth / 2);
-              // if there's space to scroll to center the image, then center it
-              // otherwise use the maximum scroll width
-              if (distance < thumbs.scrollWidth) {
-                thumbs.scrollLeft = distance + (el.clientWidth / 2);
-              } else {
-                thumbs.scrollLeft = thumbs.scrollWidth;
-              }
+          const { thumbs, thumbItems } = this.$refs;
+          const curThumb = thumbItems[newIndex];
+          // If the thumbnail's center X position is bigger than the half of the screen
+          // then scroll the thumbs scrollbar to center the image
+          if ((curThumb.offsetLeft + (curThumb.clientWidth / 2)) > window.innerWidth / 2) {
+            const distance = curThumb.offsetLeft - (window.innerWidth / 2);
+            // if there's space to scroll to center the image, then center it
+            // otherwise use the maximum scroll width
+            if (distance < thumbs.scrollWidth) {
+              thumbs.scrollLeft = distance + (curThumb.clientWidth / 2);
             } else {
-              thumbs.scrollLeft = 0;
+              thumbs.scrollLeft = thumbs.scrollWidth;
             }
+          } else {
+            thumbs.scrollLeft = 0;
           }
         });
       }
@@ -411,6 +406,7 @@ export default {
     right: 0;
     overflow-x: scroll;
     overflow-y: hidden;
+    scroll-behavior: smooth;
     white-space: nowrap;
   }
 

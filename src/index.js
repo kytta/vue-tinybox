@@ -7,7 +7,6 @@ const install = (Vue) => {
   Vue.component(component.name, component);
 };
 
-
 // auto-install when Vue is found
 let GlobalVue = null;
 if (typeof window !== 'undefined') {

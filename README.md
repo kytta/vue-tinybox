@@ -116,7 +116,7 @@ Instead of `v-model` you can use the `index` prop and `change` event:
  - `onClose` when `TinyBox` is closed
 
 e.g:
-```js
+```vue
 <template>
     <Tinybox
         class="w-screen h-screen absolute"

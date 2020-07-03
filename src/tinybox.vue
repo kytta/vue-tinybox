@@ -236,6 +236,7 @@ export default {
      */
     close() {
       this.goto(null);
+      this.$emit('onClose', null)
     },
 
     /**
@@ -243,6 +244,7 @@ export default {
      */
     prev() {
       this.goto(this.prevImage, 'prev');
+      this.$emit('onPrev', this.prevImage)
     },
 
     /**
@@ -250,6 +252,7 @@ export default {
      */
     next() {
       this.goto(this.nextImage, 'next');
+      this.$emit('onNext', this.nextImage)
     },
 
     /**

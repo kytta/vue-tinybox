@@ -115,12 +115,13 @@ Instead of `v-model` you can use the `index` prop and `change` event:
  - `onPrev`/`onNext` with the next image being shown as a param
  - `onClose` when `TinyBox` is closed
 
+e.g:
 ```js
 <template>
     <Tinybox
         class="w-screen h-screen absolute"
         :images="photos"
-        v-model="lightboxIndex"
+        v-model="index"
         loop
         no-thumbs
         @onPrev="onPreviousImageSelected"
@@ -140,6 +141,11 @@ export default {
         },
         onClose() {
             console.log("Tiny box was closed");
+        }
+    },
+    data() {
+        return {
+            index: null
         }
     }
 }

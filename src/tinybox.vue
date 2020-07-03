@@ -243,16 +243,16 @@ export default {
      * Navigates to the previous image
      */
     prev() {
-      this.goto(this.prevImage, 'prev');
       this.$emit('onPrev', this.prevImage)
+      this.goto(this.prevImage, 'prev');
     },
 
     /**
      * Navigates to the next image
      */
     next() {
-      this.goto(this.nextImage, 'next');
       this.$emit('onNext', this.nextImage)
+      this.goto(this.nextImage, 'next');
     },
 
     /**

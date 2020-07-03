@@ -109,6 +109,47 @@ Instead of `v-model` you can use the `index` prop and `change` event:
 />
 ```
 
+### Events
+
+`TinyBox` also emits the following events:
+ - `onPrev`/`onNext` with the next image being shown as a param
+ - `onClose` when `TinyBox` is closed
+
+```js
+<template>
+    <Tinybox
+        class="w-screen h-screen absolute"
+        :images="photos"
+        v-model="lightboxIndex"
+        loop
+        no-thumbs
+        @onPrev="onPreviousImageSelected"
+        @onNext="onNextImageSelected"
+        @onClose="tinyBoxClosed"
+    />
+</template>
+
+<script>
+export default {
+    methods: {
+        onPreviousImageSelected(imageToBeShown) {
+            console.log("User selected previous: ", imageToBeShown);
+        },
+        onNextImageSelected(imageToBeShown) {
+            console.log("User selected next: ", imageToBeShown);
+        },
+        onClose() {
+            console.log("Tiny box was closed");
+        }
+    }
+}
+</script>
+
+<style>
+</style>
+
+```
+
 ## Browser support
 
 | ![Chrome][chrome] | ![Firefox][firefox] | ![Safari][safari] | ![MS Edge][edge] | ![Internet Explorer][ie] |

@@ -112,8 +112,9 @@ Instead of `v-model` you can use the `index` prop and `change` event:
 ### Events
 
 `TinyBox` also emits the following events:
- - `onPrev`/`onNext` with the next image being shown as a param
- - `onClose` when `TinyBox` is closed
+ - `change` every time the index changes
+ - `prev`/`next` with the next image being shown as a param
+ - `close` when `TinyBox` is closed, with the current index as param
 
 e.g:
 ```vue
@@ -124,23 +125,27 @@ e.g:
         v-model="index"
         loop
         no-thumbs
-        @onPrev="onPreviousImageSelected"
-        @onNext="onNextImageSelected"
-        @onClose="tinyBoxClosed"
+        @change="onChange"
+        @prev="onPreviousImageSelected"
+        @next="onNextImageSelected"
+        @close="tinyBoxClosed"
     />
 </template>
 
 <script>
 export default {
     methods: {
+        onChange(index) {
+            console.log("A TinyBox change occured with index: ", index);
+        },
         onPreviousImageSelected(imageToBeShown) {
             console.log("User selected previous: ", imageToBeShown);
         },
         onNextImageSelected(imageToBeShown) {
             console.log("User selected next: ", imageToBeShown);
         },
-        onClose() {
-            console.log("Tiny box was closed");
+        onClose(index) {
+            console.log("Tiny box was closed, index was ", index);
         }
     },
     data() {

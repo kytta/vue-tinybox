@@ -5,7 +5,7 @@
 A slick, yet tiny lightbox gallery for Vue.js
 
 - **Slick.** No excessive design. Pictures, thumbnails, controls.
-- **Tiny.** Dependency-free. Less than 3 KB minified and gzipped.
+- **Tiny.** Dependency-free. 3 KB minified and gzipped.
 - **Adaptive.** Works on computers. Works on tablets. Works on phones.
 
 ## Demo

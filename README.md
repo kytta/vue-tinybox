@@ -111,54 +111,43 @@ Instead of `v-model` you can use the `index` prop and `change` event:
 
 ### Events
 
-`TinyBox` also emits the following events:
- - `change` every time the index changes
- - `prev`/`next` with the next image being shown as a param
- - `close` when `TinyBox` is closed, with the current index as param
+| Event name    | Payload                                  | Description                                                                                |
+|---------------|------------------------------------------|--------------------------------------------------------------------------------------------|
+| `change`      | index of the image changed to            | Is emitted on any image change (thumbnail navigation, prev/next, close)                    |
+| `prev`/`next` | index of the image changed to            | Is emitted specifically when the user clicks "Prev"/"Next" or presses Left/Right arrow key |
+| `close`       | index of the image Tinybox was closed at | Is emitted specifically when the user clicks "Close" or presses the Esc key                |
 
-e.g:
-```vue
-<template>
-    <Tinybox
-        class="w-screen h-screen absolute"
-        :images="photos"
-        v-model="index"
-        loop
-        no-thumbs
-        @change="onChange"
-        @prev="onPreviousImageSelected"
-        @next="onNextImageSelected"
-        @close="tinyBoxClosed"
-    />
-</template>
+Events can come in handy for business logic cases:
 
-<script>
+```html
+<Tinybox
+    :images="images"
+    v-model="index"
+    @change="onChange"
+    @prev="onPrevious"
+    @next="onNext"
+    @close="onClose"
+/>
+```
+
+```js
 export default {
+    // ...
     methods: {
         onChange(index) {
-            console.log("A TinyBox change occured with index: ", index);
+            console.log("User navigated to the photo: ", index);
         },
-        onPreviousImageSelected(imageToBeShown) {
-            console.log("User selected previous: ", imageToBeShown);
+        onPrevious(index) {
+            console.log("User clicked 'previous' to switch to: ", index);
         },
-        onNextImageSelected(imageToBeShown) {
-            console.log("User selected next: ", imageToBeShown);
+        onNext(index) {
+            console.log("User clicked 'previous' to switch to: ", index);
         },
         onClose(index) {
-            console.log("Tiny box was closed, index was ", index);
+            console.log("User closed TinyBox on this photo: ", index);
         }
     },
-    data() {
-        return {
-            index: null
-        }
-    }
 }
-</script>
-
-<style>
-</style>
-
 ```
 
 ## Browser support

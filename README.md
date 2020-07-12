@@ -5,7 +5,7 @@
 A slick, yet tiny lightbox gallery for Vue.js
 
 - **Slick.** No excessive design. Pictures, thumbnails, controls.
-- **Tiny.** Dependency-free. Less than 3 KB minified and gzipped.
+- **Tiny.** Dependency-free. 3 KB minified and gzipped.
 - **Adaptive.** Works on computers. Works on tablets. Works on phones.
 
 ## Demo
@@ -107,6 +107,47 @@ Instead of `v-model` you can use the `index` prop and `change` event:
     :index="index"
     @change="(i) => {index = i}"
 />
+```
+
+### Events
+
+| Event name    | Payload                                  | Description                                                                                |
+|---------------|------------------------------------------|--------------------------------------------------------------------------------------------|
+| `change`      | index of the image changed to            | Is emitted on any image change (thumbnail navigation, prev/next, close)                    |
+| `prev`/`next` | index of the image changed to            | Is emitted specifically when the user clicks "Prev"/"Next" or presses Left/Right arrow key |
+| `close`       | index of the image Tinybox was closed at | Is emitted specifically when the user clicks "Close" or presses the Esc key                |
+
+Events can come in handy for business logic cases:
+
+```html
+<Tinybox
+    :images="images"
+    v-model="index"
+    @change="onChange"
+    @prev="onPrevious"
+    @next="onNext"
+    @close="onClose"
+/>
+```
+
+```js
+export default {
+    // ...
+    methods: {
+        onChange(index) {
+            console.log("User navigated to the photo: ", index);
+        },
+        onPrevious(index) {
+            console.log("User clicked 'previous' to switch to: ", index);
+        },
+        onNext(index) {
+            console.log("User clicked 'previous' to switch to: ", index);
+        },
+        onClose(index) {
+            console.log("User closed TinyBox on this photo: ", index);
+        }
+    },
+}
 ```
 
 ## Browser support

@@ -1,6 +1,12 @@
 <template>
   <transition name="fade">
-    <div v-if="open" class="tinybox" @click="close" @wheel.prevent @touchmove.prevent>
+    <div
+      v-if="open"
+      class="tinybox"
+      @click="close"
+      @wheel.prevent
+      @touchmove.prevent
+    >
       <div
         class="tinybox__content"
         :class="{'tinybox__content--no-thumbs': noThumbs}"
@@ -14,13 +20,14 @@
             :alt="images[index].alt || images[index].caption || ''"
             class="tinybox__content__image"
             @click.stop="next"
-          />
+          >
         </transition>
 
         <span
           v-if="images[index].caption"
           class="tinybox__content__image__caption"
-        >{{ images[index].caption }}</span>
+          v-text="images[index].caption"
+        />
 
         <div
           v-if="prevImage !== index"
@@ -37,7 +44,13 @@
           @click.stop="close"
         />
       </div>
-      <div v-if="!noThumbs" ref="thumbs" class="tinybox__thumbs" @touchmove.stop @wheel.stop>
+      <div
+        v-if="!noThumbs"
+        ref="thumbs"
+        class="tinybox__thumbs"
+        @touchmove.stop
+        @wheel.stop
+      >
         <img
           v-for="(image, idx) in images"
           :key="idx"
@@ -47,7 +60,7 @@
           :alt="images[index].alt || images[index].caption || ''"
           class="tinybox__thumbs__item"
           @click.stop="goto(idx)"
-        />
+        >
       </div>
     </div>
   </transition>
@@ -60,10 +73,10 @@
  * @event change - the index has been changed. The current index is sent as payload
  */
 export default {
-  name: "Tinybox",
+  name: 'Tinybox',
   model: {
-    prop: "index",
-    event: "change"
+    prop: 'index',
+    event: 'change',
   },
   props: {
     /**
@@ -78,7 +91,7 @@ export default {
      */
     images: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
 
     /**
@@ -86,7 +99,7 @@ export default {
      */
     index: {
       type: Number,
-      default: null
+      default: null,
     },
 
     /**
@@ -94,7 +107,7 @@ export default {
      */
     loop: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     /**
@@ -102,8 +115,8 @@ export default {
      */
     noThumbs: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
@@ -112,7 +125,7 @@ export default {
        *
        * @type string
        */
-      slide: "next",
+      slide: 'next',
 
       /**
        * Indication that the swipe action has been executed
@@ -126,7 +139,7 @@ export default {
        *
        * @type null|number
        */
-      swipeX: null
+      swipeX: null,
     };
   },
   computed: {
@@ -167,14 +180,14 @@ export default {
         return 0;
       }
       return this.index;
-    }
+    },
   },
   watch: {
     open(value) {
       if (value) {
-        window.addEventListener("keyup", this.keyup);
+        window.addEventListener('keyup', this.keyup);
       } else {
-        window.removeEventListener("keyup", this.keyup);
+        window.removeEventListener('keyup', this.keyup);
       }
     },
     /*
@@ -188,8 +201,8 @@ export default {
           // If the thumbnail's center X position is bigger than the half of the screen
           // then scroll the thumbs scrollbar to center the image
           if (
-            curThumb.offsetLeft + curThumb.clientWidth / 2 >
-            window.innerWidth / 2
+            curThumb.offsetLeft + curThumb.clientWidth / 2
+            > window.innerWidth / 2
           ) {
             const distance = curThumb.offsetLeft - window.innerWidth / 2;
             // if there's space to scroll to center the image, then center it
@@ -204,7 +217,7 @@ export default {
           }
         });
       }
-    }
+    },
   },
   methods: {
     /**
@@ -213,23 +226,23 @@ export default {
     close() {
       const indexBeforeClose = this.index;
       this.goto(null);
-      this.$emit("close", indexBeforeClose);
+      this.$emit('close', indexBeforeClose);
     },
 
     /**
      * Navigates to the previous image
      */
     prev() {
-      this.$emit("prev", this.prevImage);
-      this.goto(this.prevImage, "prev");
+      this.$emit('prev', this.prevImage);
+      this.goto(this.prevImage, 'prev');
     },
 
     /**
      * Navigates to the next image
      */
     next() {
-      this.$emit("next", this.nextImage);
-      this.goto(this.nextImage, "next");
+      this.$emit('next', this.nextImage);
+      this.goto(this.nextImage, 'next');
     },
 
     /**
@@ -238,9 +251,9 @@ export default {
      * @param {string} [slide] name of the transition to be used
      */
     goto(idx, slide) {
-      this.slide = slide || (this.index < idx ? "next" : "prev");
+      this.slide = slide || (this.index < idx ? 'next' : 'prev');
 
-      this.$emit("change", idx);
+      this.$emit('change', idx);
     },
 
     /**
@@ -250,24 +263,24 @@ export default {
      */
     keyup(e) {
       if (
-        e.code === "ArrowRight" ||
-        e.key === "ArrowRight" ||
-        e.key === "Right" ||
-        e.keyCode === 39
+        e.code === 'ArrowRight'
+        || e.key === 'ArrowRight'
+        || e.key === 'Right'
+        || e.keyCode === 39
       ) {
         this.next();
       } else if (
-        e.code === "ArrowLeft" ||
-        e.key === "ArrowLeft" ||
-        e.key === "Left" ||
-        e.keyCode === 37
+        e.code === 'ArrowLeft'
+        || e.key === 'ArrowLeft'
+        || e.key === 'Left'
+        || e.keyCode === 37
       ) {
         this.prev();
       } else if (
-        e.code === "Escape" ||
-        e.key === "Escape" ||
-        e.key === "Esc" ||
-        e.keyCode === 27
+        e.code === 'Escape'
+        || e.key === 'Escape'
+        || e.key === 'Esc'
+        || e.keyCode === 27
       ) {
         this.close();
       }
@@ -306,8 +319,8 @@ export default {
           this.swipeDone = true;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

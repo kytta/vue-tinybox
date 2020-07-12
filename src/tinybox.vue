@@ -224,9 +224,9 @@ export default {
      * Closes the Tinybox
      */
     close() {
-      const indexBeforeClose = this.index;
+      const oldIndex = this.index;
       this.goto(null);
-      this.$emit('close', indexBeforeClose);
+      this.$emit('close', oldIndex);
     },
 
     /**

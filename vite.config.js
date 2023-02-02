@@ -12,10 +12,8 @@ export default defineConfig({
 		lib: {
 			entry: resolve("src/index.js"),
 			name: "Tinybox",
-			formats: ["es", "umd"],
-			// Workaround to keep the old file names
-			fileName: (format) =>
-				format === "es" ? "tinybox.esm.js" : "tinybox.umd.js",
+			fileName: "vue-tinybox",
+			formats: ["es", "umd", "iife"],
 		},
 		outDir: resolve("./dist"),
 		target: "es2015",

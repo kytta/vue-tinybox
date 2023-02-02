@@ -24,19 +24,19 @@
 		"url": "https://karamoff.dev"
 	},
 	"type": "module",
-	"main": "./dist/tinybox.umd.js",
-	"module": "./dist/tinybox.esm.js",
-	"unpkg": "./dist/tinybox.umd.js",
+	"main": "./dist/vue-tinybox.umd.cjs",
+	"module": "./dist/vue-tinybox.js",
+	"unpkg": "./dist/vue-tinybox.iife.js",
+	"jsdelivr": "./dist/vue-tinybox.iife.js",
 	"exports": {
-		"require": "./dist/tinybox.umd.js",
-		"import": "./dist/tinybox.esm.js"
-	},
-	"browser": {
+		".": {
+			"require": "./dist/vue-tinybox.umd.cjs",
+			"import": "./dist/vue-tinybox.js"
+		},
 		"./sfc": "src/tinybox.vue"
 	},
 	"files": [
-		"dist/tinybox.umd.js",
-		"dist/tinybox.esm.js",
+		"dist/",
 		"src/tinybox.vue"
 	],
 	"scripts": {

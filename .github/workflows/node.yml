@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --ignore-scripts
       - name: Lint
-        run: pnpm lint
+        run: pnpm test:lint
         env:
           FORCE_COLOR: 2
       - name: Build

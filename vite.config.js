@@ -7,11 +7,6 @@ import vue from "@vitejs/plugin-vue";
 import autoprefixer from "autoprefixer";
 
 export default defineConfig({
-	resolve: {
-		alias: {
-			vue: "@vue/compat",
-		},
-	},
 	root: resolve("./dev"),
 	build: {
 		lib: {

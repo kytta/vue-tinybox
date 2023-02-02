@@ -64,7 +64,6 @@
 		"postcss": "^7.0.32",
 		"prettier": "^2.8.3",
 		"size-limit": "^4.5.2",
-		"terser": "^5.16.2",
 		"vite": "^4.1.1",
 		"vite-plugin-css-injected-by-js": "^2.4.0",
 		"vue": "^3.1",

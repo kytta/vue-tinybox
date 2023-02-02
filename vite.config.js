@@ -17,14 +17,8 @@ export default defineConfig({
 			fileName: (format) =>
 				format === "es" ? "tinybox.esm.js" : "tinybox.umd.js",
 		},
-		minify: "terser",
 		outDir: resolve("./dist"),
 		target: "es2015",
-		terserOptions: {
-			output: {
-				ecma: 6,
-			},
-		},
 		rollupOptions: {
 			external: ["vue"],
 			output: {

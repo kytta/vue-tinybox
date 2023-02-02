@@ -26,7 +26,7 @@ Observe the live demo here: [os.karamoff.dev/vue-tinybox](https://os.karamoff.de
   ```html
   <script type="module">
   	import { createApp } from "https://cdn.jsdelivr.net/npm/vue@3/dist/vue.esm-browser.js";
-  	import Tinybox from "https://cdn.jsdelivr.net/npm/vue-tinybox@2/dist/vue-tinybox.es.js";
+  	import Tinybox from "https://cdn.jsdelivr.net/npm/vue-tinybox@2/dist/vue-tinybox.js";
 
   	// ...
   </script>

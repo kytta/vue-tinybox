@@ -1,10 +1,9 @@
 ---
 name: Question
 about: If you stumble upon something you don't understand
-title: ''
+title: ""
 labels: question
 assignees: NickKaramoff
-
 ---
 
 **The Question**

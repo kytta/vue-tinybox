@@ -1,17 +1,18 @@
+/* eslint-env node */
+require("@rushstack/eslint-patch/modern-module-resolution");
+
 module.exports = {
-  env: {
-    browser: true,
-    es2020: true,
-  },
-  extends: [
-    'airbnb-base',
-    'plugin:vue/recommended',
-  ],
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
-  },
-  plugins: [
-    'vue',
-  ],
+	root: true,
+	extends: [
+		"eslint:recommended",
+		"xo/browser",
+		"plugin:vue/recommended",
+		"@vue/eslint-config-prettier",
+	],
+	parserOptions: {
+		ecmaVersion: "latest",
+	},
+	env: {
+		browser: true,
+	},
 };

@@ -1,91 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>[DEV] vue-tinybox</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<meta charset="UTF-8" />
+		<title>[DEV] vue-tinybox</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <style>
-    body {
-      height: 3000px; /* to test scrolling */
-    }
+		<style>
+			body {
+				height: 3000px; /* to test scrolling */
+			}
 
-    .open-tinybox {
-      display: inline-block;
-      cursor: pointer;
-      margin-right: 10px;
-    }
-  </style>
+			.open-tinybox {
+				display: inline-block;
+				cursor: pointer;
+				margin-right: 10px;
+			}
+		</style>
 
-  <!-- development version, includes helpful console warnings -->
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="./src/index.js" type="module"></script>
-</head>
-<body>
-<div id="app">
-  <h2>vue-tinybox demo: vanilla Vue.js</h2>
-  <div>
-    <input v-model="loopCheckbox" id="loop" type="checkbox">
-    <label for="loop">Loop</label>
-    <br>
-    <input v-model="thumbsCheckbox" id="thumbs" type="checkbox">
-    <label for="thumbs">Thumbnails</label>
-  </div>
-  <p>Click on any image below to open <code>Tinybox</code></p>
+		<!-- development version, includes helpful console warnings -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="./src/index.js" type="module"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h2>vue-tinybox demo: vanilla Vue.js</h2>
+			<div>
+				<input v-model="loopCheckbox" id="loop" type="checkbox" />
+				<label for="loop">Loop</label>
+				<br />
+				<input v-model="thumbsCheckbox" id="thumbs" type="checkbox" />
+				<label for="thumbs">Thumbnails</label>
+			</div>
+			<p>Click on any image below to open <code>Tinybox</code></p>
 
-  <Tinybox
-      v-model="index"
-      :images="images"
-      :loop="loopCheckbox"
-      :no-thumbs="!thumbsCheckbox"
-  ></Tinybox>
-  <img
-      v-for="(img, idx) in thumbs"
-      class="open-tinybox"
-      width="100"
-      :src="img"
-      @click="index = idx"
-  >
-</div>
+			<Tinybox
+				v-model="index"
+				:images="images"
+				:loop="loopCheckbox"
+				:no-thumbs="!thumbsCheckbox"
+			></Tinybox>
+			<img
+				v-for="(img, idx) in thumbs"
+				class="open-tinybox"
+				width="100"
+				:src="img"
+				@click="index = idx"
+			/>
+		</div>
 
-<script type="module">
-new Vue({
-  el: '#app',
-  data: function () {
-    return {
-      images: [
-        {
-          src: 'https://picsum.photos/id/13/500/1000',
-          alt: 'An empty beach',
-          thumbnail: 'https://picsum.photos/id/13/200',
-          caption: 'Beach'
-        },
-        {
-          src: 'https://picsum.photos/id/42/1500/600',
-          alt: 'A café desk',
-          caption: 'Café'
-        },
-        {
-          src: 'https://picsum.photos/id/256/800/800',
-          thumbnail: 'https://picsum.photos/id/256/200',
-          caption: 'Mountain range',
-        },
-        'https://picsum.photos/id/69/800/600',
-        'https://picsum.photos/id/420/800/600',
-      ],
-      thumbs: [
-        'https://picsum.photos/id/13/200',
-        'https://picsum.photos/id/42/200',
-        'https://picsum.photos/id/256/200',
-        'https://picsum.photos/id/69/200',
-        'https://picsum.photos/id/420/200',
-      ],
-      index: null,
-      loopCheckbox: false,
-      thumbsCheckbox: true,
-    };
-  },
-});
-</script>
-</body>
+		<script type="module">
+			new Vue({
+				el: "#app",
+				data: function () {
+					return {
+						images: [
+							{
+								src: "https://picsum.photos/id/13/500/1000",
+								alt: "An empty beach",
+								thumbnail: "https://picsum.photos/id/13/200",
+								caption: "Beach",
+							},
+							{
+								src: "https://picsum.photos/id/42/1500/600",
+								alt: "A café desk",
+								caption: "Café",
+							},
+							{
+								src: "https://picsum.photos/id/256/800/800",
+								thumbnail: "https://picsum.photos/id/256/200",
+								caption: "Mountain range",
+							},
+							"https://picsum.photos/id/69/800/600",
+							"https://picsum.photos/id/420/800/600",
+						],
+						thumbs: [
+							"https://picsum.photos/id/13/200",
+							"https://picsum.photos/id/42/200",
+							"https://picsum.photos/id/256/200",
+							"https://picsum.photos/id/69/200",
+							"https://picsum.photos/id/420/200",
+						],
+						index: null,
+						loopCheckbox: false,
+						thumbsCheckbox: true,
+					};
+				},
+			});
+		</script>
+	</body>
 </html>

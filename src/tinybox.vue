@@ -75,10 +75,6 @@
 export default {
 	// eslint-disable-next-line vue/multi-word-component-names, no-warning-comments
 	name: "Tinybox", // TODO: rename to TinyBox
-	model: {
-		prop: "index",
-		event: "change",
-	},
 	props: {
 		/**
 		 * List of images to display in the lightbox
@@ -258,7 +254,7 @@ export default {
 		goto(idx, slide) {
 			this.slide = slide || (this.index < idx ? "next" : "prev");
 
-			this.$emit("change", idx);
+			this.$emit("update:index", idx);
 		},
 
 		/**

@@ -23,14 +23,14 @@ export default defineConfig({
 				ecma: 6,
 			},
 		},
-	},
-	rollupOptions: {
-		external: ["vue"],
-		output: {
-			// Provide global variables to use in the UMD build
-			// for externalized deps
-			globals: {
-				vue: "Vue",
+		rollupOptions: {
+			external: ["vue"],
+			output: {
+				// Provide global variables to use in the UMD build
+				// for externalized deps
+				globals: {
+					vue: "Vue",
+				},
 			},
 		},
 	},

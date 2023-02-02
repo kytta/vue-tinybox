@@ -48,6 +48,9 @@
 		"pretest": "pnpm run build",
 		"test": "pnpm run lint && pnpm run size"
 	},
+	"peerDependencies": {
+		"vue": "^3"
+	},
 	"devDependencies": {
 		"@rushstack/eslint-patch": "^1.2.0",
 		"@size-limit/preset-small-lib": "^4.5.2",

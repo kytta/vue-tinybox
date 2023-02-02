@@ -1,4 +1,3 @@
-import { fileURLToPath, URL } from "node:url";
 import { resolve } from "node:path";
 
 import { defineConfig } from "vite";
@@ -16,6 +15,12 @@ export default defineConfig({
 			// Workaround to keep the old file names
 			fileName: (format) =>
 				format == "es" ? "tinybox.esm.js" : "tinybox.umd.js",
+		},
+		minify: "terser",
+		terserOptions: {
+			output: {
+				ecma: 6,
+			},
 		},
 	},
 	rollupOptions: {

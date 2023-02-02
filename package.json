@@ -23,6 +23,7 @@
     "email": "nick@karamoff.dev",
     "url": "https://karamoff.dev"
   },
+  "type": "module",
   "main": "./dist/tinybox.umd.js",
   "module": "./dist/tinybox.esm.js",
   "unpkg": "./dist/tinybox.umd.js",
@@ -53,6 +54,7 @@
     "@babel/preset-env": "^7.10.3",
     "@rollup/plugin-node-resolve": "^8.1.0",
     "@size-limit/preset-small-lib": "^4.5.2",
+    "@vitejs/plugin-vue2": "^2.2.0",
     "autoprefixer": "^9.8.4",
     "cross-env": "^7.0.2",
     "eslint": "^7.3.1",
@@ -67,6 +69,8 @@
     "rollup-plugin-vue": "^5.1.9",
     "sirv-cli": "^1.0.1",
     "size-limit": "^4.5.2",
+    "vite": "^4.1.1",
+    "vue": "^2",
     "vue-eslint-parser": "^7.1.0",
     "vue-template-compiler": "^2.6.11"
   },

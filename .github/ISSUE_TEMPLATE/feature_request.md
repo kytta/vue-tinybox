@@ -1,10 +1,9 @@
 ---
 name: Feature request
 about: If you want to suggest a new feature
-title: ''
+title: ""
 labels: feature
 assignees: NickKaramoff
-
 ---
 
 **Is your feature request related to a problem?**

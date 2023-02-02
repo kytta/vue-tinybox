@@ -57,7 +57,7 @@ You can run `yarn test:size` to check the built bundle size.
 
 After your work is done, you can submit a pull request. There are some automated checks. One is from a GitHub Action — it executes `yarn test`. Another one is from Codacy — it checks the code quality. Please fix the issues detected by Codacy!
 
-----
+---
 
 After you submitted your issue or pull request, I will reach out to you and get the needed things done. Don't hesitate commenting on my decisions if you find them incorrect or unclear.
 

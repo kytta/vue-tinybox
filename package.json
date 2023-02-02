@@ -1,87 +1,87 @@
 {
-  "name": "vue-tinybox",
-  "version": "2.0.0-alpha.1",
-  "description": "A slick, yet tiny lightbox gallery for Vue.js",
-  "license": "MIT",
-  "keywords": [
-    "vue",
-    "vuejs",
-    "vue.js",
-    "lightbox",
-    "gallery"
-  ],
-  "homepage": "https://os.karamoff.dev/vue-tinybox",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NickKaramoff/vue-tinybox.git"
-  },
-  "bugs": {
-    "url": "https://github.com/NickKaramoff/vue-tinybox/issues"
-  },
-  "author": {
-    "name": "Nikita Karamov",
-    "email": "nick@karamoff.dev",
-    "url": "https://karamoff.dev"
-  },
-  "type": "module",
-  "main": "./dist/tinybox.umd.js",
-  "module": "./dist/tinybox.esm.js",
-  "unpkg": "./dist/tinybox.umd.js",
-  "exports": {
-    "require": "./dist/tinybox.umd.js",
-    "import": "./dist/tinybox.esm.js"
-  },
-  "browser": {
-    "./sfc": "src/tinybox.vue"
-  },
-  "files": [
-    "dist/tinybox.umd.js",
-    "dist/tinybox.esm.js",
-    "src/tinybox.vue"
-  ],
-  "scripts": {
-    "build": "vite build",
-    "dev": "vite",
-    "fmt": "prettier --write .",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --ignore-path .gitignore",
-    "test:size": "size-limit",
-    "pretest": "run-s build",
-    "test": "run-p --aggregate-output test:*"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.10.3",
-    "@babel/preset-env": "^7.10.3",
-    "@rushstack/eslint-patch": "^1.2.0",
-    "@size-limit/preset-small-lib": "^4.5.2",
-    "@vitejs/plugin-vue2": "^2.2.0",
-    "@vue/eslint-config-prettier": "^7.0.0",
-    "autoprefixer": "^9.8.4",
-    "eslint": "^8.33.0",
-    "eslint-config-xo": "^0.43.1",
-    "eslint-plugin-vue": "^9.9.0",
-    "npm-run-all": "^4.1.5",
-    "postcss": "^7.0.32",
-    "prettier": "^2.8.3",
-    "size-limit": "^4.5.2",
-    "terser": "^5.16.2",
-    "vite": "^4.1.1",
-    "vite-plugin-css-injected-by-js": "^2.4.0",
-    "vue": "^2",
-    "vue-eslint-parser": "^9.1.0",
-    "vue-template-compiler": "^2.7.14"
-  },
-  "size-limit": [
-    {
-      "path": "dist/tinybox.umd.js",
-      "limit": "3333 B",
-      "webpack": false
-    },
-    {
-      "path": "dist/tinybox.esm.js",
-      "limit": "3333 B"
-    }
-  ],
-  "engines": {
-    "node": ">=10"
-  }
+	"name": "vue-tinybox",
+	"version": "2.0.0-alpha.1",
+	"description": "A slick, yet tiny lightbox gallery for Vue.js",
+	"license": "MIT",
+	"keywords": [
+		"vue",
+		"vuejs",
+		"vue.js",
+		"lightbox",
+		"gallery"
+	],
+	"homepage": "https://os.karamoff.dev/vue-tinybox",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NickKaramoff/vue-tinybox.git"
+	},
+	"bugs": {
+		"url": "https://github.com/NickKaramoff/vue-tinybox/issues"
+	},
+	"author": {
+		"name": "Nikita Karamov",
+		"email": "nick@karamoff.dev",
+		"url": "https://karamoff.dev"
+	},
+	"type": "module",
+	"main": "./dist/tinybox.umd.js",
+	"module": "./dist/tinybox.esm.js",
+	"unpkg": "./dist/tinybox.umd.js",
+	"exports": {
+		"require": "./dist/tinybox.umd.js",
+		"import": "./dist/tinybox.esm.js"
+	},
+	"browser": {
+		"./sfc": "src/tinybox.vue"
+	},
+	"files": [
+		"dist/tinybox.umd.js",
+		"dist/tinybox.esm.js",
+		"src/tinybox.vue"
+	],
+	"scripts": {
+		"build": "vite build",
+		"dev": "vite",
+		"fmt": "prettier --write .",
+		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --ignore-path .gitignore",
+		"test:size": "size-limit",
+		"pretest": "run-s build",
+		"test": "run-p --aggregate-output test:*"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.10.3",
+		"@babel/preset-env": "^7.10.3",
+		"@rushstack/eslint-patch": "^1.2.0",
+		"@size-limit/preset-small-lib": "^4.5.2",
+		"@vitejs/plugin-vue2": "^2.2.0",
+		"@vue/eslint-config-prettier": "^7.0.0",
+		"autoprefixer": "^9.8.4",
+		"eslint": "^8.33.0",
+		"eslint-config-xo": "^0.43.1",
+		"eslint-plugin-vue": "^9.9.0",
+		"npm-run-all": "^4.1.5",
+		"postcss": "^7.0.32",
+		"prettier": "^2.8.3",
+		"size-limit": "^4.5.2",
+		"terser": "^5.16.2",
+		"vite": "^4.1.1",
+		"vite-plugin-css-injected-by-js": "^2.4.0",
+		"vue": "^2",
+		"vue-eslint-parser": "^9.1.0",
+		"vue-template-compiler": "^2.7.14"
+	},
+	"size-limit": [
+		{
+			"path": "dist/tinybox.umd.js",
+			"limit": "3333 B",
+			"webpack": false
+		},
+		{
+			"path": "dist/tinybox.esm.js",
+			"limit": "3333 B"
+		}
+	],
+	"engines": {
+		"node": ">=10"
+	}
 }

@@ -4,3 +4,4 @@
 dist
 .idea
 node_modules
+vite.config.js

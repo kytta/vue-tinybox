@@ -23,6 +23,7 @@
     "email": "nick@karamoff.dev",
     "url": "https://karamoff.dev"
   },
+  "type": "module",
   "main": "./dist/tinybox.umd.js",
   "module": "./dist/tinybox.esm.js",
   "unpkg": "./dist/tinybox.umd.js",
@@ -39,10 +40,8 @@
     "src/tinybox.vue"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c",
-    "dev:build": "rollup -c -w --no-watch.clearScreen",
-    "dev:serve": "sirv ./dev -s -D -p 8629",
-    "dev": "run-p dev:*",
+    "build": "vite build",
+    "dev": "vite",
     "test:lint": "eslint .",
     "test:size": "size-limit",
     "pretest": "run-s build",
@@ -51,24 +50,22 @@
   "devDependencies": {
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
-    "@rollup/plugin-node-resolve": "^8.1.0",
     "@size-limit/preset-small-lib": "^4.5.2",
+    "@vitejs/plugin-vue2": "^2.2.0",
     "autoprefixer": "^9.8.4",
-    "cross-env": "^7.0.2",
     "eslint": "^7.3.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-vue": "^6.2.2",
     "npm-run-all": "^4.1.5",
     "postcss": "^7.0.32",
-    "rollup": "^2.18.0",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-terser": "^6.1.0",
-    "rollup-plugin-vue": "^5.1.9",
-    "sirv-cli": "^1.0.1",
     "size-limit": "^4.5.2",
+    "terser": "^5.16.2",
+    "vite": "^4.1.1",
+    "vite-plugin-css-injected-by-js": "^2.4.0",
+    "vue": "^2",
     "vue-eslint-parser": "^7.1.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.7.14"
   },
   "size-limit": [
     {

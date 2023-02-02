@@ -49,8 +49,6 @@
 		"test": "pnpm run lint && pnpm run size"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.10.3",
-		"@babel/preset-env": "^7.10.3",
 		"@rushstack/eslint-patch": "^1.2.0",
 		"@size-limit/preset-small-lib": "^4.5.2",
 		"@vitejs/plugin-vue": "^4.0.0",

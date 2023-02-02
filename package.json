@@ -70,6 +70,7 @@
 		"vue": "^3.2.47",
 		"vue-eslint-parser": "^9.1.0"
 	},
+	"browserslist": "defaults and supports es6-module",
 	"size-limit": [
 		{
 			"path": "dist/vue-tinybox.js",

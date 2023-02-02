@@ -32,6 +32,15 @@ Observe the live demo here: [os.karamoff.dev/vue-tinybox](https://os.karamoff.de
   </script>
   ```
 
+  You'll also need the CSS file:
+
+  ```html
+  <link
+  	href="https://cdn.jsdelivr.net/npm/vue-tinybox@2/dist/vue-tinybox.css"
+  	rel="stylesheet"
+  />
+  ```
+
 - **In Node**, install the `vue-tinybox` package:
 
   ```sh
@@ -50,6 +59,7 @@ Observe the live demo here: [os.karamoff.dev/vue-tinybox](https://os.karamoff.de
 
   ```js
   import Tinybox from "vue-tinybox";
+  import "vue-tinybox/css";
   // or const Tinybox = require("vue-tinybox");
   ```
 
@@ -75,6 +85,10 @@ If you need to use the component in a browser without ESM support, include the
 IIFE version:
 
 ```html
+<link
+	href="https://cdn.jsdelivr.net/npm/vue-tinybox@2/dist/vue-tinybox.css"
+	rel="stylesheet"
+/>
 <script src="https://cdn.jsdelivr.net/npm/vue-tinybox@2/dist/vue-tinybox.iife.js"></script>
 ```
 

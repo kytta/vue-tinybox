@@ -12,6 +12,7 @@ export default defineConfig({
 			vue: "@vue/compat",
 		},
 	},
+	root: resolve("./dev"),
 	build: {
 		lib: {
 			entry: resolve("src/index.js"),

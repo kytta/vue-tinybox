@@ -55,6 +55,7 @@ const state = reactive({
 		/>
 		<img
 			v-for="(img, idx) in state.thumbs"
+			:key="img"
 			class="open-tinybox"
 			width="100"
 			:src="img"

@@ -60,7 +60,6 @@
 		"@size-limit/esbuild": "^8.1.2",
 		"@size-limit/file": "^8.1.2",
 		"@vitejs/plugin-vue": "^4.0.0",
-		"@vue/compiler-sfc": "^3.2.47",
 		"@vue/eslint-config-prettier": "^7.0.0",
 		"autoprefixer": "^10.4.13",
 		"eslint": "^8.33.0",
@@ -70,8 +69,7 @@
 		"prettier": "^2.8.3",
 		"size-limit": "^8.1.2",
 		"vite": "^4.1.1",
-		"vue": "^3.2.47",
-		"vue-eslint-parser": "^9.1.0"
+		"vue": "^3.2.47"
 	},
 	"browserslist": "defaults and supports es6-module",
 	"postcss": {

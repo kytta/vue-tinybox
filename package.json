@@ -40,7 +40,7 @@
 		"src/tinybox.vue"
 	],
 	"scripts": {
-		"build": "vite build",
+		"build": "vite build --emptyOutDir",
 		"dev": "vite",
 		"fmt": "prettier --write .",
 		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --ignore-path .gitignore",

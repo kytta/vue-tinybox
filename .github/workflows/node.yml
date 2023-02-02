@@ -19,7 +19,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 16
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --ignore-scripts
@@ -32,9 +32,8 @@ jobs:
         env:
           FORCE_COLOR: 2
       - name: Check size
-        uses: getsentry/size-limit-action@v5
+        uses: andresz1/size-limit-action@v1
         with:
-          main_branch: main
           github_token: ${{ secrets.GITHUB_TOKEN }}
           skip_step: build
         if: github.event_name == 'pull_request'

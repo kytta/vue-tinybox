@@ -14,7 +14,7 @@ export default defineConfig({
 			formats: ["es", "umd"],
 			// Workaround to keep the old file names
 			fileName: (format) =>
-				format == "es" ? "tinybox.esm.js" : "tinybox.umd.js",
+				format === "es" ? "tinybox.esm.js" : "tinybox.umd.js",
 		},
 		minify: "terser",
 		terserOptions: {

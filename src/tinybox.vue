@@ -73,7 +73,8 @@
  * @event change - the index has been changed. The current index is sent as payload
  */
 export default {
-	name: "Tinybox",
+	// eslint-disable-next-line vue/multi-word-component-names, no-warning-comments
+	name: "Tinybox", // TODO: rename to TinyBox
 	model: {
 		prop: "index",
 		event: "change",
@@ -149,7 +150,7 @@ export default {
 		 * @returns {boolean} open state
 		 */
 		open() {
-			return this.index != null;
+			return this.index !== null;
 		},
 
 		/**
@@ -161,9 +162,11 @@ export default {
 			if (this.index > 0) {
 				return this.index - 1;
 			}
+
 			if (this.loop) {
 				return this.images.length - 1;
 			}
+
 			return this.index;
 		},
 
@@ -176,9 +179,11 @@ export default {
 			if (this.index < this.images.length - 1) {
 				return this.index + 1;
 			}
+
 			if (this.loop) {
 				return 0;
 			}
+
 			return this.index;
 		},
 	},
@@ -194,7 +199,7 @@ export default {
 		 * Center the thumbnails' scrollbar to the clicked image
 		 */
 		index(newIndex) {
-			if (!this.noThumbs && newIndex != null) {
+			if (!this.noThumbs && newIndex !== null) {
 				this.$nextTick(() => {
 					const { thumbs, thumbItems } = this.$refs;
 					const curThumb = thumbItems[newIndex];
@@ -205,7 +210,7 @@ export default {
 						window.innerWidth / 2
 					) {
 						const distance = curThumb.offsetLeft - window.innerWidth / 2;
-						// if there's space to scroll to center the image, then center it
+						// If there's space to scroll to center the image, then center it
 						// otherwise use the maximum scroll width
 						if (distance < thumbs.scrollWidth) {
 							thumbs.scrollLeft = distance + curThumb.clientWidth / 2;

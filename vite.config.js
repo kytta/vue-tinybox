@@ -18,6 +18,7 @@ export default defineConfig({
 				format === "es" ? "tinybox.esm.js" : "tinybox.umd.js",
 		},
 		minify: "terser",
+		outDir: resolve("./dist"),
 		terserOptions: {
 			output: {
 				ecma: 6,

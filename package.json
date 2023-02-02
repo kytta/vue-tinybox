@@ -71,13 +71,13 @@
 	},
 	"size-limit": [
 		{
-			"path": "dist/tinybox.umd.js",
-			"limit": "3333 B",
+			"path": "dist/vue-tinybox.iife.js",
+			"limit": "3 kB",
 			"webpack": false
 		},
 		{
-			"path": "dist/tinybox.esm.js",
-			"limit": "3333 B"
+			"path": "dist/vue-tinybox.js",
+			"limit": "3 kB"
 		}
 	],
 	"engines": {

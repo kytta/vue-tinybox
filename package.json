@@ -40,6 +40,9 @@
 		"dist/",
 		"src/tinybox.vue"
 	],
+	"engines": {
+		"node": "^14 || ^16 || >=18"
+	},
 	"scripts": {
 		"build": "vite build --emptyOutDir",
 		"dev": "vite",
@@ -91,8 +94,5 @@
 			"limit": "1 kB",
 			"brotli": true
 		}
-	],
-	"engines": {
-		"node": "^14 || ^16 || >=18"
-	}
+	]
 }

@@ -37,9 +37,6 @@ export default defineConfig({
 			},
 			template: {
 				compilerOptions: {
-					compatConfig: {
-						MODE: 3,
-					},
 					whitespace: "condense",
 				},
 			},

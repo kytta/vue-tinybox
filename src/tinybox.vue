@@ -115,6 +115,7 @@ export default {
 			default: false,
 		},
 	},
+	emits: ["close", "prev", "next", "update:index"],
 	data() {
 		return {
 			/**

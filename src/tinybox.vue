@@ -441,9 +441,9 @@ export default {
 /*   TRANSITIONS   */
 /*******************/
 
-.fade-enter,
-.next-enter,
-.prev-enter,
+.fade-enter-from,
+.next-enter-from,
+.prev-enter-from,
 .fade-leave-active,
 .prev-leave-active,
 .next-leave-active {
@@ -457,11 +457,11 @@ export default {
 	transition: opacity 300ms ease;
 }
 
-.prev-enter {
+.prev-enter-from {
 	transform: translateX(-40px);
 }
 
-.next-enter {
+.next-enter-from {
 	transform: translateX(40px);
 }
 

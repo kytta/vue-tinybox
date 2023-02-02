@@ -19,6 +19,7 @@ export default defineConfig({
 		},
 		minify: "terser",
 		outDir: resolve("./dist"),
+		target: "es2015",
 		terserOptions: {
 			output: {
 				ecma: 6,

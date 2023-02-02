@@ -21,6 +21,7 @@ specifiers:
   sirv-cli: ^1.0.1
   size-limit: ^4.5.2
   vite: ^4.1.1
+  vite-plugin-css-injected-by-js: ^2.4.0
   vue: ^2
   vue-eslint-parser: ^7.1.0
   vue-template-compiler: ^2.6.11
@@ -46,6 +47,7 @@ devDependencies:
   sirv-cli: 1.0.11
   size-limit: 4.10.1
   vite: 4.1.1
+  vite-plugin-css-injected-by-js: 2.4.0_vite@4.1.1
   vue: 2.7.14
   vue-eslint-parser: 7.6.0_eslint@7.22.0
   vue-template-compiler: 2.6.12
@@ -7582,6 +7584,14 @@ packages:
 
   /vendors/1.0.4:
     resolution: {integrity: sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w==}
+    dev: true
+
+  /vite-plugin-css-injected-by-js/2.4.0_vite@4.1.1:
+    resolution: {integrity: sha512-fQkJ5baPEasjjJLxHINLjXuPREO61VIDFUeUqleEBghOLfZZe/k/zrxG5b3kFZXu6JtdI11pnwtj3dh3CN9X4Q==}
+    peerDependencies:
+      vite: '>2.0.0-0'
+    dependencies:
+      vite: 4.1.1
     dev: true
 
   /vite/4.1.1:

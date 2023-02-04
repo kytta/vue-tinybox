@@ -13,10 +13,10 @@
 	"homepage": "https://os.karamoff.dev/vue-tinybox",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/NickKaramoff/vue-tinybox.git"
+		"url": "git+https://github.com/kytta/vue-tinybox.git"
 	},
 	"bugs": {
-		"url": "https://github.com/NickKaramoff/vue-tinybox/issues"
+		"url": "https://github.com/kytta/vue-tinybox/issues"
 	},
 	"author": {
 		"name": "Nikita Karamov",

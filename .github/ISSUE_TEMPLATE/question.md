@@ -3,7 +3,7 @@ name: Question
 about: If you stumble upon something you don't understand
 title: ""
 labels: question
-assignees: NickKaramoff
+assignees: kytta
 ---
 
 **The Question**

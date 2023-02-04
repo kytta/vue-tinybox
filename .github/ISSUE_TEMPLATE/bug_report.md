@@ -3,7 +3,7 @@ name: Bug report
 about: If you have encountered a bug and want to have it fixed
 title: ""
 labels: bug
-assignees: NickKaramoff
+assignees: kytta
 ---
 
 **Describe the bug**

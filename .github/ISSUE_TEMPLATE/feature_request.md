@@ -3,7 +3,7 @@ name: Feature request
 about: If you want to suggest a new feature
 title: ""
 labels: feature
-assignees: NickKaramoff
+assignees: kytta
 ---
 
 **Is your feature request related to a problem?**

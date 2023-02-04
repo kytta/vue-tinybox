@@ -15,7 +15,7 @@ Thank you for deciding to contribute to vue-tinybox! There are some things you n
 
 ## I want to propose a feature or file a bug without writing code
 
-If you want to ask a question, propose a new feature or tell us about a bug, you should [create a new issue](https://github.com/NickKaramoff/vue-tinybox/issues/new/choose) on the matter. Please make sure to pick the appropriate template and add as much information as you can. The more you tell me, the quicker can I resolve your issue :)
+If you want to ask a question, propose a new feature or tell us about a bug, you should [create a new issue](https://github.com/kytta/vue-tinybox/issues/new/choose) on the matter. Please make sure to pick the appropriate template and add as much information as you can. The more you tell me, the quicker can I resolve your issue :)
 
 ## I want to implement a feature or fix a bug myself
 
@@ -61,7 +61,7 @@ After your work is done, you can submit a pull request. There are some automated
 
 After you submitted your issue or pull request, I will reach out to you and get the needed things done. Don't hesitate commenting on my decisions if you find them incorrect or unclear.
 
-If you have any questions, you can always contact me at [github@karamoff.dev](mailto:github@karamoff.dev)
+If you have any questions, you can always contact me at [me@kytta.dev](mailto:me@kytta.dev)
 
 Thank you once again for participating in the life of vue-tinybox!
 

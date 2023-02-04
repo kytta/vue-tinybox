@@ -10,7 +10,7 @@ A slick, yet tiny lightbox gallery for Vue.js
 
 ## Demo
 
-Observe the live demo here: [os.karamoff.dev/vue-tinybox](https://os.karamoff.dev/vue-tinybox)
+Observe the live demo here: [os.kytta.dev/vue-tinybox](https://os.kytta.dev/vue-tinybox)
 
 ## Basic usage
 

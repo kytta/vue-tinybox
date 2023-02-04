@@ -10,7 +10,7 @@
 		"lightbox",
 		"gallery"
 	],
-	"homepage": "https://os.karamoff.dev/vue-tinybox",
+	"homepage": "https://os.kytta.dev/vue-tinybox",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/kytta/vue-tinybox.git"
@@ -20,8 +20,8 @@
 	},
 	"author": {
 		"name": "Nikita Karamov",
-		"email": "nick@karamoff.dev",
-		"url": "https://karamoff.dev"
+		"email": "me@kytta.dev",
+		"url": "https://www.kytta.dev/"
 	},
 	"type": "module",
 	"main": "./dist/tinybox.umd.js",

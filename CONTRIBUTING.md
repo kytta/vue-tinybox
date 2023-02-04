@@ -61,7 +61,7 @@ After your work is done, you can submit a pull request. There are some automated
 
 After you submitted your issue or pull request, I will reach out to you and get the needed things done. Don't hesitate commenting on my decisions if you find them incorrect or unclear.
 
-If you have any questions, you can always contact me at [github@karamoff.dev](mailto:github@karamoff.dev)
+If you have any questions, you can always contact me at [me@kytta.dev](mailto:me@kytta.dev)
 
 Thank you once again for participating in the life of vue-tinybox!
 

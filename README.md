@@ -15,7 +15,7 @@ Observe the live demo here: [os.karamoff.dev/vue-tinybox](https://os.karamoff.de
 ## Basic usage
 
 ```html
-<Tinybox v-model:index="index" :images="images" loop no-thumbs />
+<TinyboxGallery v-model:index="index" :images="images" loop no-thumbs />
 ```
 
 ## Install
@@ -26,7 +26,7 @@ Observe the live demo here: [os.karamoff.dev/vue-tinybox](https://os.karamoff.de
   ```html
   <script type="module">
   	import { createApp } from "https://cdn.jsdelivr.net/npm/vue@3/dist/vue.esm-browser.js";
-  	import Tinybox from "https://cdn.jsdelivr.net/npm/vue-tinybox@2/dist/vue-tinybox.js";
+  	import TinyboxGallery from "https://cdn.jsdelivr.net/npm/vue-tinybox@2/dist/vue-tinybox.js";
 
   	// ...
   </script>
@@ -58,9 +58,9 @@ Observe the live demo here: [os.karamoff.dev/vue-tinybox](https://os.karamoff.de
   ...and then import Tinybox like you usually would:
 
   ```js
-  import Tinybox from "vue-tinybox";
+  import TinyboxGallery from "vue-tinybox";
   import "vue-tinybox/css";
-  // or const Tinybox = require("vue-tinybox");
+  // or const TinyboxGallery = require("vue-tinybox");
   ```
 
 After you have imported Tinybox, you can bind it to your application instance
@@ -69,13 +69,13 @@ like you usually do:
 ```js
 const app = createApp({
 	components: {
-		Tinybox,
+		TinyboxGallery,
 	},
 });
 
-// or app.component("Tinybox", Tinybox);
+// or app.component("TinyboxGallery", TinyboxGallery);
 
-// or app.use(Tinybox);
+// or app.use(TinyboxGallery);
 ```
 
 <details>
@@ -92,7 +92,7 @@ IIFE version:
 <script src="https://cdn.jsdelivr.net/npm/vue-tinybox@2/dist/vue-tinybox.iife.js"></script>
 ```
 
-This exposes the `Tinybox` component in the global scope. Include it in your app:
+This exposes the `TinyboxGallery` component in the global scope. Include it in your app:
 
 ```html
 <script>
@@ -100,7 +100,7 @@ This exposes the `Tinybox` component in the global scope. Include it in your app
 		// ...
 	});
 
-	app.component("Tinybox", Tinybox);
+	app.component("TinyboxGallery", TinyboxGallery);
 </script>
 ```
 
@@ -136,11 +136,11 @@ becomes `null`.
 Instead of `v-model` you can use the `index` prop and `change` event:
 
 ```html
-<Tinybox v-model:index="index" :images="images" />
+<TinyboxGallery v-model:index="index" :images="images" />
 
 <!-- is equivalent to -->
 
-<Tinybox :images="images" :index="index" @update:index="(i) => {index = i}" />
+<TinyboxGallery :images="images" :index="index" @update:index="(i) => {index = i}" />
 ```
 
 ### Events
@@ -154,7 +154,7 @@ Instead of `v-model` you can use the `index` prop and `change` event:
 Events can come in handy for business logic cases:
 
 ```html
-<Tinybox
+<TinyboxGallery
 	:images="images"
 	v-model:index="index"
 	@update:index="onChange"

@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from "vue";
-import Tinybox from "../src";
+import TinyboxGallery from "../src";
 
 const state = reactive({
 	images: [
@@ -46,8 +46,8 @@ const state = reactive({
 			<input id="thumbs" v-model="state.thumbsCheckbox" type="checkbox" />
 			<label for="thumbs">Thumbnails</label>
 		</div>
-		<p>Click on any image below to open <code>Tinybox</code></p>
-		<Tinybox
+		<p>Click on any image below to open <code>TinyboxGallery</code></p>
+		<TinyboxGallery
 			v-model:index="state.index"
 			:images="state.images"
 			:loop="state.loopCheckbox"

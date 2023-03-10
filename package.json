@@ -38,7 +38,7 @@
 	},
 	"files": [
 		"dist/",
-		"src/tinybox.vue"
+		"src/tinybox-gallery.vue"
 	],
 	"engines": {
 		"node": "^14 || ^16 || >=18"

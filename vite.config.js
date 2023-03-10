@@ -10,7 +10,7 @@ export default defineConfig({
 	build: {
 		lib: {
 			entry: resolve("src/index.js"),
-			name: "Tinybox",
+			name: "TinyboxGallery",
 			fileName: "vue-tinybox",
 			formats: ["es", "umd", "iife"],
 		},

@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/googlefonts/noto-emoji/master/png/128/emoji_u1f30c.png" align="right" alt="Milky Way emoji" width="96" height="96">
 
-A slick, yet tiny lightbox gallery for Vue.js
+A slick, yet tiny lightbox gallery for Vue 3.
 
 - **Slick.** No excessive design. Pictures, thumbnails, controls.
 - **Tiny.** Dependency-free. 3 KB minified and gzipped.
@@ -15,49 +15,96 @@ Observe the live demo here: [os.kytta.dev/vue-tinybox](https://os.kytta.dev/vue-
 ## Basic usage
 
 ```html
-<Tinybox v-model="index" :images="images" loop no-thumbs />
+<TinyboxGallery v-model:index="index" :images="images" loop no-thumbs />
 ```
 
 ## Install
 
-### Browsers
+- **In modern browsers**, you can import Tinybox from a CDN URL along with the
+  Vue import:
 
-1. Include the link to Tinybox in `<head>` alongside Vue.js:
+  ```html
+  <script type="module">
+  	import { createApp } from "https://cdn.jsdelivr.net/npm/vue@3/dist/vue.esm-browser.js";
+  	import TinyboxGallery from "https://cdn.jsdelivr.net/npm/vue-tinybox@2/dist/vue-tinybox.js";
 
-   ```html
-   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-   <script src="https://cdn.jsdelivr.net/npm/vue-tinybox"></script>
-   ```
+  	// ...
+  </script>
+  ```
 
-2. Tinybox will auto-install upon detecting the global Vue instance. You can use
-   it right away.
+  You'll also need the CSS file:
 
-### Node environment
+  ```html
+  <link
+  	href="https://cdn.jsdelivr.net/npm/vue-tinybox@2/dist/vue-tinybox.css"
+  	rel="stylesheet"
+  />
+  ```
 
-1. Install the Tinybox package:
+- **In Node**, install the `vue-tinybox` package:
 
-   ```sh
-   npm install vue-tinybox
-   # or
-   yarn add vue-tinybox
-   ```
+  ```sh
+   pnpm add vue-tinybox
+  ```
 
-2. Register it as you usually would:
+  ```sh
+  npm install vue-tinybox
+  ```
 
-   ```js
-   import Tinybox from "vue-tinybox";
-   // or
-   const Tinybox = require("vue-tinybox");
+  ```sh
+  yarn add vue-tinybox
+  ```
 
-   Vue.component("Tinybox", Tinybox);
-   //or
-   Vue.use(Tinybox);
-   //or
-   new Vue({
-   	components: { Tinybox },
-   	// ...
-   });
-   ```
+  ...and then import Tinybox like you usually would:
+
+  ```js
+  import TinyboxGallery from "vue-tinybox";
+  import "vue-tinybox/css";
+  // or const TinyboxGallery = require("vue-tinybox");
+  ```
+
+After you have imported Tinybox, you can bind it to your application instance
+like you usually do:
+
+```js
+const app = createApp({
+	components: {
+		TinyboxGallery,
+	},
+});
+
+// or app.component("TinyboxGallery", TinyboxGallery);
+
+// or app.use(TinyboxGallery);
+```
+
+<details>
+<summary>For older browsers</summary>
+
+If you need to use the component in a browser without ESM support, include the
+IIFE version:
+
+```html
+<link
+	href="https://cdn.jsdelivr.net/npm/vue-tinybox@2/dist/vue-tinybox.css"
+	rel="stylesheet"
+/>
+<script src="https://cdn.jsdelivr.net/npm/vue-tinybox@2/dist/vue-tinybox.iife.js"></script>
+```
+
+This exposes the `TinyboxGallery` component in the global scope. Include it in your app:
+
+```html
+<script>
+	app = createApp({
+		// ...
+	});
+
+	app.component("TinyboxGallery", TinyboxGallery);
+</script>
+```
+
+</details>
 
 ## API
 
@@ -89,11 +136,11 @@ becomes `null`.
 Instead of `v-model` you can use the `index` prop and `change` event:
 
 ```html
-<Tinybox v-model="index" :images="images" />
+<TinyboxGallery v-model:index="index" :images="images" />
 
 <!-- is equivalent to -->
 
-<Tinybox :images="images" :index="index" @change="(i) => {index = i}" />
+<TinyboxGallery :images="images" :index="index" @update:index="(i) => {index = i}" />
 ```
 
 ### Events
@@ -107,10 +154,10 @@ Instead of `v-model` you can use the `index` prop and `change` event:
 Events can come in handy for business logic cases:
 
 ```html
-<Tinybox
+<TinyboxGallery
 	:images="images"
-	v-model="index"
-	@change="onChange"
+	v-model:index="index"
+	@update:index="onChange"
 	@prev="onPrevious"
 	@next="onNext"
 	@close="onClose"
@@ -139,12 +186,11 @@ export default {
 
 ## Browser support
 
-| ![Chrome][chrome] | ![Firefox][firefox] | ![Safari][safari] | ![MS Edge][edge] | ![Internet Explorer][ie] |
-| :---------------: | :-----------------: | :---------------: | :--------------: | :----------------------: |
-|      **21+**      |       **28+**       |      **7+**       |     **16+**      |          **11**          |
+| ![Chrome][chrome] | ![Firefox][firefox] | ![Safari][safari] | ![Edge][edge] |
+| :---------------: | :-----------------: | :---------------: | :-----------: |
+|      **51+**      |       **28+**       |      **10+**      |    **16+**    |
 
-[chrome]: https://github.com/alrra/browser-logos/raw/master/src/chrome/chrome_48x48.png
-[firefox]: https://github.com/alrra/browser-logos/raw/master/src/firefox/firefox_48x48.png
-[safari]: https://github.com/alrra/browser-logos/raw/master/src/safari/safari_48x48.png
-[edge]: https://github.com/alrra/browser-logos/raw/master/src/edge/edge_48x48.png
-[ie]: https://github.com/alrra/browser-logos/raw/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png
+[chrome]: https://raw.githubusercontent.com/alrra/browser-logos/main/src/chrome/chrome_48x48.png
+[firefox]: https://raw.githubusercontent.com/alrra/browser-logos/main/src/firefox/firefox_48x48.png
+[safari]: https://raw.githubusercontent.com/alrra/browser-logos/main/src/safari/safari_48x48.png
+[edge]: https://raw.githubusercontent.com/alrra/browser-logos/main/src/edge/edge_48x48.png

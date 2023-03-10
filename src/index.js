@@ -1,25 +1,13 @@
-import component from "./tinybox.vue";
+import component from "./tinybox-gallery.vue";
 
-// Executed by Vue.use()
-const install = (Vue) => {
-	if (install.installed) return;
-	install.installed = true;
-	Vue.component(component.name, component);
-};
+// Allow installing with app.use()
+// Source: https://github.com/houtaroy/vue-component-template/blob/619cacae5b000e4afdc623f2cb5f64fa522214ca/package/utils/ComponentUtil.ts
+// IIFE approach inspired by vue-sfc-rollup
+export default ((_component) => {
+	const installable = _component;
+	installable.install = function (app) {
+		app.component("TinyboxGallery", installable);
+	};
 
-// Auto-install when Vue is found
-let GlobalVue = null;
-if (typeof window !== "undefined") {
-	GlobalVue = window.Vue;
-	// eslint-disable-next-line no-undef
-} else if (typeof global !== "undefined") {
-	// eslint-disable-next-line no-undef
-	GlobalVue = global.Vue;
-}
-
-if (GlobalVue) {
-	GlobalVue.use({ install });
-}
-
-// To allow module use
-export default component;
+	return _component;
+})(component);

@@ -1,3 +1,211 @@
+<script setup>
+import { computed, nextTick, reactive, ref, watch } from "vue";
+
+const props = defineProps({
+	/**
+	 * List of images to display in the lightbox
+	 *
+	 * Any array item can be either a string containing the image URL or an object.
+	 * The object fields are the following:
+	 * - `src` - image URL
+	 * - `thumbnail` - thumbnail URL. If omitted, the image URL will be used
+	 * - `caption` - caption text to be overlayed on the image
+	 * - `alt` - alt text. If omitted, the caption will be used
+	 */
+	images: {
+		type: Array,
+		required: true,
+	},
+
+	/**
+	 * The index of the image to be opened in the lightbox
+	 */
+	index: {
+		type: Number,
+		default: null,
+	},
+
+	/**
+	 * Indicates whether the images carousel should loop around itself
+	 */
+	loop: {
+		type: Boolean,
+		default: false,
+	},
+
+	/**
+	 * When enabled, the thumbnails are hidden
+	 */
+	noThumbs: {
+		type: Boolean,
+		default: false,
+	},
+});
+
+const index = computed({
+	get() {
+		return props.index;
+	},
+	set(newIndex) {
+		emit("update:index", newIndex);
+		nextTick(alignThumbnails);
+	},
+});
+
+const state = reactive({
+	transitionName: "next",
+	swipeDone: false,
+	swipeX: null,
+});
+
+const emit = defineEmits(["close", "prev", "next", "update:index"]);
+
+const open = computed(() => index.value !== null);
+const prevImage = computed(() => {
+	if (index.value > 0) {
+		return index.value - 1;
+	}
+
+	if (props.loop) {
+		return props.images.length - 1;
+	}
+
+	return index.value;
+});
+const nextImage = computed(() => {
+	if (index.value < props.images.length - 1) {
+		return index.value + 1;
+	}
+
+	if (props.loop) {
+		return 0;
+	}
+
+	return index.value;
+});
+
+/**
+ * Navigates to the image with a specific index
+ * @param {null|number} index image index
+ * @param {string} [transitionName] name of the transition to be used
+ */
+function goToImage(newIndex, transitionName) {
+	state.transitionName =
+		transitionName || (index.value < newIndex ? "next" : "prev");
+
+	index.value = newIndex;
+}
+
+/**
+ * Navigates to the previous image
+ */
+function goToPrevious() {
+	emit("prev", prevImage.value);
+	goToImage(prevImage.value, "prev");
+}
+
+/**
+ * Navigates to the next image
+ */
+function goToNext() {
+	emit("next", nextImage.value);
+	goToImage(nextImage.value, "next");
+}
+
+/**
+ * Closes the Tinybox
+ */
+function close() {
+	const oldIndex = index.value;
+	goToImage(null);
+	emit("close", oldIndex);
+}
+
+const thumbs = ref(null);
+const thumbItems = ref(null);
+function alignThumbnails() {
+	if (props.noThumbs || index.value === null) return;
+
+	const curThumb = thumbItems.value[index.value];
+	// If the thumbnail's center X position is bigger than the half of the screen
+	// then scroll the thumbs scrollbar to center the image
+	if (curThumb.offsetLeft + curThumb.clientWidth / 2 > window.innerWidth / 2) {
+		const distance = curThumb.offsetLeft - window.innerWidth / 2;
+		// If there's space to scroll to center the image, then center it
+		// otherwise use the maximum scroll width
+		if (distance < thumbs.value.scrollWidth) {
+			thumbs.value.scrollLeft = distance + curThumb.clientWidth / 2;
+		} else {
+			thumbs.value.scrollLeft = thumbs.value.scrollWidth;
+		}
+	} else {
+		thumbs.value.scrollLeft = 0;
+	}
+}
+
+/**
+ * Handles the `keyup` event.
+ *
+ * If right arrow was pressed, switches to the next image.
+ * If left arrow was pressed, switches to the previous image.
+ * If Escape was pressed, closes the lightbox.
+ *
+ * @param {KeyboardEvent} event keyboard event
+ */
+function keyUpHandler(event) {
+	if (event.code === "ArrowRight") {
+		goToNext();
+	} else if (event.code === "ArrowLeft") {
+		goToPrevious();
+	} else if (event.code === "Escape") {
+		close();
+	}
+}
+
+/**
+ * Handles the `touchstart` event
+ *
+ * The `touchstart` event on the image indicates the beginning of the swipe action.
+ *
+ * @param {TouchEvent} e event
+ */
+function handleTouchStart(e) {
+	this.swipeDone = false;
+	if (e.changedTouches.length === 1) {
+		this.swipeX = e.changedTouches[0].screenX;
+	}
+}
+
+/**
+ * Handles the `touch` event
+ *
+ * The `touch` event registered after the `touchstart` event indicates the swipe being in action
+ *
+ * @param {TouchEvent} e event
+ */
+function handleTouchMove(e) {
+	if (!this.swipeDone && e.changedTouches.length === 1) {
+		const swipeDistance = e.changedTouches[0].screenX - this.swipeX;
+
+		if (swipeDistance >= 50) {
+			this.prev();
+			this.swipeDone = true;
+		} else if (swipeDistance <= -50) {
+			this.next();
+			this.swipeDone = true;
+		}
+	}
+}
+
+watch(open, (newState) => {
+	if (newState) {
+		window.addEventListener("keyup", keyUpHandler);
+	} else {
+		window.removeEventListener("keyup", keyUpHandler);
+	}
+});
+</script>
+
 <template>
 	<transition name="fade">
 		<div
@@ -10,16 +218,16 @@
 			<div
 				class="tinybox__content"
 				:class="{ 'tinybox__content--no-thumbs': noThumbs }"
-				@touchstart="swipeStart"
-				@touchmove="swipe"
+				@touchstart="handleTouchStart"
+				@touchmove="handleTouchMove"
 			>
-				<transition :name="slide">
+				<transition :name="state.transitionName">
 					<img
 						:key="images[index].src || images[index] || ''"
 						:src="images[index].src || images[index] || ''"
 						:alt="images[index].alt || images[index].caption || ''"
 						class="tinybox__content__image"
-						@click.stop="next"
+						@click.stop="goToNext"
 					/>
 				</transition>
 
@@ -32,12 +240,12 @@
 				<div
 					v-if="prevImage !== index"
 					class="tinybox__content__control tinybox__content__control--prev"
-					@click.stop="prev"
+					@click.stop="goToPrevious"
 				/>
 				<div
 					v-if="nextImage !== index"
 					class="tinybox__content__control tinybox__content__control--next"
-					@click.stop="next"
+					@click.stop="goToNext"
 				/>
 				<div
 					class="tinybox__content__control tinybox__content__control--close"
@@ -59,272 +267,12 @@
 					:src="image.thumbnail || image.src || image || ''"
 					:alt="images[index].alt || images[index].caption || ''"
 					class="tinybox__thumbs__item"
-					@click.stop="goto(idx)"
+					@click.stop="goToImage(idx)"
 				/>
 			</div>
 		</div>
 	</transition>
 </template>
-
-<script>
-/**
- * The Tinybox component
- *
- * @event change - the index has been changed. The current index is sent as payload
- */
-export default {
-	// eslint-disable-next-line vue/multi-word-component-names, no-warning-comments
-	name: "Tinybox", // TODO: rename to TinyBox
-	props: {
-		/**
-		 * List of images to display in the lightbox
-		 *
-		 * Any array item can be either a string containing the image URL or an object.
-		 * The object fields are the following:
-		 * - `src` - image URL
-		 * - `thumbnail` - thumbnail URL. If omitted, the image URL will be used
-		 * - `caption` - caption text to be overlayed on the image
-		 * - `alt` - alt text. If omitted, the caption will be used
-		 */
-		images: {
-			type: Array,
-			default: () => [],
-		},
-
-		/**
-		 * The index of the image to be opened in the lightbox
-		 */
-		index: {
-			type: Number,
-			default: null,
-		},
-
-		/**
-		 * Indicates whether the images carousel should loop around itself
-		 */
-		loop: {
-			type: Boolean,
-			default: false,
-		},
-
-		/**
-		 * When enabled, the thumbnails are hidden
-		 */
-		noThumbs: {
-			type: Boolean,
-			default: false,
-		},
-	},
-	emits: ["close", "prev", "next", "update:index"],
-	data() {
-		return {
-			/**
-			 * Transition name to be used on photo switch
-			 *
-			 * @type string
-			 */
-			slide: "next",
-
-			/**
-			 * Indication that the swipe action has been executed
-			 *
-			 * @type boolean
-			 */
-			swipeDone: false,
-
-			/**
-			 * The swipe distance or null if no swipe action is being executed
-			 *
-			 * @type null|number
-			 */
-			swipeX: null,
-		};
-	},
-	computed: {
-		/**
-		 * Indicates whether the Tinybox is open
-		 *
-		 * @returns {boolean} open state
-		 */
-		open() {
-			return this.index !== null;
-		},
-
-		/**
-		 * Index of the image _previous_ to the one being open
-		 *
-		 * @returns {number} index
-		 */
-		prevImage() {
-			if (this.index > 0) {
-				return this.index - 1;
-			}
-
-			if (this.loop) {
-				return this.images.length - 1;
-			}
-
-			return this.index;
-		},
-
-		/**
-		 * Index of the image _next_ to the one being open
-		 *
-		 * @returns {number} index
-		 */
-		nextImage() {
-			if (this.index < this.images.length - 1) {
-				return this.index + 1;
-			}
-
-			if (this.loop) {
-				return 0;
-			}
-
-			return this.index;
-		},
-	},
-	watch: {
-		open(value) {
-			if (value) {
-				window.addEventListener("keyup", this.keyup);
-			} else {
-				window.removeEventListener("keyup", this.keyup);
-			}
-		},
-		/*
-		 * Center the thumbnails' scrollbar to the clicked image
-		 */
-		index(newIndex) {
-			if (!this.noThumbs && newIndex !== null) {
-				this.$nextTick(() => {
-					const { thumbs, thumbItems } = this.$refs;
-					const curThumb = thumbItems[newIndex];
-					// If the thumbnail's center X position is bigger than the half of the screen
-					// then scroll the thumbs scrollbar to center the image
-					if (
-						curThumb.offsetLeft + curThumb.clientWidth / 2 >
-						window.innerWidth / 2
-					) {
-						const distance = curThumb.offsetLeft - window.innerWidth / 2;
-						// If there's space to scroll to center the image, then center it
-						// otherwise use the maximum scroll width
-						if (distance < thumbs.scrollWidth) {
-							thumbs.scrollLeft = distance + curThumb.clientWidth / 2;
-						} else {
-							thumbs.scrollLeft = thumbs.scrollWidth;
-						}
-					} else {
-						thumbs.scrollLeft = 0;
-					}
-				});
-			}
-		},
-	},
-	methods: {
-		/**
-		 * Closes the Tinybox
-		 */
-		close() {
-			const oldIndex = this.index;
-			this.goto(null);
-			this.$emit("close", oldIndex);
-		},
-
-		/**
-		 * Navigates to the previous image
-		 */
-		prev() {
-			this.$emit("prev", this.prevImage);
-			this.goto(this.prevImage, "prev");
-		},
-
-		/**
-		 * Navigates to the next image
-		 */
-		next() {
-			this.$emit("next", this.nextImage);
-			this.goto(this.nextImage, "next");
-		},
-
-		/**
-		 * Navigates to the image with a specific index
-		 * @param {null|number} idx image index
-		 * @param {string} [slide] name of the transition to be used
-		 */
-		goto(idx, slide) {
-			this.slide = slide || (this.index < idx ? "next" : "prev");
-
-			this.$emit("update:index", idx);
-		},
-
-		/**
-		 * Handles the `keyup` event
-		 *
-		 * @param {KeyboardEvent} e event
-		 */
-		keyup(e) {
-			if (
-				e.code === "ArrowRight" ||
-				e.key === "ArrowRight" ||
-				e.key === "Right" ||
-				e.keyCode === 39
-			) {
-				this.next();
-			} else if (
-				e.code === "ArrowLeft" ||
-				e.key === "ArrowLeft" ||
-				e.key === "Left" ||
-				e.keyCode === 37
-			) {
-				this.prev();
-			} else if (
-				e.code === "Escape" ||
-				e.key === "Escape" ||
-				e.key === "Esc" ||
-				e.keyCode === 27
-			) {
-				this.close();
-			}
-		},
-
-		/**
-		 * Handles the `touchstart` event
-		 *
-		 * The `touchstart` event on the image indicates the beginning of the swipe action.
-		 *
-		 * @param {TouchEvent} e event
-		 */
-		swipeStart(e) {
-			this.swipeDone = false;
-			if (e.changedTouches.length === 1) {
-				this.swipeX = e.changedTouches[0].screenX;
-			}
-		},
-
-		/**
-		 * Handles the `touch` event
-		 *
-		 * The `touch` event registered after the `touchstart` event indicates the swipe being in action
-		 *
-		 * @param {TouchEvent} e event
-		 */
-		swipe(e) {
-			if (!this.swipeDone && e.changedTouches.length === 1) {
-				const swipeDistance = e.changedTouches[0].screenX - this.swipeX;
-
-				if (swipeDistance >= 50) {
-					this.prev();
-					this.swipeDone = true;
-				} else if (swipeDistance <= -50) {
-					this.next();
-					this.swipeDone = true;
-				}
-			}
-		},
-	},
-};
-</script>
 
 <style scoped>
 .tinybox {

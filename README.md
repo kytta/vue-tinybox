@@ -140,7 +140,11 @@ Instead of `v-model` you can use the `index` prop and `change` event:
 
 <!-- is equivalent to -->
 
-<TinyboxGallery :images="images" :index="index" @update:index="(i) => {index = i}" />
+<TinyboxGallery
+	:images="images"
+	:index="index"
+	@update:index="(i) => {index = i}"
+/>
 ```
 
 ### Events

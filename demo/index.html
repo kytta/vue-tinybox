@@ -28,18 +28,13 @@
 		</style>
 
 		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+		<link id="favicon" rel="icon" type="image/svg+xml" href="favicon.svg" />
 	</head>
 
 	<body>
 		<header>
 			<p>
-				<img
-					src="https://raw.githubusercontent.com/googlefonts/noto-emoji/master/png/128/emoji_u1f30c.png"
-					width="64"
-					height="64"
-					alt="Milky Way emoji"
-				/>
+				<img src="/logo.svg" width="64" height="64" alt="Milky Way emoji" />
 			</p>
 			<h1>vue-tinybox</h1>
 			<p>A slick, yet tiny lightbox gallery for Vue.js</p>
@@ -105,15 +100,7 @@
 				</h2>
 				<p>Click on any image below to open Tinybox</p>
 
-				<Tinybox v-model="index" :images="images"></Tinybox>
-
-				<img
-					v-for="(img, idx) in images"
-					:src="img.thumbnail"
-					:alt="img.alt"
-					class="open-tinybox"
-					@click="index = idx"
-				/>
+				<div id="demo-app"></div>
 			</article>
 
 			<article>
@@ -153,7 +140,10 @@ Vue.component('Tinybox', Tinybox);</code></pre>
 		<footer>
 			<p>
 				vue-tinybox by
-				<a href="https://www.kytta.dev" target="_blank" rel="noopener noreferrer"
+				<a
+					href="https://www.kytta.dev"
+					target="_blank"
+					rel="noopener noreferrer"
 					>Nikita Karamov</a
 				>
 			</p>
@@ -168,50 +158,6 @@ Vue.component('Tinybox', Tinybox);</code></pre>
 			</p>
 		</footer>
 
-		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-		<script
-			defer
-			src="https://cdn.jsdelivr.net/npm/vue-tinybox@1.3/dist/tinybox.umd.js"
-		></script>
-
-		<script>
-			window.onload = function () {
-				new Vue({
-					components: { Tinybox },
-					el: "#demo-app",
-					data: function () {
-						return {
-							images: [
-								{
-									src: "https://picsum.photos/id/13/600/1000",
-									alt: "Empty beach",
-									caption: "Beach",
-									thumbnail: "https://picsum.photos/id/13/200",
-								},
-								{
-									src: "https://picsum.photos/id/42/800/600",
-									alt: "Desk in a café",
-									caption: "Café",
-									thumbnail: "https://picsum.photos/id/42/200",
-								},
-								{
-									src: "https://picsum.photos/id/256/1500/600",
-									alt: "Mountains range",
-									caption: "Mountains",
-									thumbnail: "https://picsum.photos/id/256/200",
-								},
-								{
-									src: "https://picsum.photos/id/666/800/600",
-									alt: "Green trees in forest",
-									caption: "Forest",
-									thumbnail: "https://picsum.photos/id/666/200",
-								},
-							],
-							index: null,
-						};
-					},
-				});
-			};
-		</script>
+		<script src="/main.js" type="module"></script>
 	</body>
 </html>

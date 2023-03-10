@@ -5,18 +5,24 @@ import vue from "@vitejs/plugin-vue";
 
 import autoprefixer from "autoprefixer";
 
-export default defineConfig({
-	root: resolve("./dev"),
-	build: {
-		lib: {
+export default defineConfig(({ mode }) => {
+	const build = {
+		target: "es2015",
+	};
+
+	if (mode === "docs") {
+		// Documentation website mode
+		build.outDir = resolve("./_site"); // For later GitHub pages deployment
+	} else {
+		// Normal library / dev build mode
+		build.outDir = resolve("./dist");
+		build.lib = {
 			entry: resolve("src/index.js"),
 			name: "TinyboxGallery",
 			fileName: "vue-tinybox",
 			formats: ["es", "umd", "iife"],
-		},
-		outDir: resolve("./dist"),
-		target: "es2015",
-		rollupOptions: {
+		};
+		build.rollupOptions = {
 			external: ["vue"],
 			output: {
 				// Provide global variables to use in the UMD build
@@ -31,18 +37,17 @@ export default defineConfig({
 					return assetInfo.name;
 				},
 			},
+		};
+	}
+
+	return {
+		root: resolve("./demo"),
+		build,
+		css: {
+			postcss: {
+				plugins: [autoprefixer],
+			},
 		},
-	},
-	plugins: [
-		vue({
-			style: {
-				postcssPlugins: [autoprefixer],
-			},
-			template: {
-				compilerOptions: {
-					whitespace: "condense",
-				},
-			},
-		}),
-	],
+		plugins: [vue()],
+	};
 });

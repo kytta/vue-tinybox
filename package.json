@@ -45,6 +45,7 @@
 	},
 	"scripts": {
 		"build": "vite build --emptyOutDir",
+		"build-docs": "vite build --emptyOutDir --mode docs",
 		"dev": "vite",
 		"fmt": "prettier --write .",
 		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --ignore-path .gitignore",

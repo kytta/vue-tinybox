@@ -23,13 +23,7 @@ const state = reactive({
 		"https://picsum.photos/id/69/800/600",
 		"https://picsum.photos/id/420/800/600",
 	],
-	thumbs: [
-		"https://picsum.photos/id/13/200",
-		"https://picsum.photos/id/42/200",
-		"https://picsum.photos/id/256/200",
-		"https://picsum.photos/id/69/200",
-		"https://picsum.photos/id/420/200",
-	],
+	thumbs: [],
 	index: null,
 	loopCheckbox: false,
 	thumbsCheckbox: true,
@@ -39,13 +33,6 @@ const state = reactive({
 <template>
 	<main>
 		<h1>vue-tinybox demo: vanilla Vue.js</h1>
-		<div>
-			<input id="loop" v-model="state.loopCheckbox" type="checkbox" />
-			<label for="loop">Loop</label>
-			<br />
-			<input id="thumbs" v-model="state.thumbsCheckbox" type="checkbox" />
-			<label for="thumbs">Thumbnails</label>
-		</div>
 		<p>Click on any image below to open <code>TinyboxGallery</code></p>
 		<TinyboxGallery
 			v-model:index="state.index"

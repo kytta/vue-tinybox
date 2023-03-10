@@ -1,6 +1,6 @@
-.cache
-/dev/**/*.js*
-/dev/nuxt/.nuxt/
-dist
-.idea
-node_modules
+/dist/
+/_site/
+
+.idea/
+.vscode/
+node_modules/
